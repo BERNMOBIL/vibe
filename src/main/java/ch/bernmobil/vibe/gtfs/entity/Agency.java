@@ -1,7 +1,9 @@
 package ch.bernmobil.vibe.gtfs.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class Agency {
     @Id
     private long id;

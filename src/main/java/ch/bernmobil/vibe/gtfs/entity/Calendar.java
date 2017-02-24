@@ -1,18 +1,21 @@
 package ch.bernmobil.vibe.gtfs.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.Map;
 
+@Entity
 public class Calendar {
     @Id
     @GeneratedValue
     private long id;
-    @OneToOne
     private Service service;
-    private Map<String, Integer> days;
+    private boolean monday;
+    private boolean tuesday;
+    private boolean wednesday;
+    private boolean thursday;
+    private boolean friday;
+    private boolean saturday;
+    private boolean sunday;
     private Date startDate;
     private Date endDate;
 
@@ -32,12 +35,60 @@ public class Calendar {
         this.service = service;
     }
 
-    public Map<String, Integer> getDays() {
-        return days;
+    public boolean isMonday() {
+        return monday;
     }
 
-    public void setDays(Map<String, Integer> days) {
-        this.days = days;
+    public void setMonday(boolean monday) {
+        this.monday = monday;
+    }
+
+    public boolean isTuesday() {
+        return tuesday;
+    }
+
+    public void setTuesday(boolean tuesday) {
+        this.tuesday = tuesday;
+    }
+
+    public boolean isWednesday() {
+        return wednesday;
+    }
+
+    public void setWednesday(boolean wednesday) {
+        this.wednesday = wednesday;
+    }
+
+    public boolean isThursday() {
+        return thursday;
+    }
+
+    public void setThursday(boolean thursday) {
+        this.thursday = thursday;
+    }
+
+    public boolean isFriday() {
+        return friday;
+    }
+
+    public void setFriday(boolean friday) {
+        this.friday = friday;
+    }
+
+    public boolean isSaturday() {
+        return saturday;
+    }
+
+    public void setSaturday(boolean saturday) {
+        this.saturday = saturday;
+    }
+
+    public boolean isSunday() {
+        return sunday;
+    }
+
+    public void setSunday(boolean sunday) {
+        this.sunday = sunday;
     }
 
     public Date getStartDate() {

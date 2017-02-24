@@ -1,8 +1,11 @@
 package ch.bernmobil.vibe.gtfs.entity;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class Service {
     @Id
     private String id;

@@ -1,10 +1,12 @@
 package ch.bernmobil.vibe.gtfs.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
+@Entity
 public class CalendarDate {
     @Id
     @GeneratedValue
