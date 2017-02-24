@@ -1,7 +1,5 @@
 package ch.bernmobil.vibe.gtfs.entity;
 
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 

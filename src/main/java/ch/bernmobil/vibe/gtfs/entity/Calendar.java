@@ -1,5 +1,7 @@
 package ch.bernmobil.vibe.gtfs.entity;
 
+import org.hibernate.annotations.NotFound;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,6 +10,8 @@ public class Calendar {
     @Id
     @GeneratedValue
     private long id;
+    @NotFound
+    @ManyToOne
     private Service service;
     private boolean monday;
     private boolean tuesday;
