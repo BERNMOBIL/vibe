@@ -1,8 +1,13 @@
 package ch.bernmobil.vibe.gtfs.entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 public class StopTime {
+    @Id
+    @GeneratedValue
+    private long id;
     @ManyToOne
     private Trip trip;
     private String arrivalTime;
