@@ -1,4 +1,4 @@
-package ch.bernmobil.vibe.gtfs.Repository;
+package ch.bernmobil.vibe.gtfs.repository;
 
 import ch.bernmobil.vibe.gtfs.entity.Agency;
 import org.springframework.data.repository.CrudRepository;

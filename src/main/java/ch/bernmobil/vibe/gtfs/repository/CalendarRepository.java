@@ -1,4 +1,4 @@
-package ch.bernmobil.vibe.gtfs.Repository;
+package ch.bernmobil.vibe.gtfs.repository;
 
 import ch.bernmobil.vibe.gtfs.entity.Calendar;
 import org.springframework.data.repository.CrudRepository;
