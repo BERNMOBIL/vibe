@@ -1,4 +1,4 @@
-package ch.bernmobil.vibe.gtfs.entity;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

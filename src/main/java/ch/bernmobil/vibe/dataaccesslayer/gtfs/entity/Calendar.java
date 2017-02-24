@@ -1,4 +1,4 @@
-package ch.bernmobil.vibe.gtfs.entity;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
 import org.hibernate.annotations.NotFound;
 

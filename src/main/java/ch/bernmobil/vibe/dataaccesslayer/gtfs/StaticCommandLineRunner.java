@@ -1,7 +1,7 @@
-package ch.bernmobil.vibe.gtfs;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs;
 
-import ch.bernmobil.vibe.gtfs.entity.Agency;
-import ch.bernmobil.vibe.gtfs.repository.AgencyRepository;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Agency;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.AgencyRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
