@@ -15,6 +15,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
@@ -29,11 +30,11 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     runtime('org.postgresql:postgresql')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools") //Dev Tool -- disables view cache
 
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

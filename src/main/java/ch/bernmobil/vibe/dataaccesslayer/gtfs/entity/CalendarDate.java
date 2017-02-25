@@ -10,17 +10,18 @@ import java.util.Date;
 public class CalendarDate {
     @Id
     @GeneratedValue
-    private long id;
+    private String id;
+
     @ManyToOne
     private Service service;
     private Date date;
     private int exceptionType;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

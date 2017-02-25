@@ -9,10 +9,11 @@ import java.util.Date;
 public class Calendar {
     @Id
     @GeneratedValue
-    private long id;
+    private String id;
     @NotFound
     @ManyToOne
     private Service service;
+
     private boolean monday;
     private boolean tuesday;
     private boolean wednesday;
@@ -23,11 +24,11 @@ public class Calendar {
     private Date startDate;
     private Date endDate;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

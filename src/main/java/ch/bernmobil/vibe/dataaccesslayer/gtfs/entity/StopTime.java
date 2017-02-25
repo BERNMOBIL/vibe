@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 public class StopTime {
     @Id
     @GeneratedValue
-    private long id;
+    private String id;
     @ManyToOne
     private Trip trip;
     private String arrivalTime;
