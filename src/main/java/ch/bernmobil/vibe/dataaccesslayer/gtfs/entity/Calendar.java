@@ -1,19 +1,13 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
-import org.hibernate.annotations.NotFound;
-
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class Calendar {
     @Id
-    @GeneratedValue
+    @Column(name = "service_id")
     private String id;
-    @NotFound
-    @ManyToOne
-    private Service service;
-
     private boolean monday;
     private boolean tuesday;
     private boolean wednesday;
@@ -21,6 +15,7 @@ public class Calendar {
     private boolean friday;
     private boolean saturday;
     private boolean sunday;
+
     private Date startDate;
     private Date endDate;
 
@@ -30,14 +25,6 @@ public class Calendar {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
     }
 
     public boolean isMonday() {

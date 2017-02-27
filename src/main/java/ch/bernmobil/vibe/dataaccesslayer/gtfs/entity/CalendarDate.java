@@ -1,36 +1,25 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class CalendarDate {
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long id;
 
     @ManyToOne
-    private Service service;
+    private Calendar calendar;
     private Date date;
     private int exceptionType;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
     }
 
     public Date getDate() {
@@ -47,5 +36,13 @@ public class CalendarDate {
 
     public void setExceptionType(int exceptionType) {
         this.exceptionType = exceptionType;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 }

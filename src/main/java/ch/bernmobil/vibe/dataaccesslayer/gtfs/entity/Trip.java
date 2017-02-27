@@ -1,21 +1,16 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Trip {
     @Id
-    @GeneratedValue
     private String id;
     @ManyToOne
     private Route route;
     @ManyToOne
-    private Service service;
-    @ManyToOne
-    private Trip trip;
+    private Calendar calendar;
+
     private String tripHeadsign;
     private String directionId;
 
@@ -35,20 +30,12 @@ public class Trip {
         this.route = route;
     }
 
-    public Service getService() {
-        return service;
+    public Calendar getCalendar() {
+        return calendar;
     }
 
-    public void setService(Service service) {
-        this.service = service;
-    }
-
-    public Trip getTrip() {
-        return trip;
-    }
-
-    public void setTrip(Trip trip) {
-        this.trip = trip;
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 
     public String getTripHeadsign() {
