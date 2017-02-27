@@ -6,5 +6,12 @@
 </head>
 <body>
 <p>Das ist Home, <span th:text="${name}"/></p>
+
+<ul data-th-each="stopTime : ${allTrips}">
+    <li>
+        <span data-th-text="${stopTime.getDepartureTime()}"></span>
+        <span data-th-text="${stopTime.getTrip().getTripHeadsign()}"></span>
+    </li>
+</ul>
 </body>
 </html>

@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import ch.bernmobil.vibe.businesslayer.IBusinessLogic;
+import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.presentationlayer.HomeController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +25,7 @@ public class WebMockTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private IBusinessLogic service;
+    private BusinessLogic service;
 
     @Test
     public void greetingShouldReturnMessageFromService() throws Exception {

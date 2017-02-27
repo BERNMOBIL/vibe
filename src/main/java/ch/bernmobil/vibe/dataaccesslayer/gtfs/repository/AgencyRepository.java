@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 
 public interface AgencyRepository extends CrudRepository<Agency, Long> {
     Agency findFirstByOrderById();
+
 }

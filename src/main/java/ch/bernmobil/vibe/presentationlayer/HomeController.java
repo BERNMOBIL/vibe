@@ -1,27 +1,48 @@
 package ch.bernmobil.vibe.presentationlayer;
 
-import ch.bernmobil.vibe.businesslayer.IBusinessLogic;
+import ch.bernmobil.vibe.businesslayer.BusinessLogic;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+
 
 @Controller
 public class HomeController {
 
     @Autowired
-    private final IBusinessLogic businessLogic;
+    private final BusinessLogic businessLogic;
 
-    public HomeController(IBusinessLogic businessLogic) {
+    public HomeController(BusinessLogic businessLogic) {
         this.businessLogic = businessLogic;
     }
 
     @RequestMapping("/")
     public String home(Model model) {
+
         model.addAttribute("name", businessLogic.getName());
+
         return "home";
     }
 
+    @RequestMapping("/nexttrip/{stopName}")
+    public String nextTrip(Model model, @PathVariable("stopName") String stopName) {
+        ArrayList<StopTime> allTrips = businessLogic.getNextTripsByStopName(stopName);
+        model.addAttribute("allTrips", allTrips);
+        return "home";
+    }
 
+    @RequestMapping("to")
+    public String nextTripByDestination(Model model) {
+        ArrayList<StopTime> allTrips = businessLogic.getAllTripsByDestinationStop();
+
+        model.addAttribute("allTrips", allTrips);
+
+        return "home";
+    }
 
 }
