@@ -2,6 +2,7 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Stop {
@@ -11,7 +12,8 @@ public class Stop {
     private double stopLatitude;
     private double stopLongitude;
     private String locationType;
-    private String parentStation;
+    @ManyToOne
+    private Stop parentStation;
 
     public long getStopId() {
         return stopId;
@@ -53,11 +55,11 @@ public class Stop {
         this.locationType = locationType;
     }
 
-    public String getParentStation() {
+    public Stop getParentStation() {
         return parentStation;
     }
 
-    public void setParentStation(String parentStation) {
+    public void setParentStation(Stop parentStation) {
         this.parentStation = parentStation;
     }
 }

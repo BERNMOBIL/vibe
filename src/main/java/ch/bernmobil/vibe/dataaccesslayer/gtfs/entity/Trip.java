@@ -10,9 +10,9 @@ public class Trip {
     private Route route;
     @ManyToOne
     private Calendar calendar;
-
     private String tripHeadsign;
-    private String directionId;
+    @Enumerated(EnumType.ORDINAL)
+    private Direction directionId;
 
     public String getId() {
         return id;
@@ -46,11 +46,15 @@ public class Trip {
         this.tripHeadsign = tripHeadsign;
     }
 
-    public String getDirectionId() {
+    public Direction getDirectionId() {
         return directionId;
     }
 
-    public void setDirectionId(String directionId) {
+    public void setDirectionId(Direction directionId) {
         this.directionId = directionId;
+    }
+
+    public enum Direction {
+        OUTBOUND, INBOUND
     }
 }
