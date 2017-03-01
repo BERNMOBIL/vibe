@@ -6,9 +6,10 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Trip;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public interface StopTimeRepository extends CrudRepository<StopTime, String> {
+public interface StopTimeRepository extends CrudRepository<StopTime, String>, StopTimeRepositoryCustom {
     StopTime findFirstByStop(Stop stop);
     ArrayList<StopTime> findAllByTrip(Trip trip);
-    ArrayList<StopTime> findAllByStop(Stop stop);
+    List<StopTime> findAllByStopOrderByDepartureTime(Stop stop);
 }

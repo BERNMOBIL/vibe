@@ -2,6 +2,7 @@ package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.TimeTableEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -31,16 +33,28 @@ public class HomeController {
 
     @RequestMapping("/nexttrip/{stopName}")
     public String nextTrip(Model model, @PathVariable("stopName") String stopName) {
-        ArrayList<StopTime> allTrips = businessLogic.getNextTripsByStopName(stopName);
+        List<StopTime> allTrips = businessLogic.getNextDeparturesByStopName(stopName);
         model.addAttribute("allTrips", allTrips);
         return "home";
     }
 
-    @RequestMapping("to")
-    public String nextTripByDestination(Model model) {
-        ArrayList<StopTime> allTrips = businessLogic.getAllTripsByDestinationStop();
+    @RequestMapping("/from/{departure}/to/{arrival}")
+    public String nextTripByDestination(Model model, @PathVariable("departure") String departure, @PathVariable("arrival") String arrival) {
+        ArrayList<StopTime> allStopTimes = businessLogic.getAllStopTimesFromArrivalToDestination(departure, arrival);
 
-        model.addAttribute("allTrips", allTrips);
+        model.addAttribute("departure", departure);
+        model.addAttribute("arrival", arrival);
+        model.addAttribute("allStopTimes", allStopTimes);
+
+        return "home";
+    }
+
+    @RequestMapping("test")
+    public String test(Model model) {
+
+        ArrayList<TimeTableEntry> timeTableEntries =  businessLogic.getTimeTableEntriesByStopName("Rapperswil");
+        model.addAttribute("departure", "Rapperswil");
+        model.addAttribute("timeTableEntries", timeTableEntries);
 
         return "home";
     }

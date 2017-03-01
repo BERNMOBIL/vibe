@@ -5,21 +5,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p>Das ist Home, <span th:text="${name}"/></p>
-
-<h2>Abfahrten von <span data-th-text="${departure}"></span> nach <span data-th-text="${arrival}"></span></h2>
+<h1>Abfahrten von <span data-th-text="${departure}"></span></h1>
 <table>
     <thead>
     <tr>
-        <th>Abfahrtszeit</th>
-        <th>Richtung</th>
+        <th>Linie</th>
+        <th>Ziel</th>
+        <th>Kante / Perron</th>
+        <th>Abfahrt</th>
+        <th>Hinweis</th>
     </tr>
     </thead>
-    <tr data-th-each="stopTime : ${allStopTimes}">
-        <td data-th-text="${stopTime.getDepartureTime()}">...</td>
-        <td data-th-text="${stopTime.getTrip().getTripHeadsign()}">...</td>
+    <tr data-th-each="departureStopTime : ${nextDepartures}">
+        <td></td>
+        <td><span data-th-text="${departureStopTime.getTrip().getTripHeadsign()}"></span></td>
+        <td><span></span></td>
+        <td data-th-text="${departureStopTime.getDepartureTime()}"></td>
+        <td></td>
     </tr>
 </table>
+
+
+
+
+
 
 
 <table>

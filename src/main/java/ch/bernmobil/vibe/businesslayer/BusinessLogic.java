@@ -1,14 +1,16 @@
 package ch.bernmobil.vibe.businesslayer;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Agency;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Stop;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Trip;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.*;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BusinessLogic {
@@ -17,19 +19,20 @@ public class BusinessLogic {
     private final AgencyRepository agencyRepository;
 
     @Autowired
-    private final RouteRepository routeRepository;
-
-    @Autowired
     private final StopRepository stopRepository;
 
     @Autowired
     private final StopTimeRepository stopTimeRepository;
 
-    public BusinessLogic(AgencyRepository agencyRepository, RouteRepository routeRepository, StopRepository stopRepository, StopTimeRepository stopTimeRepository) {
+    @Autowired
+    private final TimeTableEntryRepository timeTableEntryRepository;
+
+
+    public BusinessLogic(AgencyRepository agencyRepository, StopRepository stopRepository, StopTimeRepository stopTimeRepository, TimeTableEntryRepository timeTableEntryRepository) {
         this.agencyRepository = agencyRepository;
-        this.routeRepository = routeRepository;
         this.stopRepository = stopRepository;
         this.stopTimeRepository = stopTimeRepository;
+        this.timeTableEntryRepository = timeTableEntryRepository;
     }
 
     public String getName() {
@@ -37,49 +40,39 @@ public class BusinessLogic {
         return agency.getName();
     }
 
-    public ArrayList<StopTime> getNextTripsByStopName(String stopName) {
-        Stop stop = stopRepository.findFirstByStopName(stopName);
-        StopTime stopTime = stopTimeRepository.findFirstByStop(stop);
-        Trip trip = stopTime.getTrip();
-        ArrayList<StopTime> allStopTimes = stopTimeRepository.findAllByTrip(trip);
-
-        return allStopTimes;
+    public List<StopTime> getNextDeparturesByStopName(String stopName) {
+        Stop departureStop = stopRepository.findFirstByStopName(stopName);
+        return stopTimeRepository.getNextDeparturesBy(departureStop);
     }
 
-    public ArrayList<StopTime> getAllStopTimesByStopName(String stopName) {
-        Stop startStop = stopRepository.findFirstByStopName(stopName);
-        return stopTimeRepository.findAllByStop(startStop);
-    }
 
-    public ArrayList<StopTime> getAllTripsByDestinationStop() {
-        String start = "Rapperswil";
-        String destination = "Zürich HB";
+    public ArrayList<StopTime> getAllStopTimesFromArrivalToDestination (String departureStopName, String arrivalStopName) {
 
-        ArrayList<StopTime> allStartingStopTimes = getAllStopTimesByStopName(start);
-        ArrayList<StopTime> allDestinationStopTimes = getAllStopTimesByStopName(destination);
+        Stop departureStop = stopRepository.findFirstByStopName(departureStopName);
+        Stop arrivalStop = stopRepository.findFirstByStopName(arrivalStopName);
 
-        ArrayList<Trip> allStartingTrips = new ArrayList<>();
-        for(StopTime stopTime : allStartingStopTimes) allStartingTrips.add(stopTime.getTrip());
 
-        ArrayList<Trip> allDestinationTrips = new ArrayList<>();
-        for(StopTime stopTime : allDestinationStopTimes) allDestinationTrips.add(stopTime.getTrip());
+        List<StopTime> allDepartingStopTimes = stopTimeRepository.findAllByStopOrderByDepartureTime(departureStop);
+        List<StopTime> allArrivalStopTimes = stopTimeRepository.findAllByStopOrderByDepartureTime(arrivalStop);
 
-        ArrayList<StopTime> resultingStopTimes = new ArrayList<>();
+        ArrayList<StopTime> filteredDepartureStopTimes = new ArrayList<>();
 
-        for(StopTime startStopTime : allStartingStopTimes) {
-            StopTime destinationStopTime = findByTrip(allDestinationStopTimes, startStopTime.getTrip());
-            if(startStopTime != null && destinationStopTime != null && startStopTime.getStopSequence() < destinationStopTime.getStopSequence()){
-                resultingStopTimes.add(startStopTime);
+        //TODO: Make this better
+        for(StopTime departureStopTime : allDepartingStopTimes) {
+            for(StopTime arrivalStopTime : allArrivalStopTimes) {
+                if(departureStopTime.getTrip().getId() == arrivalStopTime.getTrip().getId() && departureStopTime.getStopSequence() < arrivalStopTime.getStopSequence()){
+                    filteredDepartureStopTimes.add(departureStopTime);
+                }
             }
         }
 
-        return resultingStopTimes;
+
+        return filteredDepartureStopTimes;
     }
 
-    private StopTime findByTrip(ArrayList<StopTime> list, Trip trip) {
-        for(StopTime stopTime : list) {
-            if(stopTime.getTrip().equals(trip)) return stopTime;
-        }
-        return null;
+    public ArrayList<TimeTableEntry> getTimeTableEntriesByStopName(String departureStopName) {
+        return timeTableEntryRepository.getTimeTableEntriesByStopName("Rüti ZH", 10);
     }
+
+
 }
