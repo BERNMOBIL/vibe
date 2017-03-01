@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 
 @Entity
 public class StopTime {
@@ -9,13 +10,15 @@ public class StopTime {
     private long id;
     @ManyToOne
     private Trip trip;
-    private String arrivalTime;
-    private String departureTime;
+    private LocalTime arrivalTime;
+    private LocalTime departureTime;
     @ManyToOne
     private Stop stop;
     private int stopSequence;
-    private int pickupType;
-    private int dropOffType;
+    @Enumerated(EnumType.ORDINAL)
+    private PickupType pickupType;
+    @Enumerated(EnumType.ORDINAL)
+    private DropOffType dropOffType;
 
     public long getId() {
         return id;
@@ -33,19 +36,19 @@ public class StopTime {
         this.trip = trip;
     }
 
-    public String getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
+    public void setArrivalTime(LocalTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public String getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
+    public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
 
@@ -65,19 +68,27 @@ public class StopTime {
         this.stopSequence = stopSequence;
     }
 
-    public int getPickupType() {
+    public PickupType getPickupType() {
         return pickupType;
     }
 
-    public void setPickupType(int pickupType) {
+    public void setPickupType(PickupType pickupType) {
         this.pickupType = pickupType;
     }
 
-    public int getDropOffType() {
+    public DropOffType getDropOffType() {
         return dropOffType;
     }
 
-    public void setDropOffType(int dropOffType) {
+    public void setDropOffType(DropOffType dropOffType) {
         this.dropOffType = dropOffType;
+    }
+
+    public enum PickupType {
+        REGULARLY_SCHEDULED_PICKUP, NO_PICKUP_AVAILABLE, PHONE_AGENCY_REQUEST_PICKUP, COORDINATE_WITH_DRIVER
+    }
+
+    public enum DropOffType {
+        REGULARLY_SCHEDULED_DROP_OFF, NO_DROP_OFF_AVAILABLE, PHONE_AGENCY_REQUEST_DROP_OFF, COORDINATE_WITH_DRIVER
     }
 }

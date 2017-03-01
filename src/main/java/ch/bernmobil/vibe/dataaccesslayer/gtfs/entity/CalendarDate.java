@@ -1,7 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class CalendarDate {
@@ -11,7 +11,7 @@ public class CalendarDate {
 
     @ManyToOne
     private Calendar calendar;
-    private Date date;
+    private LocalDate date;
     private int exceptionType;
 
     public long getId() {
@@ -22,11 +22,11 @@ public class CalendarDate {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

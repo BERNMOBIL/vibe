@@ -1,8 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Route {
@@ -12,7 +10,8 @@ public class Route {
     private Agency agency;
     private String routeShortName;
     private String routeLongName;
-    private int routeType;
+    @Enumerated(EnumType.ORDINAL)
+    private RouteType routeType;
 
     public String getRouteId() {
         return routeId;
@@ -46,11 +45,15 @@ public class Route {
         this.routeLongName = routeLongName;
     }
 
-    public int getRouteType() {
+    public RouteType getRouteType() {
         return routeType;
     }
 
-    public void setRouteType(int routeType) {
+    public void setRouteType(RouteType routeType) {
         this.routeType = routeType;
+    }
+
+    public enum RouteType {
+        TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR
     }
 }
