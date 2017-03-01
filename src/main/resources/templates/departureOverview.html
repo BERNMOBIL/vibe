@@ -17,7 +17,7 @@
     </tr>
     </thead>
     <tr data-th-each="departureStopTime : ${nextDepartures}">
-        <td></td>
+        <td><span data-th-text="${departureStopTime.getTrip().getRoute().getRouteShortName()}"></span></td>
         <td><span data-th-text="${departureStopTime.getTrip().getTripHeadsign()}"></span></td>
         <td><span></span></td>
         <td data-th-text="${departureStopTime.getDepartureTime()}"></td>

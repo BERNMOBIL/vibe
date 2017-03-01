@@ -12,8 +12,7 @@ public class Stop {
     private double stopLatitude;
     private double stopLongitude;
     private String locationType;
-    @ManyToOne
-    private Stop parentStation;
+    private String parentStation;
 
     public long getStopId() {
         return stopId;
@@ -55,11 +54,11 @@ public class Stop {
         this.locationType = locationType;
     }
 
-    public Stop getParentStation() {
+    public String getParentStation() {
         return parentStation;
     }
 
-    public void setParentStation(Stop parentStation) {
+    public void setParentStation(String parentStation) {
         this.parentStation = parentStation;
     }
 }
