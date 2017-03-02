@@ -15,16 +15,13 @@ import java.util.stream.Collectors;
 @Service
 public class BusinessLogic {
 
-    @Autowired
     private final AgencyRepository agencyRepository;
 
-    @Autowired
     private final StopRepository stopRepository;
 
-    @Autowired
     private final StopTimeRepository stopTimeRepository;
 
-
+    @Autowired
     public BusinessLogic(AgencyRepository agencyRepository, StopRepository stopRepository, StopTimeRepository stopTimeRepository) {
         this.agencyRepository = agencyRepository;
         this.stopRepository = stopRepository;
@@ -40,31 +37,5 @@ public class BusinessLogic {
         Stop departureStop = stopRepository.findFirstByStopName(stopName);
         return stopTimeRepository.getNextDeparturesBy(departureStop);
     }
-
-
-    public ArrayList<StopTime> getAllStopTimesFromArrivalToDestination (String departureStopName, String arrivalStopName) {
-
-        Stop departureStop = stopRepository.findFirstByStopName(departureStopName);
-        Stop arrivalStop = stopRepository.findFirstByStopName(arrivalStopName);
-
-
-        List<StopTime> allDepartingStopTimes = stopTimeRepository.findAllByStopOrderByDepartureTime(departureStop);
-        List<StopTime> allArrivalStopTimes = stopTimeRepository.findAllByStopOrderByDepartureTime(arrivalStop);
-
-        ArrayList<StopTime> filteredDepartureStopTimes = new ArrayList<>();
-
-        //TODO: Make this better
-        for(StopTime departureStopTime : allDepartingStopTimes) {
-            for(StopTime arrivalStopTime : allArrivalStopTimes) {
-                if(departureStopTime.getTrip().getId() == arrivalStopTime.getTrip().getId() && departureStopTime.getStopSequence() < arrivalStopTime.getStopSequence()){
-                    filteredDepartureStopTimes.add(departureStopTime);
-                }
-            }
-        }
-
-
-        return filteredDepartureStopTimes;
-    }
-
 
 }
