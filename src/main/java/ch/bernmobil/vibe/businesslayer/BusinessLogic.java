@@ -24,15 +24,11 @@ public class BusinessLogic {
     @Autowired
     private final StopTimeRepository stopTimeRepository;
 
-    @Autowired
-    private final TimeTableEntryRepository timeTableEntryRepository;
 
-
-    public BusinessLogic(AgencyRepository agencyRepository, StopRepository stopRepository, StopTimeRepository stopTimeRepository, TimeTableEntryRepository timeTableEntryRepository) {
+    public BusinessLogic(AgencyRepository agencyRepository, StopRepository stopRepository, StopTimeRepository stopTimeRepository) {
         this.agencyRepository = agencyRepository;
         this.stopRepository = stopRepository;
         this.stopTimeRepository = stopTimeRepository;
-        this.timeTableEntryRepository = timeTableEntryRepository;
     }
 
     public String getName() {
@@ -68,10 +64,6 @@ public class BusinessLogic {
 
 
         return filteredDepartureStopTimes;
-    }
-
-    public ArrayList<TimeTableEntry> getTimeTableEntriesByStopName(String departureStopName) {
-        return timeTableEntryRepository.getTimeTableEntriesByStopName("Rüti ZH", 10);
     }
 
 
