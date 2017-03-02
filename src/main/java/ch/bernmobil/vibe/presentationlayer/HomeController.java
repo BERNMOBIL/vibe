@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,9 +23,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) {
-
         model.addAttribute("name", businessLogic.getName());
-
         return "home";
     }
 
@@ -34,17 +31,6 @@ public class HomeController {
     public String nextTrip(Model model, @PathVariable("stopName") String stopName) {
         List<StopTime> allTrips = businessLogic.getNextDeparturesByStopName(stopName);
         model.addAttribute("allTrips", allTrips);
-        return "home";
-    }
-
-    @RequestMapping("/from/{departure}/to/{arrival}")
-    public String nextTripByDestination(Model model, @PathVariable("departure") String departure, @PathVariable("arrival") String arrival) {
-        ArrayList<StopTime> allStopTimes = businessLogic.getAllStopTimesFromArrivalToDestination(departure, arrival);
-
-        model.addAttribute("departure", departure);
-        model.addAttribute("arrival", arrival);
-        model.addAttribute("allStopTimes", allStopTimes);
-
         return "home";
     }
 }
