@@ -19,15 +19,56 @@ public class LocalTimeConverter implements AttributeConverter<LocalTime, String>
         if(dbData == null) {
             return null;
         }
+
         String[] digits = dbData.split(":");
-        int hour = Integer.parseInt(digits[0]);
-        if(hour > 33) {
-            digits[0] = Integer.toString(hour - 24);
+        String[] correctTime = {"00", "00", "00"};
+
+        switch(digits.length) {
+            case 3: correctTime[2] = normalizeSecondsAndMinutes(digits[2]);
+            case 2: correctTime[1] = normalizeSecondsAndMinutes(digits[1]);
+            case 1: correctTime[0] = normalizeHour(digits[0]);
         }
-        else if(hour > 23) {
-            digits[0] = String.format("0%s", Integer.toString(hour - 24));
-        }
-        String newDbData = String.format("%s:%s:%s", digits[0], digits[1], digits[2]);
-        return LocalTime.parse(newDbData);
+
+        return LocalTime.parse(String.join(":", correctTime));
     }
+
+
+    private String normalizeString(int digit) {
+        if(digit < 10){
+            return "0" + digit;
+        }
+         else {
+            return Integer.toString(digit);
+        }
+    }
+
+    private int parseInt(String digitString) {
+        int digit;
+        try {
+            digit = Integer.parseInt(digitString);
+        } catch (NumberFormatException ex) {
+            return 0;
+        }
+        return digit;
+    }
+
+    private String normalizeSecondsAndMinutes(String digitString) {
+        int digit = parseInt(digitString);
+        if(digit > 60){
+            return "00";
+        }
+        return normalizeString(digit);
+    }
+
+    private String normalizeHour(String hourString) {
+        int hour = parseInt(hourString);
+        if(hour > 23) {
+            hour -= 24;
+        }
+        return normalizeString(hour);
+    }
+
+
+
+
 }

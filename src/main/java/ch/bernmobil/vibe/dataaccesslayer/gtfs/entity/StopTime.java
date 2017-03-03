@@ -10,8 +10,8 @@ public class StopTime {
     private long id;
     @ManyToOne
     private Trip trip;
-    private String arrivalTime;
-    private String departureTime;
+    private LocalTime arrivalTime;
+    private LocalTime departureTime;
     @ManyToOne
     private Stop stop;
     private int stopSequence;
@@ -36,19 +36,19 @@ public class StopTime {
         this.trip = trip;
     }
 
-    public String getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
+    public void setArrivalTime(LocalTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public String getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
+    public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
 

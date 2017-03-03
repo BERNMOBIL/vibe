@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class StopTimeRepositoryImpl implements StopTimeRepositoryCustom {
     private StopTimeRepository stopTimeRepository;
 
     public List<StopTime> getNextDeparturesBy(Stop departureStop) {
-        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        LocalTime now = LocalTime.now();//.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
         return stopTimeRepository
                 .findAllByStopOrderByDepartureTime(departureStop)
