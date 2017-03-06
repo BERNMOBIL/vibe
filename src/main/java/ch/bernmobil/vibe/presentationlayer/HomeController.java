@@ -3,13 +3,13 @@ package ch.bernmobil.vibe.presentationlayer;
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.TimeTableEntry;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,9 +25,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) {
-
         model.addAttribute("name", businessLogic.getName());
-
         return "home";
     }
 
@@ -37,26 +35,4 @@ public class HomeController {
         model.addAttribute("allTrips", allTrips);
         return "home";
     }
-
-    @RequestMapping("/from/{departure}/to/{arrival}")
-    public String nextTripByDestination(Model model, @PathVariable("departure") String departure, @PathVariable("arrival") String arrival) {
-        ArrayList<StopTime> allStopTimes = businessLogic.getAllStopTimesFromArrivalToDestination(departure, arrival);
-
-        model.addAttribute("departure", departure);
-        model.addAttribute("arrival", arrival);
-        model.addAttribute("allStopTimes", allStopTimes);
-
-        return "home";
-    }
-
-    @RequestMapping("test")
-    public String test(Model model) {
-
-        ArrayList<TimeTableEntry> timeTableEntries =  businessLogic.getTimeTableEntriesByStopName("Rapperswil");
-        model.addAttribute("departure", "Rapperswil");
-        model.addAttribute("timeTableEntries", timeTableEntries);
-
-        return "home";
-    }
-
 }

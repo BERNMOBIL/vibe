@@ -1,4 +1,5 @@
-﻿TRUNCATE TABLE agency CASCADE;
+﻿-- The data MUST be located in /tmp/gtfs
+TRUNCATE TABLE agency CASCADE;
 TRUNCATE TABLE calendar CASCADE;
 TRUNCATE TABLE calendar_date CASCADE;
 TRUNCATE TABLE route CASCADE;

@@ -13,13 +13,10 @@ import java.util.List;
 @Service
 public class BusinessLogic {
 
-    @Autowired
     private final AgencyRepository agencyRepository;
 
-    @Autowired
     private final StopRepository stopRepository;
 
-    @Autowired
     private final StopTimeRepository stopTimeRepository;
 
     @Autowired
@@ -53,35 +50,5 @@ public class BusinessLogic {
 
         return nextDepartures;
     }
-
-
-    public ArrayList<StopTime> getAllStopTimesFromArrivalToDestination (String departureStopName, String arrivalStopName) {
-
-        Stop departureStop = stopRepository.findFirstByStopName(departureStopName);
-        Stop arrivalStop = stopRepository.findFirstByStopName(arrivalStopName);
-
-
-        List<StopTime> allDepartingStopTimes = stopTimeRepository.findAllByStopOrderByDepartureTime(departureStop);
-        List<StopTime> allArrivalStopTimes = stopTimeRepository.findAllByStopOrderByDepartureTime(arrivalStop);
-
-        ArrayList<StopTime> filteredDepartureStopTimes = new ArrayList<>();
-
-        //TODO: Make this better
-        for(StopTime departureStopTime : allDepartingStopTimes) {
-            for(StopTime arrivalStopTime : allArrivalStopTimes) {
-                if(departureStopTime.getTrip().getId() == arrivalStopTime.getTrip().getId() && departureStopTime.getStopSequence() < arrivalStopTime.getStopSequence()){
-                    filteredDepartureStopTimes.add(departureStopTime);
-                }
-            }
-        }
-
-
-        return filteredDepartureStopTimes;
-    }
-
-    public ArrayList<TimeTableEntry> getTimeTableEntriesByStopName(String departureStopName) {
-        return timeTableEntryRepository.getTimeTableEntriesByStopName("Rüti ZH", 10);
-    }
-
 
 }
