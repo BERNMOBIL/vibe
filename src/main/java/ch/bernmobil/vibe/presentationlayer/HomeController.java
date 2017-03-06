@@ -1,8 +1,8 @@
 package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.TimeTableEntry;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.TimeTableEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

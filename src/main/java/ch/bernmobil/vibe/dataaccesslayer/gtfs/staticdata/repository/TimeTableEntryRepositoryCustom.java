@@ -1,10 +1,9 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.repository;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.TimeTableEntry;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.TimeTableEntry;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public interface TimeTableEntryRepositoryCustom {

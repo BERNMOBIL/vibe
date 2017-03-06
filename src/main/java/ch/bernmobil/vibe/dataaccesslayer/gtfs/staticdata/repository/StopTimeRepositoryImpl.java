@@ -1,12 +1,9 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.repository;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Stop;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

@@ -1,7 +1,7 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.repository;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Stop;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.TimeTableEntry;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.TimeTableEntry;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 

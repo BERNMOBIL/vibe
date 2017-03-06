@@ -1,8 +1,8 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.repository;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Stop;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Trip;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Trip;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
