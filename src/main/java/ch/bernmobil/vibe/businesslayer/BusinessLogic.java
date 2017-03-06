@@ -20,17 +20,13 @@ public class BusinessLogic {
     private final StopTimeRepository stopTimeRepository;
 
     @Autowired
-    private final TimeTableEntryRepository timeTableEntryRepository;
-
-    @Autowired
     private final TripUpdateRepository tripUpdateRepository;
 
 
-    public BusinessLogic(AgencyRepository agencyRepository, StopRepository stopRepository, StopTimeRepository stopTimeRepository, TimeTableEntryRepository timeTableEntryRepository, TripUpdateRepository tripUpdateRepository) {
+    public BusinessLogic(AgencyRepository agencyRepository, StopRepository stopRepository, StopTimeRepository stopTimeRepository, TripUpdateRepository tripUpdateRepository) {
         this.agencyRepository = agencyRepository;
         this.stopRepository = stopRepository;
         this.stopTimeRepository = stopTimeRepository;
-        this.timeTableEntryRepository = timeTableEntryRepository;
         this.tripUpdateRepository = tripUpdateRepository;
     }
 

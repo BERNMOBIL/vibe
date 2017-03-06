@@ -26,8 +26,7 @@ public class StopTimeRepositoryImpl implements StopTimeRepositoryCustom {
                 .findAllByStopOrderByDepartureTime(departureStop)
                .stream()
                .filter(stopTime -> stopTime
-                       .getDepartureTime()
-                       .compareTo(now) >= 1 &&
+                       .getDepartureTime().compareTo(now) >= 1 &&
                        stopTime
                                .getTrip()
                                .getTripHeadsign()

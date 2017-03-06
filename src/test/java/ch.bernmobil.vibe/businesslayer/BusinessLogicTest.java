@@ -1,11 +1,12 @@
 package ch.bernmobil.vibe.businesslayer;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Agency;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Stop;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.AgencyRepository;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.StopRepository;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.StopTimeRepository;
+
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Agency;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AgencyRepository;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopRepository;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopTimeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

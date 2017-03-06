@@ -1,8 +1,8 @@
 package ch.bernmobil.vibe.businesslayer;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.AgencyRepository;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.StopRepository;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.StopTimeRepository;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AgencyRepository;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopRepository;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopTimeRepository;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

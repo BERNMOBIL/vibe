@@ -1,9 +1,6 @@
 package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.TimeTableEntry;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +28,7 @@ public class HomeController {
 
     @RequestMapping("/nexttrip/{stopName}")
     public String nextTrip(Model model, @PathVariable("stopName") String stopName) {
-        List<StopTime> allTrips = businessLogic.getNextDeparturesByStopName(stopName);
+        List<ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime> allTrips = businessLogic.getNextDeparturesByStopName(stopName);
         model.addAttribute("allTrips", allTrips);
         return "home";
     }
