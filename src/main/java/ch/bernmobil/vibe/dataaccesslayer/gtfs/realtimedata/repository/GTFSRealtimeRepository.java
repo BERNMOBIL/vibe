@@ -36,10 +36,16 @@ public abstract class GTFSRealtimeRepository {
 
 
     protected final List<GtfsRealtime.FeedEntity> getFeedEntities() {
+        if(feedEntities == null) {
+            loadEntities(defaultAPIUrl);
+        }
         return feedEntities;
     }
 
     public final GtfsRealtime.FeedMessage getFeedMessage() {
+        if(feedMessage == null) {
+            loadEntities(defaultAPIUrl);
+        }
         return feedMessage;
     }
 

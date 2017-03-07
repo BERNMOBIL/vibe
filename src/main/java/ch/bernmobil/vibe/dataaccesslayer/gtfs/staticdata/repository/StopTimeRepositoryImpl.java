@@ -35,5 +35,4 @@ public class StopTimeRepositoryImpl implements StopTimeRepositoryCustom {
                .collect(Collectors.toList());
 
     }
-
 }
