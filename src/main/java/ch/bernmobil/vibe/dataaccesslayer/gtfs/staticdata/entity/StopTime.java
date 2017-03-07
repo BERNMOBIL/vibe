@@ -1,4 +1,4 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.entity;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import javax.persistence.*;
 import java.time.LocalTime;

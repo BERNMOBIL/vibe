@@ -1,4 +1,4 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs;
+package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

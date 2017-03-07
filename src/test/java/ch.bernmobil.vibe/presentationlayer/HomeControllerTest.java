@@ -1,26 +1,21 @@
 package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Stop;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Trip;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Trip;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import java.util.Arrays;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
-import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -56,7 +51,7 @@ public class HomeControllerTest {
         String requestPath = "/nexttrip/Generic Stop";
         StopTime stopTimeMock = new StopTime();
         String mockDeparture = "12:00:00";
-        stopTimeMock.setDepartureTime(mockDeparture);
+        stopTimeMock.setDepartureTime(LocalTime.parse(mockDeparture));
         Trip tripMock = new Trip();
         String mockStopName = "Concrete Stop";
         tripMock.setTripHeadsign(mockStopName);
@@ -65,8 +60,8 @@ public class HomeControllerTest {
         mockMvc
                 .perform(get(requestPath))
                 .andDo(print())
-                .andExpect(status().isOk());
-                //.andExpect(content().string(containsString(mockDeparture)));
+                .andExpect(status().isOk())/*
+                .andExpect(content().string(containsString(mockDeparture)))*/;
 
     }
 }

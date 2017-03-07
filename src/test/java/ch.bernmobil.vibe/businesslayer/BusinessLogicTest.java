@@ -1,11 +1,12 @@
 package ch.bernmobil.vibe.businesslayer;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Agency;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.Stop;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.entity.StopTime;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.AgencyRepository;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.StopRepository;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.repository.StopTimeRepository;
+
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Agency;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AgencyRepository;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopRepository;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopTimeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class BusinessLogicTest {
 
     @Test
     public void nextDeparture() throws Exception {
-        Stop stopMock = mock(Stop.class);
+        Stop stopMock = new Stop();
         String stopName = "Generic Stop";
         when(stopRepository.findFirstByStopName(stopName)).thenReturn(stopMock);
         StopTime stopTimeMock = mock(StopTime.class);
@@ -59,5 +60,4 @@ public class BusinessLogicTest {
         String actual = logic.getName();
         assertThat(agencyName, is(actual));
     }
-
 }
