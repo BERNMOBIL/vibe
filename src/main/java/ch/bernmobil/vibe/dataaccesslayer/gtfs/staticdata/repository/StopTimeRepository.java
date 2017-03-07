@@ -12,4 +12,7 @@ public interface StopTimeRepository extends CrudRepository<StopTime, String>, St
     StopTime findFirstByStop(Stop stop);
     ArrayList<StopTime> findAllByTrip(Trip trip);
     List<StopTime> findAllByStopOrderByDepartureTime(Stop stop);
+    StopTime findFirstByTripAndStop(Trip trip, Stop stop);
+
+
 }
