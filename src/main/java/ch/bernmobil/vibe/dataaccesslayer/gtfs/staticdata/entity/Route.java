@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import javax.persistence.*;
+import java.net.URL;
 
 @Entity
 public class Route {
@@ -10,8 +11,12 @@ public class Route {
     private Agency agency;
     private String routeShortName;
     private String routeLongName;
+    private String routeDescription;
     @Enumerated(EnumType.ORDINAL)
     private RouteType routeType;
+    private URL routeUrl;
+    private String routeColor;
+    private String routeTextColor;
 
     public String getRouteId() {
         return routeId;

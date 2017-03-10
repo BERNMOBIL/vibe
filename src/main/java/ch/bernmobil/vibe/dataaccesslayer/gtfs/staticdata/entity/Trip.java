@@ -11,8 +11,20 @@ public class Trip {
     @ManyToOne
     private Calendar calendar;
     private String tripHeadsign;
+    private String tripShortName;
     @Enumerated(EnumType.ORDINAL)
     private Direction directionId;
+    private String blockId;
+    @OneToOne
+    private Shape shape;
+
+    public enum WheelchairAccessible {
+        NO_INFORMATION, AT_LEAST_ONE_WHEELCHAIR, NO_WHEELCHAIR
+    }
+
+    public enum BikesAllowed {
+        NO_INFORMATION, AT_LEAST_ONE_BIKE, NO_BIKE
+    }
 
     public String getId() {
         return id;

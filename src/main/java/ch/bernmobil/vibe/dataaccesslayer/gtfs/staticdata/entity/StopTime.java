@@ -15,10 +15,29 @@ public class StopTime {
     @ManyToOne
     private Stop stop;
     private int stopSequence;
+    private String stopHeadsign;
     @Enumerated(EnumType.ORDINAL)
     private PickupType pickupType;
     @Enumerated(EnumType.ORDINAL)
     private DropOffType dropOffType;
+    private int shapeDistTraveled;
+    private Timepoint timepoint;
+
+    /**
+     * Indicates if the specified arrival and departure times for a stop are strictly adhered to by the transit vehicle.
+     * If empty, times are condsidered as exact.
+     */
+    public enum Timepoint {
+        APPROXIMATE, EXACT
+    }
+
+    public enum PickupType {
+        REGULARLY_SCHEDULED_PICKUP, NO_PICKUP_AVAILABLE, PHONE_AGENCY_REQUEST_PICKUP, COORDINATE_WITH_DRIVER
+    }
+
+    public enum DropOffType {
+        REGULARLY_SCHEDULED_DROP_OFF, NO_DROP_OFF_AVAILABLE, PHONE_AGENCY_REQUEST_DROP_OFF, COORDINATE_WITH_DRIVER
+    }
 
     public long getId() {
         return id;
@@ -84,11 +103,27 @@ public class StopTime {
         this.dropOffType = dropOffType;
     }
 
-    public enum PickupType {
-        REGULARLY_SCHEDULED_PICKUP, NO_PICKUP_AVAILABLE, PHONE_AGENCY_REQUEST_PICKUP, COORDINATE_WITH_DRIVER
+    public int getShapeDistTraveled() {
+        return shapeDistTraveled;
     }
 
-    public enum DropOffType {
-        REGULARLY_SCHEDULED_DROP_OFF, NO_DROP_OFF_AVAILABLE, PHONE_AGENCY_REQUEST_DROP_OFF, COORDINATE_WITH_DRIVER
+    public void setShapeDistTraveled(int shapeDistTraveled) {
+        this.shapeDistTraveled = shapeDistTraveled;
+    }
+
+    public String getStopHeadsign() {
+        return stopHeadsign;
+    }
+
+    public void setStopHeadsign(String stopHeadsign) {
+        this.stopHeadsign = stopHeadsign;
+    }
+
+    public Timepoint getTimepoint() {
+        return timepoint;
+    }
+
+    public void setTimepoint(Timepoint timepoint) {
+        this.timepoint = timepoint;
     }
 }

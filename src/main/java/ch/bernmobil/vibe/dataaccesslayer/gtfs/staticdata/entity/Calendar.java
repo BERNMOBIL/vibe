@@ -15,7 +15,6 @@ public class Calendar {
     private boolean friday;
     private boolean saturday;
     private boolean sunday;
-
     private LocalDate startDate;
     private LocalDate endDate;
 

@@ -12,7 +12,7 @@ public class CalendarDate {
     @ManyToOne
     private Calendar calendar;
     private LocalDate date;
-    private int exceptionType;
+    private ExceptionType exceptionType;
 
     public long getId() {
         return id;
@@ -30,11 +30,11 @@ public class CalendarDate {
         this.date = date;
     }
 
-    public int getExceptionType() {
+    public ExceptionType getExceptionType() {
         return exceptionType;
     }
 
-    public void setExceptionType(int exceptionType) {
+    public void setExceptionType(ExceptionType exceptionType) {
         this.exceptionType = exceptionType;
     }
 
@@ -44,5 +44,17 @@ public class CalendarDate {
 
     public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
+    }
+
+    public enum ExceptionType {
+        ADDED(1), REMOVED(2);
+
+        private final int type;
+        ExceptionType(int type) {
+            this.type = type;
+        }
+        public int getValue() {
+            return type;
+        }
     }
 }
