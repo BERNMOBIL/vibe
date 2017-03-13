@@ -3,6 +3,7 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 import javax.persistence.*;
 import java.time.LocalTime;
 
+@Entity
 public class Frequency {
     @Id
     @GeneratedValue

@@ -2,6 +2,7 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.net.URL;
 import java.util.TimeZone;
 
@@ -14,6 +15,7 @@ public class Stop {
     private String stopDescription;
     private double stopLatitude;
     private double stopLongitude;
+    @OneToOne
     private FareRule zone;
     private URL stopUrl;
     private String locationType;

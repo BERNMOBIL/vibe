@@ -1,12 +1,15 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Entity
 public class CalendarDate {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "service_id")
     private long id;
 
     @ManyToOne
