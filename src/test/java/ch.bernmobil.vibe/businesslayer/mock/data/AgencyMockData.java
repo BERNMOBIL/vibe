@@ -22,9 +22,9 @@ public class AgencyMockData {
     };
 
     public static String[] urls = {
-        "www.url1.ch",
-        "www.url2.ch",
-        "www.url3.ch",
+        "http://www.url1.ch",
+        "http://www.url2.ch",
+        "http://www.url3.ch",
     };
 
     public static String[] timezones = {
@@ -47,14 +47,18 @@ public class AgencyMockData {
 
 
     public static Agency create(int index) {
-        return new Agency(){{
+        Agency agency = new Agency(){{
             setId(ids[index]);
             setName(names[index]);
-            setUrl(urls[index]);
             setTimezone(timezones[index]);
             setLang(langs[index]);
             setPhone(phones[index]);
         }};
+
+        try { agency.setUrl(new URL(urls[index]));
+        } catch (MalformedURLException e) { e.printStackTrace(); }
+
+        return agency;
     }
 
 }

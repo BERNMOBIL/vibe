@@ -96,7 +96,7 @@ public class StopMockData {
             setWheelchairBoarding(wheelchairBoardings[index]);
         }};
 
-        try { stop.setStopUrl(new URL(StopMockData.stopUrls[index]));
+        try { stop.setStopUrl(new URL(stopUrls[index]));
         } catch (MalformedURLException e) { e.printStackTrace(); }
 
         return stop;
