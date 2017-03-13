@@ -52,7 +52,7 @@ public class RealtimeUpdateLogic {
 
         for(GtfsRealtime.TripUpdate.StopTimeUpdate stopTimeUpdate : tripUpdate.getStopTimeUpdateList())
         {
-            Stop stop = stopRepository.findFirtByStopId(getValidStopId(stopTimeUpdate.getStopId()));
+            Stop stop = stopRepository.findFirstByStopId(getValidStopId(stopTimeUpdate.getStopId()));
             StopTime stopTime = stopTimeRepository.findFirstByTripAndStop(trip, stop);
 
             allStopTimesUpdates.put(stopTime, stopTimeUpdate);

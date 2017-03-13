@@ -38,7 +38,7 @@ public class HomeControllerTest {
         String subStringOnPage = "Hello Mock";
         String requestPath = "/";
 
-        when(service.getName()).thenReturn(subStringOnPage);
+        when(service.getAgencyName()).thenReturn(subStringOnPage);
 
         mockMvc
                 .perform(get(requestPath))
@@ -56,7 +56,7 @@ public class HomeControllerTest {
         String mockStopName = "Concrete Stop";
         tripMock.setTripHeadsign(mockStopName);
         List<StopTime> expected = Collections.singletonList(stopTimeMock);
-        when(service.getNextDeparturesByStopName(Mockito.anyString())).thenReturn(expected);
+        //when(service.getNextDeparturesByStopName(Mockito.anyString())).thenReturn(expected);
         mockMvc
                 .perform(get(requestPath))
                 .andDo(print())

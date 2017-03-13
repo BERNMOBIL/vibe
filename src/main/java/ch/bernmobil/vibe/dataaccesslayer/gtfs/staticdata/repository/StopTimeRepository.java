@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface StopTimeRepository extends CrudRepository<StopTime, String>, StopTimeRepositoryCustom {
+    List<StopTime> findAll();
     StopTime findFirstByStop(Stop stop);
     ArrayList<StopTime> findAllByTrip(Trip trip);
     List<StopTime> findAllByStopOrderByDepartureTime(Stop stop);

@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface StopRepository extends CrudRepository<Stop, Long>{
     Stop findFirstByStopName(String name);
-    Stop findFirtByStopId(long stopId);
+    Stop findFirstByStopId(long stopId);
 }

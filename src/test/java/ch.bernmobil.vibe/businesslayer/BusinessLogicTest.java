@@ -1,12 +1,14 @@
 package ch.bernmobil.vibe.businesslayer;
 
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Agency;
+
+import ch.bernmobil.vibe.businesslayer.mock.data.StopMockData;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AgencyRepository;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopRepository;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopTimeRepository;
+import java.util.List;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,50 +16,57 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Collections;
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 
 @ActiveProfiles("RepositoryTestConfiguration")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {RepositoryTestConfiguration.class, BusinessLogic.class})
+@ContextConfiguration(classes = {BusinessLogic.class, RepositoryTestConfiguration.class})
 public class BusinessLogicTest {
-    @Autowired
-    private StopRepository stopRepository;
 
     @Autowired
-    private StopTimeRepository stopTimeRepository;
+    BusinessLogic businessLogic;
 
     @Autowired
-    private AgencyRepository agencyRepository;
+    AgencyRepository agencyRepository;
 
-    @Autowired
-    private BusinessLogic logic;
+    private boolean isFirstInitialization = true;
+    private static List<StopTime> mockedStopTimes;
+    private static List<Stop> mockedStops;
+
+
+    //BeforeClass executed before @Autowired
+    @Before
+    public void loadMockedDataSources() {
+        if(isFirstInitialization) {
+            isFirstInitialization = false;
+
+            mockedStopTimes = RepositoryTestConfiguration.stopTimeRepositoryMock.getDataSource();
+            mockedStops = RepositoryTestConfiguration.stopRepositoryMock.getDataSource();
+        }
+
+    }
+
+    @Test
+    public void agencyName() {
+        String agencyName = businessLogic.getAgencyName();
+
+        assertThat(agencyName, is("name 1"));
+    }
+
 
     @Test
     public void nextDeparture() throws Exception {
-        Stop stopMock = new Stop();
-        String stopName = "Generic Stop";
-        when(stopRepository.findFirstByStopName(stopName)).thenReturn(stopMock);
-        StopTime stopTimeMock = mock(StopTime.class);
-        List<StopTime> expected = Collections.singletonList(stopTimeMock);
-        when(stopTimeRepository.getNextDeparturesBy(stopMock)).thenReturn(expected);
-        List<StopTime> actual = logic.getNextDeparturesByStopName(stopName);
-        assertThat(expected, is(actual));
+        Stop stop = mockedStops.get(0);
+        List<StopTime> expectedResult = mockedStopTimes.subList(0, 2);
+
+        List<StopTime> nextDepartures =  businessLogic.getNextDeparturesByStopName(stop.getStopName());
+
+        assertThat(nextDepartures.size(), is(2));
+        assertThat(nextDepartures, is(expectedResult));
     }
 
-    @Test
-    public void getAgencyName() throws Exception {
-        Agency agencyMock = mock(Agency.class);
-        String agencyName = "Generic agency";
-        when(agencyMock.getName()).thenReturn(agencyName);
-        when(agencyRepository.findFirstByOrderById()).thenReturn(agencyMock);
-        String actual = logic.getName();
-        assertThat(agencyName, is(actual));
-    }
+
+
 }

@@ -26,10 +26,10 @@ public class DepartureController {
 
     @RequestMapping("/{departureName}")
     public String departures(Model model, @PathVariable("departureName") String departureName) {
-        List<StopTime> nextDepartures = businessLogic.getNextDeparturesByStopName(departureName);
+        //List<StopTime> nextDepartures = businessLogic.getNextDeparturesByStopName(departureName);
 
         model.addAttribute("departure", departureName);
-        model.addAttribute("nextDepartures", nextDepartures);
+//        model.addAttribute("nextDepartures", nextDepartures);
 
         return "departureOverview";
     }
