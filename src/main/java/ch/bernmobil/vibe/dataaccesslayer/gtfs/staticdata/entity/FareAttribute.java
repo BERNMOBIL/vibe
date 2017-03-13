@@ -8,6 +8,7 @@ public class FareAttribute {
     @Id
     @GeneratedValue
     private long id;
+    @ManyToOne
     private FareRule fareRule;
     private double price;
     private Currency currentyType;

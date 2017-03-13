@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Trip {
@@ -8,8 +9,8 @@ public class Trip {
     private String id;
     @ManyToOne
     private Route route;
-    @ManyToOne
-    private Calendar calendar;
+    @OneToMany
+    private List<CalendarDate> calendarDate;
     private String tripHeadsign;
     private String tripShortName;
     @Enumerated(EnumType.ORDINAL)
@@ -42,12 +43,12 @@ public class Trip {
         this.route = route;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
+    public List<CalendarDate> getCalendarDate() {
+        return calendarDate;
     }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
+    public void setCalendarDate(List<CalendarDate> calendarDate) {
+        this.calendarDate = calendarDate;
     }
 
     public String getTripHeadsign() {

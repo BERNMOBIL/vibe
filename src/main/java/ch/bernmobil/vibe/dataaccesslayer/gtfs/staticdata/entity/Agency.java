@@ -2,16 +2,19 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.net.URL;
 
 @Entity
 public class Agency {
     @Id
     private long id;
     private String name;
-    private String url;
+    private URL url;
     private String timezone;
     private String lang;
     private String phone;
+    private URL fareUrl;
+    private String email;
 
     public long getId() {
         return id;
@@ -29,11 +32,11 @@ public class Agency {
         this.name = name;
     }
 
-    public String getUrl() {
+    public URL getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(URL url) {
         this.url = url;
     }
 
@@ -59,5 +62,21 @@ public class Agency {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public URL getFareUrl() {
+        return fareUrl;
+    }
+
+    public void setFareUrl(URL fareUrl) {
+        this.fareUrl = fareUrl;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

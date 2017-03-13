@@ -1,9 +1,11 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+@Entity
 public class FareRule {
     @Id
     private long id;

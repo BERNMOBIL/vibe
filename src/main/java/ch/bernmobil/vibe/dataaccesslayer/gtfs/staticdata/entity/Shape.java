@@ -1,7 +1,9 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class Shape {
     @Id
     private long id;
