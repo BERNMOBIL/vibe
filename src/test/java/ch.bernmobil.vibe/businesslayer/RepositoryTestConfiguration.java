@@ -1,39 +1,47 @@
 package ch.bernmobil.vibe.businesslayer;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.realtimedata.repository.TripUpdateRepository;
+import ch.bernmobil.vibe.businesslayer.mock.StopRepositoryMock;
+import ch.bernmobil.vibe.businesslayer.mock.StopTimeRepositoryMock;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AgencyRepository;
+import ch.bernmobil.vibe.businesslayer.mock.AgencyRepositoryMock;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopRepository;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopTimeRepository;
-import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 @Profile("RepositoryTestConfiguration")
 @Configuration
 public class RepositoryTestConfiguration {
+
+    public static StopRepositoryMock stopRepositoryMock;
+    public static StopTimeRepositoryMock stopTimeRepositoryMock;
+    public static AgencyRepositoryMock agencyRepositoryMock;
+
     @Bean
-    @Primary
     public StopRepository stopRepository() {
-        return Mockito.mock(StopRepository.class);
+        if (stopRepositoryMock == null) {
+            stopRepositoryMock = new StopRepositoryMock();
+        }
+
+        return stopRepositoryMock.getMock();
     }
 
     @Bean
-    @Primary
     public StopTimeRepository stopTimeRepository() {
-        return Mockito.mock(StopTimeRepository.class);
+        if (stopTimeRepositoryMock == null) {
+            stopTimeRepositoryMock = new StopTimeRepositoryMock();
+        }
+
+        return stopTimeRepositoryMock.getMock();
     }
 
     @Bean
-    @Primary
     public AgencyRepository agencyRepository() {
-        return Mockito.mock(AgencyRepository.class);
-    }
+        if (agencyRepositoryMock == null) {
+            agencyRepositoryMock = new AgencyRepositoryMock();
+        }
 
-    @Bean
-    @Primary
-    public TripUpdateRepository tripUpdateRepository() {
-        return Mockito.mock(TripUpdateRepository.class);
-    }
+        return agencyRepositoryMock.getMock();    }
+
 }

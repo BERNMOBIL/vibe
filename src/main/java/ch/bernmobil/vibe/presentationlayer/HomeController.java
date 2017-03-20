@@ -22,14 +22,14 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) {
-        model.addAttribute("name", businessLogic.getName());
+        model.addAttribute("name", businessLogic.getAgencyName());
         return "home";
     }
 
     @RequestMapping("/nexttrip/{stopName}")
     public String nextTrip(Model model, @PathVariable("stopName") String stopName) {
-        List<ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime> allTrips = businessLogic.getNextDeparturesByStopName(stopName);
-        model.addAttribute("allTrips", allTrips);
+       // List<ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime> allTrips = businessLogic.getNextDeparturesByStopName(stopName);
+        //model.addAttribute("allTrips", allTrips);
         return "home";
     }
 }
