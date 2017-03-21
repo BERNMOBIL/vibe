@@ -2,9 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p>Das ist Home, <span th:text="${name}"/></p>
+    <p>Das ist Home, <span th:text="${name}"/></p>
+
+    <h2>Abfahrten von <span data-th-text="${departure}"></span> nach <span data-th-text="${arrival}"></span></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Abfahrtszeit</th>
+                <th>Richtung</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="stopTime : ${allStopTimes}">
+                <td data-th-text="${stopTime.getDepartureTime()}">...</td>
+                <td data-th-text="${stopTime.getTrip().getTripHeadsign()}">...</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
