@@ -16,11 +16,12 @@
         <th>Hinweis</th>
     </tr>
     </thead>
-    <tr data-th-each="departureStopTime : ${nextDepartures}">
-        <td><span data-th-text="${departureStopTime.getTrip().getRoute().getRouteShortName()}"></span></td>
-        <td><span data-th-text="${departureStopTime.getTrip().getTripHeadsign()}"></span></td>
-        <td><span></span></td>
-        <td data-th-text="${departureStopTime.getDepartureTime()}"></td>
+    <tr data-th-each="schedule : ${nextDepartures}">
+        <td><span>S?</span></td>
+        <td><span data-th-text="${schedule.getJourney().getHeadsign()}"></span></td>
+        <td><span>Kante</span></td>
+        <td><span data-th-text="${schedule.getPlanned_departure()}"></span></td>
+        <td><span>Blue, ein Hinweis!</span></td>
         <td></td>
     </tr>
 </table>

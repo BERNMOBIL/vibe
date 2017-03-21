@@ -4,6 +4,9 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.*;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
 
+import java.time.LocalTime;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,30 +15,27 @@ import java.util.List;
 @Service
 public class BusinessLogic {
 
-    private final AgencyRepository agencyRepository;
+    private final ScheduleRepository scheduleRepository;
     private final StopRepository stopRepository;
-    private final StopTimeRepository stopTimeRepository;
 
 
     @Autowired
-    public BusinessLogic(AgencyRepository agencyRepository, StopRepository stopRepository,
-        StopTimeRepository stopTimeRepository) {
-        this.agencyRepository = agencyRepository;
+    public BusinessLogic(ScheduleRepository scheduleRepository, StopRepository stopRepository) {
+        this.scheduleRepository = scheduleRepository;
         this.stopRepository = stopRepository;
-        this.stopTimeRepository = stopTimeRepository;
-    }
-
-    public String getAgencyName() {
-        Agency agency = agencyRepository.findFirstByOrderById();
-        return agency.getName();
     }
 
 
-    public List<StopTime> getNextDeparturesByStopName(String stopName) {
+    public List<Schedule> getNextDeparturesByStopName(String stopName) {
+        Stop stop = stopRepository.findFirstByName(stopName);
+        List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
 
-        Stop departureStop = stopRepository.findFirstByStopName(stopName);
-        List<StopTime> nextDepartures = stopTimeRepository.getNextDeparturesBy(departureStop);
-
+        List<Schedule> nextDepartures = allDepartures
+            .stream()
+            .filter(s -> s.getPlanned_departure().isAfter(LocalTime.now()))
+            .sorted((s1, s2) -> s1.getPlanned_departure().isBefore(s2.getPlanned_departure()) ? -1 : 1)
+            .limit(10)
+            .collect(Collectors.toList());
 
         return nextDepartures;
     }

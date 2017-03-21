@@ -1,21 +1,16 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Stop {
+public class Area {
+
     @Id
+    @GeneratedValue
     private Long id;
-
     private String name;
-
-    @OneToOne
-    @JoinColumn(name = "area")
-    private Area area;
 
     public Long getId() {
         return id;
@@ -31,13 +26,5 @@ public class Stop {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
     }
 }

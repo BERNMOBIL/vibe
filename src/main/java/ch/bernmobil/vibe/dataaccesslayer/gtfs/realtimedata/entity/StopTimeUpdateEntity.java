@@ -17,6 +17,14 @@ public class StopTimeUpdateEntity {
     private long arrivalTime;
     private long departureTime;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getStopId() {
         return stopId;
     }

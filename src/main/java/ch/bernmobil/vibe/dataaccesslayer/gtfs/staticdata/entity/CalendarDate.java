@@ -1,63 +1,53 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import javax.persistence.Column;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.time.LocalDate;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class CalendarDate {
-    @Id
-    @Column(name = "service_id")
-    private long id;
 
-    @ManyToOne
-    private Calendar calendar;
-    private LocalDate date;
-    private ExceptionType exceptionType;
+  @Id
+  private Long id;
+  //private String days; //TODO: ADD days
+  private LocalDate validFrom;
+  private LocalDate validUntil;
 
-    public long getId() {
-        return id;
-    }
+  @OneToOne
+  @JoinColumn(name = "journey")
+  private Journey journey;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public LocalDate getDate() {
-        return date;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+  public LocalDate getValidFrom() {
+    return validFrom;
+  }
 
-    public ExceptionType getExceptionType() {
-        return exceptionType;
-    }
+  public void setValidFrom(LocalDate validFrom) {
+    this.validFrom = validFrom;
+  }
 
-    public void setExceptionType(ExceptionType exceptionType) {
-        this.exceptionType = exceptionType;
-    }
+  public LocalDate getValidUntil() {
+    return validUntil;
+  }
 
-    public Calendar getCalendar() {
-        return calendar;
-    }
+  public void setValidUntil(LocalDate validUntil) {
+    this.validUntil = validUntil;
+  }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
-    }
+  public Journey getJourney() {
+    return journey;
+  }
 
-    public enum ExceptionType {
-        ADDED(1), REMOVED(2);
-
-        private final int type;
-        ExceptionType(int type) {
-            this.type = type;
-        }
-        public int getValue() {
-            return type;
-        }
-    }
+  public void setJourney(Journey journey) {
+    this.journey = journey;
+  }
 }

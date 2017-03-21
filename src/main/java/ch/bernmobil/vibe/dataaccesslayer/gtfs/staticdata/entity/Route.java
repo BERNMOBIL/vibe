@@ -1,64 +1,29 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import javax.persistence.*;
-import java.net.URL;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Route {
-    @Id
-    private String routeId;
-    @ManyToOne
-    private Agency agency;
-    private String routeShortName;
-    private String routeLongName;
-    private String routeDescription;
-    @Enumerated(EnumType.ORDINAL)
-    private RouteType routeType;
-    private URL routeUrl;
-    private String routeColor;
-    private String routeTextColor;
 
-    public String getRouteId() {
-        return routeId;
-    }
+  @Id
+  private Long id;
+  private Integer type;
 
-    public void setRouteId(String routeId) {
-        this.routeId = routeId;
-    }
 
-    public Agency getAgency() {
-        return agency;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setAgency(Agency agency) {
-        this.agency = agency;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getRouteShortName() {
-        return routeShortName;
-    }
+  public int getType() {
+    return type;
+  }
 
-    public void setRouteShortName(String routeShortName) {
-        this.routeShortName = routeShortName;
-    }
-
-    public String getRouteLongName() {
-        return routeLongName;
-    }
-
-    public void setRouteLongName(String routeLongName) {
-        this.routeLongName = routeLongName;
-    }
-
-    public RouteType getRouteType() {
-        return routeType;
-    }
-
-    public void setRouteType(RouteType routeType) {
-        this.routeType = routeType;
-    }
-
-    public enum RouteType {
-        TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR
-    }
+  public void setType(int type) {
+    this.type = type;
+  }
 }

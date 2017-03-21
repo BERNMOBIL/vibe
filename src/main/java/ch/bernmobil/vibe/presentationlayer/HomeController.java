@@ -22,7 +22,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) {
-        model.addAttribute("name", businessLogic.getAgencyName());
+        model.addAttribute("name", "test");
         return "home";
     }
 

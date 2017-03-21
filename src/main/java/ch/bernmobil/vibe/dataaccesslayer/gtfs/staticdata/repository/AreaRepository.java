@@ -1,8 +1,8 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Area;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.CalendarDate;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Route;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RouteRepository extends CrudRepository<Route, Long> {
+public interface AreaRepository extends CrudRepository<Area, Long> {
 }

@@ -2,7 +2,7 @@ package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,10 +26,11 @@ public class DepartureController {
 
     @RequestMapping("/{departureName}")
     public String departures(Model model, @PathVariable("departureName") String departureName) {
-        //List<StopTime> nextDepartures = businessLogic.getNextDeparturesByStopName(departureName);
+        departureName = "Gisikon-Root, Bahnhof";
+        List<Schedule> nextDepartures = businessLogic.getNextDeparturesByStopName(departureName);
 
         model.addAttribute("departure", departureName);
-//        model.addAttribute("nextDepartures", nextDepartures);
+        model.addAttribute("nextDepartures", nextDepartures);
 
         return "departureOverview";
     }
