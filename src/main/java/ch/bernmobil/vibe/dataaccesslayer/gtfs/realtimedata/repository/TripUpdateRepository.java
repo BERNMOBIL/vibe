@@ -17,7 +17,7 @@ public class TripUpdateRepository extends GTFSRealtimeRepository {
     public List<GtfsRealtime.FeedEntity> getTripUpdates() {
         return  getFeedEntities()
                 .stream()
-                .filter(entity -> entity.hasTripUpdate())
+                .filter(GtfsRealtime.FeedEntity::hasTripUpdate)
                 .collect(Collectors.toList());
     }
 }

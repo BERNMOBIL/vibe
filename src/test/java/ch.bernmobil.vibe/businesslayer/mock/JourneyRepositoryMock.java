@@ -2,11 +2,8 @@ package ch.bernmobil.vibe.businesslayer.mock;
 
 import static org.mockito.Mockito.when;
 
-import ch.bernmobil.vibe.businesslayer.mock.data.AreaMockData;
 import ch.bernmobil.vibe.businesslayer.mock.data.JourneyMockData;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Area;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Journey;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AreaRepository;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.JourneyRepository;
 
 

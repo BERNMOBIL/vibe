@@ -16,7 +16,7 @@ public class ServiceAlertRepository extends GTFSRealtimeRepository {
     public List<GtfsRealtime.FeedEntity> getServiceAlerts() throws IOException {
         return  getFeedEntities()
                 .stream()
-                .filter(entity -> entity.hasAlert())
+                .filter(GtfsRealtime.FeedEntity::hasAlert)
                 .collect(Collectors.toList());
 
     }

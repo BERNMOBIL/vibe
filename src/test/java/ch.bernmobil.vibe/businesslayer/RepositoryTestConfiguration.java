@@ -9,7 +9,6 @@ import ch.bernmobil.vibe.businesslayer.mock.RouteRepositoryMock;
 import ch.bernmobil.vibe.businesslayer.mock.ScheduleRepositoryMock;
 import ch.bernmobil.vibe.businesslayer.mock.ScheduleUpdateRepositoryMock;
 import ch.bernmobil.vibe.businesslayer.mock.StopRepositoryMock;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.CalendarDate;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AreaRepository;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.CalendarDateRepository;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.CalendarExceptionRepository;
@@ -28,15 +27,15 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class RepositoryTestConfiguration {
 
-    public static AreaRepositoryMock areaRepositoryMock;
-    public static CalendarDateRepositoryMock calendarDateRepositoryMock;
-    public static CalendarExceptionRepositoryMock calendarExceptionRepositoryMock;
-    public static JourneyRepositoryMock journeyRepositoryMock;
-    public static JourneyDisruptionRepositoryMock journeyDisruptionRepositoryMock;
-    public static RouteRepositoryMock routeRepositoryMock;
-    public static ScheduleRepositoryMock scheduleRepositoryMock;
-    public static ScheduleUpdateRepositoryMock scheduleUpdateRepositoryMock;
-    public static StopRepositoryMock stopRepositoryMock;
+    private static AreaRepositoryMock areaRepositoryMock;
+    private static CalendarDateRepositoryMock calendarDateRepositoryMock;
+    private static CalendarExceptionRepositoryMock calendarExceptionRepositoryMock;
+    private static JourneyRepositoryMock journeyRepositoryMock;
+    private static JourneyDisruptionRepositoryMock journeyDisruptionRepositoryMock;
+    private static RouteRepositoryMock routeRepositoryMock;
+    private static ScheduleRepositoryMock scheduleRepositoryMock;
+    private static ScheduleUpdateRepositoryMock scheduleUpdateRepositoryMock;
+    private static StopRepositoryMock stopRepositoryMock;
 
     @Bean
     @Primary

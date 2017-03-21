@@ -8,26 +8,26 @@ import java.util.List;
 public class StopMockData {
     private static List<Stop> dataSource;
 
-    public static long[] ids = {
+    private static long[] ids = {
         2,
         4,
         6
     };
 
-    public static String[] names = { //TODO: Link correctly
+    private static String[] names = { //TODO: Link correctly
         "Abtwil AG, Auwerstrasse",
         "Abtwil AG, Hofmatt",
         "Abtwil AG, Langegg"
     };
 
-    public static Area[] areas = { //TODO: Link
+    private static Area[] areas = { //TODO: Link
         null,
         null,
         null
     };
 
 
-    public static Stop create(int index) {
+    private static Stop create(int index) {
         return new Stop(){{
             setId(ids[index]);
             setName(names[index]);

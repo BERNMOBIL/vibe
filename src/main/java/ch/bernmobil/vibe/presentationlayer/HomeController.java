@@ -7,15 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 
 @Controller
 public class HomeController {
 
-    @Autowired
     private final BusinessLogic businessLogic;
 
+    @Autowired
     public HomeController(BusinessLogic businessLogic) {
         this.businessLogic = businessLogic;
     }

@@ -1,6 +1,5 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;

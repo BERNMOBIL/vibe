@@ -8,25 +8,25 @@ import java.util.List;
 public class JourneyMockData {
     private static List<Journey> dataSource;
 
-    public static long[] ids = {
+    private static long[] ids = {
         27,
         32,
         34
     };
 
-    public static String[] headsigns = {
+    private static String[] headsigns = {
         "Unterägeri, Zentrum",
         "Küssnacht, Bhf",
         "Zug, Postplatz",
     };
 
-    public static Route[] routes = { //TODO: Link correctly
+    private static Route[] routes = { //TODO: Link correctly
         RouteMockData.getDataSource().get(0),
         RouteMockData.getDataSource().get(0),
         RouteMockData.getDataSource().get(1),
     };
 
-    public static Journey create(int index) {
+    private static Journey create(int index) {
         return new Journey(){{
             setId(ids[index]);
             setHeadsign(headsigns[index]);

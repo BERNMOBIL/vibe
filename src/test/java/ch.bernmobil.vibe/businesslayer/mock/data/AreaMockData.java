@@ -7,15 +7,15 @@ import java.util.List;
 public class AreaMockData {
     private static List<Area> dataSource;
 
-    public static long[] ids = {
+    private static long[] ids = {
 
     };
 
-    public static String[] names = {
+    private static String[] names = {
     };
 
 
-    public static Area create(int index) {
+    private static Area create(int index) {
         return new Area(){{
             setId(ids[index]);
             setName(names[index]);
