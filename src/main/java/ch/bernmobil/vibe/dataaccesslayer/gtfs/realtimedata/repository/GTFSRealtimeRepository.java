@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class GTFSRealtimeRepository {
 
@@ -31,7 +30,9 @@ public abstract class GTFSRealtimeRepository {
             feedMessage = builder.build();
             feedEntities = feedMessage.getEntityList();
 
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

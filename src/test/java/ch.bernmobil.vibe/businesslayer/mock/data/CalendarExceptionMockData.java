@@ -9,18 +9,18 @@ import java.util.List;
 public class CalendarExceptionMockData {
     private static List<CalendarException> dataSource;
 
-    public static long[] ids = {
+    private static long[] ids = {
     };
 
-    public static LocalDate[] dates = {
+    private static LocalDate[] dates = {
     };
-    public static String[] types = { //TODO: Link correctly
-    };
-
-    public static CalendarDate[] calendarDates = { //TODO: Link
+    private static String[] types = { //TODO: Link correctly
     };
 
-    public static CalendarException create(int index) {
+    private static CalendarDate[] calendarDates = { //TODO: Link
+    };
+
+    private static CalendarException create(int index) {
         return new CalendarException(){{
             setId(ids[index]);
             setDate(dates[index]);

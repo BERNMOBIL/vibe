@@ -16,9 +16,9 @@ import java.util.List;
 @RequestMapping("departures")
 public class DepartureController {
 
-    @Autowired
     private final BusinessLogic businessLogic;
 
+    @Autowired
     public DepartureController(BusinessLogic businessLogic) {
         this.businessLogic = businessLogic;
     }
@@ -34,7 +34,4 @@ public class DepartureController {
 
         return "departureOverview";
     }
-
-
-
 }
