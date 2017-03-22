@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Schedule {
@@ -25,6 +26,9 @@ public class Schedule {
   @OneToOne
   @JoinColumn(name = "journey")
   private Journey journey;
+
+  @Transient
+  private ScheduleUpdate scheduleUpdate;
 
   public Long getId() {
     return id;
@@ -73,4 +77,13 @@ public class Schedule {
   public void setJourney(Journey journey) {
     this.journey = journey;
   }
+
+    public ScheduleUpdate getScheduleUpdate() {
+        return scheduleUpdate;
+    }
+
+    public void setScheduleUpdate(
+        ScheduleUpdate scheduleUpdate) {
+        this.scheduleUpdate = scheduleUpdate;
+    }
 }

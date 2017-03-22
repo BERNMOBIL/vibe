@@ -26,7 +26,7 @@ public class DepartureController {
 
     @RequestMapping("/{departureName}")
     public String departures(Model model, @PathVariable("departureName") String departureName) {
-        departureName = "Gisikon-Root, Bahnhof";
+        departureName = "Baar, Lättichstrasse";
         List<Schedule> nextDepartures = businessLogic.getNextDeparturesByStopName(departureName);
 
         model.addAttribute("departure", departureName);

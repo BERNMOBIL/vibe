@@ -5,7 +5,6 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
 
 import java.time.LocalTime;
-import java.util.Comparator;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +15,15 @@ import java.util.List;
 public class BusinessLogic {
 
     private final ScheduleRepository scheduleRepository;
+    private final ScheduleUpdateRepository scheduleUpdateRepository;
     private final StopRepository stopRepository;
 
 
     @Autowired
-    public BusinessLogic(ScheduleRepository scheduleRepository, StopRepository stopRepository) {
+    public BusinessLogic(ScheduleRepository scheduleRepository,
+        ScheduleUpdateRepository scheduleUpdateRepository, StopRepository stopRepository) {
         this.scheduleRepository = scheduleRepository;
+        this.scheduleUpdateRepository = scheduleUpdateRepository;
         this.stopRepository = stopRepository;
     }
 
@@ -32,10 +34,15 @@ public class BusinessLogic {
 
         List<Schedule> nextDepartures = allDepartures
             .stream()
-            .filter(s -> s.getPlanned_departure().isAfter(LocalTime.now()))
+            .filter(s -> s.getPlanned_departure().isAfter(LocalTime.parse("11:30:00")))
             .sorted((s1, s2) -> s1.getPlanned_departure().isBefore(s2.getPlanned_departure()) ? -1 : 1)
             .limit(10)
             .collect(Collectors.toList());
+
+        for(Schedule schedule : nextDepartures) {
+            ScheduleUpdate scheduleUpdate = scheduleUpdateRepository.findFirstBySchedule(schedule);
+            schedule.setScheduleUpdate(scheduleUpdate);
+        }
 
         return nextDepartures;
     }
