@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Serving Web Content</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
+    <link rel="stylesheet" href="/style.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -16,7 +19,7 @@
         <th>Hinweis</th>
     </tr>
     </thead>
-    <tr data-th-each="schedule : ${nextDepartures}">
+    <tr data-th-each="schedule : ${nextDepartures}" class="row">
         <td><span>S?</span></td>
         <td><span data-th-text="${schedule.getJourney().getHeadsign()}"></span></td>
         <td><span>Kante</span></td>
@@ -24,19 +27,6 @@
         <td><span data-th-text="${schedule.getScheduleUpdate() == null ? 'ok' : schedule.getScheduleUpdate().getActual_departure()}"></span></td>
         <td><span></span></td>
         <td></td>
-    </tr>
-</table>
-<table>
-    <thead>
-    <tr>
-        <th>Abfahrtszeit</th>
-        <th>Richtung</th>
-    </tr>
-    </thead>
-    <tr data-th-each="timeTableEntry : ${timeTableEntries}">
-        <td data-th-text="${timeTableEntry.getDepartureStop().getStopName()}">...</td>
-        <td data-th-text="${timeTableEntry.getTrip().getTripHeadsign()}">...</td>
-        <td data-th-text="${timeTableEntry.getDepartureStopTime().getDepartureTime()}">...</td>
     </tr>
 </table>
 </body>
