@@ -12,7 +12,6 @@ public class Schedule {
 
   @Id
   private Long id;
-
   private String platform;
   private LocalTime planned_arrival;
   private LocalTime planned_departure;
@@ -25,7 +24,8 @@ public class Schedule {
   @JoinColumn(name = "journey")
   private Journey journey;
 
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "schedule_update")
   private ScheduleUpdate scheduleUpdate;
 
   public Long getId() {

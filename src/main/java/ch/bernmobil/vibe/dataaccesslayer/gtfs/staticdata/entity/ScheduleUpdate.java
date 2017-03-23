@@ -14,10 +14,6 @@ public class ScheduleUpdate {
   private Time actual_arrival;
   private Time actual_departure;
 
-  @OneToOne
-  @JoinColumn(name = "schedule")
-  private Schedule schedule;
-
   public Long getId() {
     return id;
   }
@@ -40,13 +36,5 @@ public class ScheduleUpdate {
 
   public void setActual_departure(Time actual_departure) {
     this.actual_departure = actual_departure;
-  }
-
-  public Schedule getSchedule() {
-    return schedule;
-  }
-
-  public void setSchedule(Schedule schedule) {
-    this.schedule = schedule;
   }
 }

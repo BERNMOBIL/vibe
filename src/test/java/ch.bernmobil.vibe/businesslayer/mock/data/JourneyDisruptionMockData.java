@@ -1,12 +1,12 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.JourneyDistruption;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.JourneyDisruption;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JourneyDisruptionMockData {
-    private static List<JourneyDistruption> dataSource;
+    private static List<JourneyDisruption> dataSource;
 
     private static long[] ids = {
         1,
@@ -31,8 +31,8 @@ public class JourneyDisruptionMockData {
         new Timestamp(0),
     };
 
-    private static JourneyDistruption create(int index) {
-        return new JourneyDistruption(){{
+    private static JourneyDisruption create(int index) {
+        return new JourneyDisruption(){{
             setId(ids[index]);
             setMessage(messages[index]);
             setStart(starts[index]);
@@ -41,7 +41,7 @@ public class JourneyDisruptionMockData {
     }
 
 
-    public static List<JourneyDistruption> getDataSource() {
+    public static List<JourneyDisruption> getDataSource() {
         if(dataSource == null) {
             dataSource = new ArrayList<>();
 
