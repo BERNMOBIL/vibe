@@ -16,3 +16,6 @@ wrapper.jar
 # Idea project organization
 .idea/
 out/
+
+# SCSS Generated files
+src/main/resources/public/style.css*
