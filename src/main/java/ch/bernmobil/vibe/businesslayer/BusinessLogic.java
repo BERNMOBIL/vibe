@@ -32,19 +32,12 @@ public class BusinessLogic {
         Stop stop = stopRepository.findFirstByName(stopName);
         List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
 
-        List<Schedule> nextDepartures = allDepartures
+        return allDepartures
             .stream()
-            .filter(s -> s.getPlanned_departure().isAfter(LocalTime.parse("11:30:00")))
+            .filter(s -> s.getPlanned_departure().isAfter(LocalTime.now()))
             .sorted((s1, s2) -> s1.getPlanned_departure().isBefore(s2.getPlanned_departure()) ? -1 : 1)
             .limit(10)
             .collect(Collectors.toList());
-
-        for(Schedule schedule : nextDepartures) {
-            ScheduleUpdate scheduleUpdate = scheduleUpdateRepository.findFirstBySchedule(schedule);
-            schedule.setScheduleUpdate(scheduleUpdate);
-        }
-
-        return nextDepartures;
     }
 
 }
