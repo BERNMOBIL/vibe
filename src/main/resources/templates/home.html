@@ -5,9 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="/style.css"/>
 </head>
 <body>
-
+    <h1>Abfahrtsanzeiger</h1>
+    <p>Bitte geben sie eine Station ein</p>
+    <ul data-th-each="stop:${stopList}">
+        <!--/*@thymesVar id="stop" type="ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop"*/-->
+        <li>
+            Name:<span data-th-text="${stop.getName()}"></span>, ID:<a data-th-text="${stop.getId()}"></a>
+        </li>
+    </ul>
 </body>
 </html>

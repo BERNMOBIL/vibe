@@ -50,8 +50,8 @@ public class ScheduleMockData {
         return new Schedule(){{
             setId(ids[index]);
             setPlatform(platforms[index]);
-            setPlanned_arrival(planned_arrivals[index]);
-            setPlanned_departure(planned_departures[index]);
+            setPlannedArrival(planned_arrivals[index]);
+            setPlannedDeparture(planned_departures[index]);
             setStop(stops[index]);
             setJourney(journeys[index]);
         }};

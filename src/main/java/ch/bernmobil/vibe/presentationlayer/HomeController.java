@@ -1,6 +1,8 @@
 package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +21,14 @@ public class HomeController {
     }
 
     @RequestMapping("/")
-    public String home(Model model) {
-        model.addAttribute("name", "test");
+    public String home() {
         return "home";
     }
 
-    @RequestMapping("/nexttrip/{stopName}")
+    @RequestMapping("/search/{stopName}")
     public String nextTrip(Model model, @PathVariable("stopName") String stopName) {
-       // List<ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.StopTime> allTrips = businessLogic.getNextDeparturesByStopName(stopName);
-        //model.addAttribute("allTrips", allTrips);
+        List<Stop> stopList = businessLogic.findStops(stopName);
+        model.addAttribute("stopList", stopList);
         return "home";
     }
 }
