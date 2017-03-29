@@ -3,6 +3,8 @@ package ch.bernmobil.vibe.presentationlayer;
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import java.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +26,24 @@ public class DepartureController {
     }
 
 
-    @RequestMapping("/{departureName}")
-    public String departures(Model model, @PathVariable("departureName") String departureName) {
-        departureName = "Baar, Lättichstrasse";
-        List<Schedule> nextDepartures = businessLogic.getNextDeparturesByStopName(departureName);
+    @RequestMapping("/{stopId}")
+    public String departures(Model model, @PathVariable("stopId") long stopId) {
+        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, LocalTime.now());
+        Stop stop = businessLogic.getStopById(stopId);
+        model.addAttribute("departure", stop.getName());
+        model.addAttribute("nextDepartures", nextDepartures);
 
-        model.addAttribute("departure", departureName);
+        return "departureOverview";
+    }
+
+    @RequestMapping("/{stopId}/at/{time}")
+    public String departuresAtTime(Model model,
+            @PathVariable("stopId")long stopId,
+            @PathVariable("time") String time) {
+        LocalTime localTime = LocalTime.parse(time);
+        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, localTime);
+        Stop stop = businessLogic.getStopById(stopId);
+        model.addAttribute("departure", stop.getName());
         model.addAttribute("nextDepartures", nextDepartures);
 
         return "departureOverview";

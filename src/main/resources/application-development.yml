@@ -3,3 +3,7 @@ spring:
       mode: HTML5
       cache: false
       templates_root: src/main/resources/templates/
+    datasource:
+      url: jdbc:postgresql://localhost:5432/vibe
+      username: vibe
+      password: vibe

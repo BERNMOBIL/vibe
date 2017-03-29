@@ -4,9 +4,14 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.*;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
 
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,24 +32,41 @@ public class BusinessLogic {
         this.stopRepository = stopRepository;
     }
 
+    public List<Stop> findStops(String stopName) {
+        return stopRepository.findAllByNameStartingWithIgnoreCase(stopName,
+            new Sort(Direction.ASC, "name"));
 
-    public List<Schedule> getNextDeparturesByStopName(String stopName) {
-        Stop stop = stopRepository.findFirstByName(stopName);
+    }
+
+    public Stop getStopById(long id) {
+        return stopRepository.findOne(id);
+    }
+
+    public List<Schedule> getNextDeparturesByStopId(long stopId) {
+        return getDepartureByStopNameAtTimeSlow(stopId, LocalTime.now());
+    }
+
+    public List<Schedule> getDepartureByStopNameAtTimeSlow(long stopId, LocalTime time) {
+        Stop stop = stopRepository.findOne(stopId);
         List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
 
-        List<Schedule> nextDepartures = allDepartures
+
+        return allDepartures
             .stream()
-            .filter(s -> s.getPlanned_departure().isAfter(LocalTime.parse("11:30:00")))
-            .sorted((s1, s2) -> s1.getPlanned_departure().isBefore(s2.getPlanned_departure()) ? -1 : 1)
+            .filter(s -> s.getPlannedDeparture().isAfter(time))
+            .sorted(Schedule::compareByDepartureTime)
             .limit(10)
             .collect(Collectors.toList());
+    }
 
-        for(Schedule schedule : nextDepartures) {
-            ScheduleUpdate scheduleUpdate = scheduleUpdateRepository.findFirstBySchedule(schedule);
-            schedule.setScheduleUpdate(scheduleUpdate);
-        }
+    public List<Schedule> getDeparturesByStopId(long stopId, LocalTime time) {
+        Stop stop = stopRepository.findOne(stopId);
+        Page<Schedule> page = scheduleRepository.findSchedulesByStop(
+            stop,
+            time,
+            new PageRequest(1, 10, Direction.ASC, "plannedDeparture"));
+        return page.getContent();
 
-        return nextDepartures;
     }
 
 }

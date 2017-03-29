@@ -38,7 +38,6 @@ public class ScheduleUpdateMockData {
             setId(ids[index]);
             setActual_arrival(actual_arrivals[index]);
             setActual_departure(actual_departures[index]);
-            setSchedule(schedules[index]);
         }};
     }
 
