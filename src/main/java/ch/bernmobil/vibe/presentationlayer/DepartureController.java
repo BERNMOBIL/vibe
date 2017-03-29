@@ -27,7 +27,7 @@ public class DepartureController {
 
     @RequestMapping("/{stopId}")
     public String departures(Model model, @PathVariable("stopId") long stopId) {
-        List<Schedule> nextDepartures = businessLogic.getNextDeparturesByStopId(stopId);
+        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, LocalTime.now());
 
         model.addAttribute("departure", stopId);
         model.addAttribute("nextDepartures", nextDepartures);
@@ -40,7 +40,7 @@ public class DepartureController {
             @PathVariable("stopId")long stopId,
             @PathVariable("time") String time) {
         LocalTime localTime = LocalTime.parse(time);
-        List<Schedule> nextDepartures = businessLogic.getDepartureByStopNameAtTime(stopId, localTime);
+        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, localTime);
 
         model.addAttribute("departure", stopId);
         model.addAttribute("nextDepartures", nextDepartures);
