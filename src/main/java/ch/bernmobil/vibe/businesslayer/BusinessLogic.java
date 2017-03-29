@@ -38,6 +38,27 @@ public class BusinessLogic {
 
     }
 
+    public Stop getStopById(long id) {
+        return stopRepository.findOne(id);
+    }
+
+    public List<Schedule> getNextDeparturesByStopId(long stopId) {
+        return getDepartureByStopNameAtTimeSlow(stopId, LocalTime.now());
+    }
+
+    public List<Schedule> getDepartureByStopNameAtTimeSlow(long stopId, LocalTime time) {
+        Stop stop = stopRepository.findOne(stopId);
+        List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
+
+
+        return allDepartures
+            .stream()
+            .filter(s -> s.getPlannedDeparture().isAfter(time))
+            .sorted(Schedule::compareByDepartureTime)
+            .limit(10)
+            .collect(Collectors.toList());
+    }
+
     public List<Schedule> getDeparturesByStopId(long stopId, LocalTime time) {
         Stop stop = stopRepository.findOne(stopId);
         Page<Schedule> page = scheduleRepository.findSchedulesByStop(

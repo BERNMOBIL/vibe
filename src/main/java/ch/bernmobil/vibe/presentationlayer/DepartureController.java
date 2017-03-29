@@ -3,6 +3,7 @@ package ch.bernmobil.vibe.presentationlayer;
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
 import java.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,8 +29,8 @@ public class DepartureController {
     @RequestMapping("/{stopId}")
     public String departures(Model model, @PathVariable("stopId") long stopId) {
         List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, LocalTime.now());
-
-        model.addAttribute("departure", stopId);
+        Stop stop = businessLogic.getStopById(stopId);
+        model.addAttribute("departure", stop.getName());
         model.addAttribute("nextDepartures", nextDepartures);
 
         return "departureOverview";
@@ -41,8 +42,8 @@ public class DepartureController {
             @PathVariable("time") String time) {
         LocalTime localTime = LocalTime.parse(time);
         List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, localTime);
-
-        model.addAttribute("departure", stopId);
+        Stop stop = businessLogic.getStopById(stopId);
+        model.addAttribute("departure", stop.getName());
         model.addAttribute("nextDepartures", nextDepartures);
 
         return "departureOverview";
