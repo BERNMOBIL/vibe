@@ -1,0 +1,14 @@
+body {
+  background: #0812ba;
+  color: #ffffff;
+}
+
+#dark-primary-color    { background: #303F9F; }
+#default-primary-color { background: #3F51B5; }
+#light-primary-color   { background: #C5CAE9; }
+#text-primary-color    { color: #FFFFFF; !important; }
+#text-primary-color:link    { color: #FFFFFF; !important; }3
+#accent-color          { background: #03A9F4; }
+#primary-text-color    { color: #212121; }
+#secondary-text-color  { color: #757575; }
+#divider-color         { border-color: #BDBDBD; }

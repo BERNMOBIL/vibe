@@ -8,14 +8,16 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
   <link rel="stylesheet" href="/style.css"/>
 </head>
-<body>
+<body class="default-primary-color, text-primary-color">
 <h1>Abfahrtsanzeiger</h1>
 <p>Bitte geben sie eine Station ein</p>
-<ul data-th-each="stop:${stopList}">
+<div data-th-each="stop:${stopList}" class="collection, light-primary-color">
   <!--/*@thymesVar id="stop" type="ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop"*/-->
-  <li>
-    Name:<span data-th-text="${stop.getName()}"></span>, ID:<a data-th-text="${stop.getId()}"></a>
-  </li>
-</ul>
+    <div class="collection-item, accent-color">
+      <a data-th-href="@{/departures/__${stop.getId()}__}" class="text-primary-color">
+        <span data-th-text="${stop.getName()}"></span>
+      </a>
+    </div>
+</div>
 </body>
 </html>
