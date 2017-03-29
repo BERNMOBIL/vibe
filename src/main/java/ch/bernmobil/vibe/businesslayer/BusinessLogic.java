@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +32,9 @@ public class BusinessLogic {
     }
 
     public List<Stop> findStops(String stopName) {
-        Page<Stop> stops = stopRepository.findAllByNameStartingWithIgnoreCase(stopName, new PageRequest(1, 10));
-        return stops.getContent();
+        return stopRepository.findAllByNameStartingWithIgnoreCase(stopName,
+            new Sort(Direction.ASC, "name"));
+
     }
 
     public List<Schedule> getNextDeparturesByStopId(long stopId) {
@@ -41,6 +44,7 @@ public class BusinessLogic {
     public List<Schedule> getDepartureByStopNameAtTime(long stopId, LocalTime time) {
         Stop stop = stopRepository.findOne(stopId);
         List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
+
 
         return allDepartures
             .stream()
