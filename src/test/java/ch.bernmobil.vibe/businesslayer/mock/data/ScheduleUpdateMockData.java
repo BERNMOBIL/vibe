@@ -36,8 +36,8 @@ public class ScheduleUpdateMockData {
     private static ScheduleUpdate create(int index) {
         return new ScheduleUpdate(){{
             setId(ids[index]);
-            setActual_arrival(actual_arrivals[index]);
-            setActual_departure(actual_departures[index]);
+            setActualArrival(actual_arrivals[index]);
+            setActualDeparture(actual_departures[index]);
         }};
     }
 

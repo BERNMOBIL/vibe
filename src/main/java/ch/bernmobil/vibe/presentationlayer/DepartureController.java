@@ -5,6 +5,10 @@ import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
 import java.time.LocalTime;
+<<<<<<< Updated upstream
+=======
+import java.time.ZoneId;
+>>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +32,8 @@ public class DepartureController {
 
     @RequestMapping("/{stopId}")
     public String departures(Model model, @PathVariable("stopId") long stopId) {
-        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, LocalTime.now());
+        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, LocalTime.now(
+            ZoneId.of("Europe/Paris")));
         Stop stop = businessLogic.getStopById(stopId);
         model.addAttribute("departure", stop.getName());
         model.addAttribute("nextDepartures", nextDepartures);
