@@ -5,10 +5,7 @@ import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
 import java.time.LocalTime;
-<<<<<<< Updated upstream
-=======
 import java.time.ZoneId;
->>>>>>> Stashed changes
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
