@@ -1,11 +1,13 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import java.time.LocalTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import org.hibernate.annotations.Formula;
 
 @Entity
 public class Schedule {
@@ -24,8 +26,7 @@ public class Schedule {
     @JoinColumn(name = "journey")
     private Journey journey;
 
-    @OneToOne
-    @JoinColumn(name = "schedule_update")
+    @OneToOne(targetEntity = ScheduleUpdate.class, mappedBy = "schedule")
     private ScheduleUpdate scheduleUpdate;
 
     public Long getId() {

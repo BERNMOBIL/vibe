@@ -14,9 +14,6 @@ public class Journey {
     @OneToOne
     @JoinColumn(name = "route")
     private Route route;
-    @OneToOne
-    @JoinColumn(name = "journey_disruption")
-    private JourneyDisruption journeyDisruption;
 
 
     public Long getId() {
@@ -43,11 +40,4 @@ public class Journey {
         this.route = route;
     }
 
-    public JourneyDisruption getJourneyDisruption() {
-        return journeyDisruption;
-    }
-
-    public void setJourneyDisruption(JourneyDisruption journeyDisruption) {
-        this.journeyDisruption = journeyDisruption;
-    }
 }
