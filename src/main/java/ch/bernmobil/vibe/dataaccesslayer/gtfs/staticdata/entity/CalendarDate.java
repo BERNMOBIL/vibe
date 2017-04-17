@@ -1,6 +1,10 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.JsonObjectConverter;
+import com.google.gson.JsonObject;
 import java.time.LocalDate;
+import javax.persistence.Convert;
+import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,8 +15,8 @@ public class CalendarDate {
 
     @Id
     private long id;
-    //TODO: This should be some kind of JSON
-    private String days;
+    @Convert(converter = JsonObjectConverter.class)
+    private JsonObject days;
     private LocalDate validFrom;
     private LocalDate validUntil;
 
@@ -52,11 +56,11 @@ public class CalendarDate {
         this.journey = journey;
     }
 
-    public String getDays() {
+    public JsonObject getDays() {
         return days;
     }
 
-    public void setDays(String days) {
+    public void setDays(JsonObject days) {
         this.days = days;
     }
 }
