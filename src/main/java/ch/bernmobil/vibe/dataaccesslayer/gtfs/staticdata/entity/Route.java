@@ -6,24 +6,33 @@ import javax.persistence.Id;
 @Entity
 public class Route {
 
-  @Id
-  private Long id;
-  private Integer type;
+    @Id
+    private long id;
+    private Integer type;
+    private String line;
 
 
-  public Long getId() {
-    return id;
-  }
+    public long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  public int getType() {
-    return type;
-  }
+    public int getType() {
+        return type;
+    }
 
-  public void setType(int type) {
-    this.type = type;
-  }
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
+    }
 }

@@ -11,10 +11,13 @@ public class Journey {
     @Id
     private Long id;
     private String headsign;
+
     @OneToOne
     @JoinColumn(name = "route")
     private Route route;
 
+    @OneToOne(targetEntity = JourneyDisruption.class, mappedBy = "journey")
+    private JourneyDisruption journeyDisruption;
 
     public Long getId() {
         return id;
@@ -40,4 +43,12 @@ public class Journey {
         this.route = route;
     }
 
+    public JourneyDisruption getJourneyDisruption() {
+        return journeyDisruption;
+    }
+
+    public void setJourneyDisruption(
+        JourneyDisruption journeyDisruption) {
+        this.journeyDisruption = journeyDisruption;
+    }
 }

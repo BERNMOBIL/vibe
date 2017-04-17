@@ -9,45 +9,44 @@ import javax.persistence.OneToOne;
 @Entity
 public class CalendarException {
 
-  @Id
-  private Long id;
-  private LocalDate date;
-  private String type;
+    @Id
+    private Long id;
+    private LocalDate date;
+    private String type;
 
-  @OneToOne
-  @JoinColumn(name = "calendar_date")
-  private CalendarDate calendar_date;
+    @OneToOne
+    @JoinColumn(name = "calendarDate")
+    private CalendarDate calendarDate;
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public LocalDate getDate() {
-    return date;
-  }
+    public LocalDate getDate() {
+        return date;
+    }
 
-  public void setDate(LocalDate date) {
-    this.date = date;
-  }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
-  public String getType() {
-    return type;
-  }
+    public String getType() {
+        return type;
+    }
 
-  public void setType(String type) {
-    this.type = type;
-  }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-  public CalendarDate getCalendar_date() {
-    return calendar_date;
-  }
+    public CalendarDate getCalendarDate() {
+        return calendarDate;
+    }
 
-  public void setCalendar_date(
-      CalendarDate calendar_date) {
-    this.calendar_date = calendar_date;
-  }
+    public void setCalendarDate(CalendarDate calendarDate) {
+        this.calendarDate = calendarDate;
+    }
 }

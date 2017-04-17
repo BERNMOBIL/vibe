@@ -25,7 +25,7 @@ public class CalendarExceptionMockData {
             setId(ids[index]);
             setDate(dates[index]);
             setType(types[index]);
-            setCalendar_date(calendarDates[index]);
+            setCalendarDate(calendarDates[index]);
         }};
     }
 

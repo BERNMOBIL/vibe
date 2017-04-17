@@ -9,45 +9,54 @@ import javax.persistence.OneToOne;
 @Entity
 public class CalendarDate {
 
-  @Id
-  private Long id;
-  //private String days; //TODO: ADD days
-  private LocalDate validFrom;
-  private LocalDate validUntil;
+    @Id
+    private long id;
+    //TODO: This should be some kind of JSON
+    private String days;
+    private LocalDate validFrom;
+    private LocalDate validUntil;
 
-  @OneToOne
-  @JoinColumn(name = "journey")
-  private Journey journey;
+    @OneToOne
+    @JoinColumn(name = "journey")
+    private Journey journey;
 
-  public Long getId() {
-    return id;
-  }
+    public long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  public LocalDate getValidFrom() {
-    return validFrom;
-  }
+    public LocalDate getValidFrom() {
+        return validFrom;
+    }
 
-  public void setValidFrom(LocalDate validFrom) {
-    this.validFrom = validFrom;
-  }
+    public void setValidFrom(LocalDate validFrom) {
+        this.validFrom = validFrom;
+    }
 
-  public LocalDate getValidUntil() {
-    return validUntil;
-  }
+    public LocalDate getValidUntil() {
+        return validUntil;
+    }
 
-  public void setValidUntil(LocalDate validUntil) {
-    this.validUntil = validUntil;
-  }
+    public void setValidUntil(LocalDate validUntil) {
+        this.validUntil = validUntil;
+    }
 
-  public Journey getJourney() {
-    return journey;
-  }
+    public Journey getJourney() {
+        return journey;
+    }
 
-  public void setJourney(Journey journey) {
-    this.journey = journey;
-  }
+    public void setJourney(Journey journey) {
+        this.journey = journey;
+    }
+
+    public String getDays() {
+        return days;
+    }
+
+    public void setDays(String days) {
+        this.days = days;
+    }
 }

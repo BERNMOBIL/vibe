@@ -8,6 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+<!--/*@thymesVar id="departure" type="java.lang.String"*/-->
 <h1>Abfahrten von <span data-th-text="${departure}"></span></h1>
 <table>
     <thead>
@@ -19,15 +20,18 @@
         <th>Hinweis</th>
     </tr>
     </thead>
+    <!--/*@thymesVar id="nextDepartures" type="java.util.List"*/-->
     <!--/*@thymesVar id="schedule" type="ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule"*/-->
     <tr data-th-each="schedule : ${nextDepartures}" class="row">
-        <td>N.A.</td>
+        <td data-th-text="${schedule.getJourney().getRoute().getLine()}"></td>
         <td><span data-th-text="${schedule.getJourney().getHeadsign()}"></span></td>
-        <td><span data-th-text="${schedule.getPlatform()}"></span></td>
+        <td>
+            <span data-th-if="${schedule.hasPlatform()}" data-th-text="${schedule.getPlatform()}"></span>
+        </td>
         <td><span data-th-text="${schedule.getPlannedDeparture()}"></span></td>
         <td>
-            <span data-th-if="${schedule.getScheduleUpdate()} == null">OK</span>
-            <span data-th-if="${schedule.getScheduleUpdate()} != null" data-th-text="${schedule.getScheduleUpdate().getActualDeparture()}"></span>
+            <span data-th-if="${!schedule.hasScheduleUpdate()}">OK</span>
+            <span data-th-if="${schedule.hasScheduleUpdate()}" data-th-text="${schedule.getScheduleUpdate().getActualDeparture()}"></span>
         </td>
     </tr>
 </table>

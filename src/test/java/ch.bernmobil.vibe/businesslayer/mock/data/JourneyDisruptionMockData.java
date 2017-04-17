@@ -36,7 +36,7 @@ public class JourneyDisruptionMockData {
             setId(ids[index]);
             setMessage(messages[index]);
             setStart(starts[index]);
-            setPlanned_end(planned_ends[index]);
+            setPlannedEnd(planned_ends[index]);
         }};
     }
 

@@ -13,7 +13,7 @@ import org.hibernate.annotations.Formula;
 public class Schedule {
 
     @Id
-    private Long id;
+    private long id;
     private String platform;
     private LocalTime plannedArrival;
     private LocalTime plannedDeparture;
@@ -29,11 +29,11 @@ public class Schedule {
     @OneToOne(targetEntity = ScheduleUpdate.class, mappedBy = "schedule")
     private ScheduleUpdate scheduleUpdate;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -89,6 +89,16 @@ public class Schedule {
     @Transient
     public int compareByDepartureTime(Schedule other) {
         return plannedDeparture.compareTo(other.getPlannedDeparture());
+    }
+
+    @Transient
+    public boolean hasScheduleUpdate() {
+        return scheduleUpdate != null;
+    }
+
+    @Transient
+    public boolean hasPlatform() {
+        return !platform.equals("0");
     }
 
 }

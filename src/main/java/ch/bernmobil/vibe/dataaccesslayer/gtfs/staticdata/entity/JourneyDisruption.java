@@ -4,21 +4,25 @@ import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class JourneyDisruption {
     @Id
-    private Long id;
+    private long id;
     private String message;
     private Timestamp start;
-    private Timestamp planned_end;
+    private Timestamp plannedEnd;
 
-    public Long getId() {
+    @ManyToOne
+    @JoinColumn(name = "journey")
+    private Journey journey;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,11 +42,19 @@ public class JourneyDisruption {
         this.start = start;
     }
 
-    public Timestamp getPlanned_end() {
-        return planned_end;
+    public Timestamp getPlannedEnd() {
+        return plannedEnd;
     }
 
-    public void setPlanned_end(Timestamp planned_end) {
-        this.planned_end = planned_end;
+    public void setPlannedEnd(Timestamp plannedEnd) {
+        this.plannedEnd = plannedEnd;
+    }
+
+    public Journey getJourney() {
+        return journey;
+    }
+
+    public void setJourney(Journey journey) {
+        this.journey = journey;
     }
 }
