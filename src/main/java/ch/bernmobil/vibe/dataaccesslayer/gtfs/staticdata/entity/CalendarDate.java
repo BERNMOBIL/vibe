@@ -2,6 +2,7 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.JsonObjectConverter;
 import com.google.gson.JsonObject;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import javax.persistence.Convert;
 import javax.persistence.Converter;
@@ -19,6 +20,7 @@ public class CalendarDate {
     private JsonObject days;
     private LocalDate validFrom;
     private LocalDate validUntil;
+    private Timestamp update;
 
     @OneToOne
     @JoinColumn(name = "journey")

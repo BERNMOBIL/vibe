@@ -1,5 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ public class Area {
     @GeneratedValue
     private Long id;
     private String name;
+    private Timestamp update;
 
     public Long getId() {
         return id;

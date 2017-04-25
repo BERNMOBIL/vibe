@@ -1,5 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,6 +12,7 @@ public class Journey {
     @Id
     private Long id;
     private String headsign;
+    private Timestamp update;
 
     @OneToOne
     @JoinColumn(name = "route")

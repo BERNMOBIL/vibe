@@ -5,6 +5,8 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
 
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ public class BusinessLogic {
     private final ScheduleRepository scheduleRepository;
     private final ScheduleUpdateRepository scheduleUpdateRepository;
     private final StopRepository stopRepository;
+    private static final Timestamp UPDATE_TIME = Timestamp.valueOf("2017-04-25 09:30:08.094");
 
 
     @Autowired
@@ -33,8 +36,13 @@ public class BusinessLogic {
     }
 
     public List<Stop> findStops(String stopName) {
-        return stopRepository.findAllByNameStartingWithIgnoreCase(stopName,
-            new Sort(Direction.ASC, "name"));
+
+        return stopRepository.findAllByUpdateAndName(UPDATE_TIME, "Gümligen");
+
+//        return stopRepository.findAllByNameStartingWithIgnoreCase(
+//            stopName,
+//            new Sort(Direction.ASC, "name")
+//        );
 
     }
 
@@ -49,7 +57,6 @@ public class BusinessLogic {
     public List<Schedule> getDepartureByStopNameAtTimeSlow(long stopId, LocalTime time) {
         Stop stop = stopRepository.findOne(stopId);
         List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
-
 
         return allDepartures
             .stream()

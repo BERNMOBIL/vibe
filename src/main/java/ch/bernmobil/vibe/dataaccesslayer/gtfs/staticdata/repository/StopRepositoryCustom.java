@@ -2,18 +2,12 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
-public interface ScheduleRepository extends CrudRepository<Schedule, Long>, ScheduleRepositoryCustom {
-    List<Schedule> findAllByStop(Stop stop);
+public interface StopRepositoryCustom {
+    List<Stop> findAllByUpdateAndName(Timestamp update, String name);
 }

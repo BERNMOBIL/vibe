@@ -1,5 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -10,6 +11,7 @@ public class Route {
     private long id;
     private Integer type;
     private String line;
+    private Timestamp update;
 
 
     public long getId() {

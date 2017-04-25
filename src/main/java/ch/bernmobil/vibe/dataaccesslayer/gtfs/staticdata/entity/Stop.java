@@ -1,5 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -9,8 +10,8 @@ import javax.persistence.OneToOne;
 public class Stop {
     @Id
     private long id;
-
     private String name;
+    private Timestamp update;
 
     @OneToOne
     @JoinColumn(name = "area")

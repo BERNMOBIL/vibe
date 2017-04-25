@@ -1,5 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
+import java.sql.Timestamp;
 import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ public class Schedule {
     private String platform;
     private LocalTime plannedArrival;
     private LocalTime plannedDeparture;
+    private Timestamp update;
 
     @OneToOne
     @JoinColumn(name = "stop")
