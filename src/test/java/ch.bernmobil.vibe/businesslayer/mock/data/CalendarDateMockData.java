@@ -5,14 +5,15 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Journey;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CalendarDateMockData {
     private static List<CalendarDate> dataSource;
 
-    private static long[] ids = {
-        1,
-        2,
-        3
+    private static UUID[] ids = {
+            UUID.fromString("635977d7-28be-4cbc-833b-f817fbc47225"),
+            UUID.fromString("1b50cc76-83be-4aa0-bde9-74fc188a8978"),
+            UUID.fromString("86deb4f8-aaa3-4734-a772-1ee38f3e0344")
     };
 
     private static LocalDate[] validFroms = {

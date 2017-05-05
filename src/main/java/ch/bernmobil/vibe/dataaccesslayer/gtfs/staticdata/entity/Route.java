@@ -3,22 +3,23 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.UUID;
 
 @Entity
 public class Route {
 
     @Id
-    private long id;
+    private UUID id;
     private Integer type;
     private String line;
     private Timestamp update;
 
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

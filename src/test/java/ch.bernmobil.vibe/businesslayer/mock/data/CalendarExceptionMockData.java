@@ -5,11 +5,13 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.CalendarExceptio
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CalendarExceptionMockData {
     private static List<CalendarException> dataSource;
 
-    private static long[] ids = {
+    private static UUID[] ids = {
+
     };
 
     private static LocalDate[] dates = {

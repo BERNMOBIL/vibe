@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import java.util.UUID;
 
 @Entity
 public class Stop {
     @Id
-    private long id;
+    private UUID id;
+
     private String name;
     private Timestamp update;
 
@@ -17,11 +19,11 @@ public class Stop {
     @JoinColumn(name = "area")
     private Area area;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

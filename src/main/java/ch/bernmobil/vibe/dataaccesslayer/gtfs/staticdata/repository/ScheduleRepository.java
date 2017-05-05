@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-public interface ScheduleRepository extends CrudRepository<Schedule, Long>, ScheduleRepositoryCustom {
+@Repository
+public interface ScheduleRepository extends CrudRepository<Schedule, UUID>, ScheduleRepositoryCustom {
     List<Schedule> findAllByStop(Stop stop);
 }

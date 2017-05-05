@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -28,7 +29,7 @@ public class DepartureController {
 
 
     @RequestMapping("/{stopId}")
-    public String departures(Model model, @PathVariable("stopId") long stopId) {
+    public String departures(Model model, @PathVariable("stopId") UUID stopId) {
         List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, LocalTime.now(
             ZoneId.of("Europe/Paris")));
         Stop stop = businessLogic.getStopById(stopId);
@@ -40,7 +41,7 @@ public class DepartureController {
 
     @RequestMapping("/{stopId}/at/{time}")
     public String departuresAtTime(Model model,
-            @PathVariable("stopId")long stopId,
+            @PathVariable("stopId")UUID stopId,
             @PathVariable("time") String time) {
         LocalTime localTime = LocalTime.parse(time);
         List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, localTime);

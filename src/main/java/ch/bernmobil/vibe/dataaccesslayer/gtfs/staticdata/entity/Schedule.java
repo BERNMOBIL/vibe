@@ -2,19 +2,18 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import java.sql.Timestamp;
 import java.time.LocalTime;
-import javax.persistence.Column;
+import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
-import org.hibernate.annotations.Formula;
 
 @Entity
 public class Schedule {
 
     @Id
-    private long id;
+    private UUID id;
     private String platform;
     private LocalTime plannedArrival;
     private LocalTime plannedDeparture;
@@ -31,11 +30,11 @@ public class Schedule {
     @OneToOne(targetEntity = ScheduleUpdate.class, mappedBy = "schedule")
     private ScheduleUpdate scheduleUpdate;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

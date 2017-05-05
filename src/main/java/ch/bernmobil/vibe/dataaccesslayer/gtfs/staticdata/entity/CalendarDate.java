@@ -4,6 +4,7 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.JsonObjectConverter;
 import com.google.gson.JsonObject;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.UUID;
 import javax.persistence.Convert;
 import javax.persistence.Converter;
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import javax.persistence.OneToOne;
 public class CalendarDate {
 
     @Id
-    private long id;
+    private UUID id;
     @Convert(converter = JsonObjectConverter.class)
     private JsonObject days;
     private LocalDate validFrom;
@@ -26,11 +27,11 @@ public class CalendarDate {
     @JoinColumn(name = "journey")
     private Journey journey;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
