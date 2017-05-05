@@ -4,8 +4,8 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.*;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
 
-import java.sql.Time;
 import java.time.LocalTime;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,15 +38,15 @@ public class BusinessLogic {
 
     }
 
-    public Stop getStopById(long id) {
+    public Stop getStopById(UUID id) {
         return stopRepository.findOne(id);
     }
 
-    public List<Schedule> getNextDeparturesByStopId(long stopId) {
+    public List<Schedule> getNextDeparturesByStopId(UUID stopId) {
         return getDepartureByStopNameAtTimeSlow(stopId, LocalTime.now());
     }
 
-    public List<Schedule> getDepartureByStopNameAtTimeSlow(long stopId, LocalTime time) {
+    public List<Schedule> getDepartureByStopNameAtTimeSlow(UUID stopId, LocalTime time) {
         Stop stop = stopRepository.findOne(stopId);
         List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
 
@@ -59,7 +59,7 @@ public class BusinessLogic {
             .collect(Collectors.toList());
     }
 
-    public List<Schedule> getDeparturesByStopId(long stopId, LocalTime time) {
+    public List<Schedule> getDeparturesByStopId(UUID stopId, LocalTime time) {
         Stop stop = stopRepository.findOne(stopId);
         Page<Schedule> page = scheduleRepository.findSchedulesByStop(
             stop,

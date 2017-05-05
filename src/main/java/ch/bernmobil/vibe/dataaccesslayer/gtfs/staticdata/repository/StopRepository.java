@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.data.repository.query.Param;
 
-public interface StopRepository extends CrudRepository<Stop, Long> {
-    List<Stop> findAllByNameStartingWithIgnoreCase(@Param("stopName") String stopName, Sort sort);
-    Stop findFirstByName(String name);
+public interface StopRepository extends CrudRepository<Stop, UUID> {
+    List<Stop> findAllByNameStartingWithIgnoreCase(String stopName, Sort sort);
 }

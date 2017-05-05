@@ -18,111 +18,80 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.RouteReposit
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.ScheduleRepository;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.ScheduleUpdateRepository;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.StopRepository;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.*;
 
 @Profile("RepositoryTestConfiguration")
 @Configuration
 public class RepositoryTestConfiguration {
 
-    private static AreaRepositoryMock areaRepositoryMock;
-    private static CalendarDateRepositoryMock calendarDateRepositoryMock;
-    private static CalendarExceptionRepositoryMock calendarExceptionRepositoryMock;
-    private static JourneyRepositoryMock journeyRepositoryMock;
-    private static JourneyDisruptionRepositoryMock journeyDisruptionRepositoryMock;
-    private static RouteRepositoryMock routeRepositoryMock;
-    private static ScheduleRepositoryMock scheduleRepositoryMock;
-    private static ScheduleUpdateRepositoryMock scheduleUpdateRepositoryMock;
-    private static StopRepositoryMock stopRepositoryMock;
-
     @Bean
     @Primary
+    @Autowired
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public BusinessLogic businessLogic(ScheduleRepository scheduleRepository, ScheduleUpdateRepository scheduleUpdateRepository, StopRepository stopRepository) {
+        return new BusinessLogic(scheduleRepository, scheduleUpdateRepository, stopRepository);
+    }
+    @Bean
+    @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public AreaRepository agencyRepository() {
-        if (areaRepositoryMock == null) {
-            areaRepositoryMock = new AreaRepositoryMock();
-        }
-
-        return areaRepositoryMock.getMock();
+        return new AreaRepositoryMock().getMock();
     }
 
     @Bean
     @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public CalendarDateRepository calendarDateRepository() {
-        if (calendarDateRepositoryMock == null) {
-            calendarDateRepositoryMock = new CalendarDateRepositoryMock();
-        }
-
-        return calendarDateRepositoryMock.getMock();
+        return new CalendarDateRepositoryMock().getMock();
     }
 
     @Bean
     @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public CalendarExceptionRepository calendarExceptionRepository() {
-        if (calendarExceptionRepositoryMock == null) {
-            calendarExceptionRepositoryMock = new CalendarExceptionRepositoryMock();
-        }
-
-        return calendarExceptionRepositoryMock.getMock();
+        return new CalendarExceptionRepositoryMock().getMock();
     }
     @Bean
     @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public JourneyRepository journeyRepository() {
-        if (journeyRepositoryMock == null) {
-            journeyRepositoryMock = new JourneyRepositoryMock();
-        }
-
-        return journeyRepositoryMock.getMock();
+        return new JourneyRepositoryMock().getMock();
     }
 
     @Bean
     @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public JourneyDistruptionRepository journeyDistruptionRepository() {
-        if (journeyDisruptionRepositoryMock == null) {
-            journeyDisruptionRepositoryMock = new JourneyDisruptionRepositoryMock();
-        }
-
-        return journeyDisruptionRepositoryMock.getMock();
+        return new JourneyDisruptionRepositoryMock().getMock();
     }
 
     @Bean
     @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public RouteRepository routeRepository() {
-        if (routeRepositoryMock == null) {
-            routeRepositoryMock = new RouteRepositoryMock();
-        }
-
-        return routeRepositoryMock.getMock();
+        return new RouteRepositoryMock().getMock();
     }
 
     @Bean
     @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public ScheduleRepository scheduleRepository() {
-        if (scheduleRepositoryMock == null) {
-            scheduleRepositoryMock = new ScheduleRepositoryMock();
-        }
-
-        return scheduleRepositoryMock.getMock();
+        return new ScheduleRepositoryMock().getMock();
     }
 
     @Bean
     @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public ScheduleUpdateRepository scheduleUpdateRepository() {
-        if (scheduleUpdateRepositoryMock == null) {
-            scheduleUpdateRepositoryMock = new ScheduleUpdateRepositoryMock();
-        }
-
-        return scheduleUpdateRepositoryMock.getMock();
+        return new ScheduleUpdateRepositoryMock().getMock();
     }
 
     @Bean
     @Primary
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public StopRepository stopRepository() {
-        if (stopRepositoryMock == null) {
-            stopRepositoryMock = new StopRepositoryMock();
-        }
-
-        return stopRepositoryMock.getMock();
+        return new StopRepositoryMock().getMock();
     }
 }

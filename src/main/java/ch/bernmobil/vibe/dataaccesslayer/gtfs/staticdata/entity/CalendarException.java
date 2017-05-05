@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import java.time.LocalDate;
+import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -10,7 +11,7 @@ import javax.persistence.OneToOne;
 public class CalendarException {
 
     @Id
-    private Long id;
+    private UUID id;
     private LocalDate date;
     private String type;
 
@@ -18,11 +19,11 @@ public class CalendarException {
     @JoinColumn(name = "calendarDate")
     private CalendarDate calendarDate;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

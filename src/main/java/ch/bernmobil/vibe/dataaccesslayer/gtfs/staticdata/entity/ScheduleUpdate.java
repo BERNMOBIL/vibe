@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import java.sql.Time;
+import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -10,7 +11,7 @@ import javax.persistence.OneToOne;
 public class ScheduleUpdate {
 
   @Id
-  private Long id;
+  private UUID id;
   private Time actualArrival;
   private Time actualDeparture;
 
@@ -18,11 +19,11 @@ public class ScheduleUpdate {
   @JoinColumn(name = "schedule")
   private Schedule schedule;
 
-  public Long getId() {
+  public UUID getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 

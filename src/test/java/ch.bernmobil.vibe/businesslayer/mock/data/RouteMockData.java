@@ -4,13 +4,14 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Route;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class RouteMockData {
     private static List<Route> dataSource;
 
-    private static long[] ids = {
-        21,
-        35,
+    private static UUID[] ids = {
+            UUID.fromString("635977d7-28be-4cbc-833b-f817fbc47225"),
+            UUID.fromString("1b50cc76-83be-4aa0-bde9-74fc188a8978"),
     };
 
     private static Integer[] types = {
