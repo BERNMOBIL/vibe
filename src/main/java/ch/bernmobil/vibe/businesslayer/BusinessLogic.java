@@ -4,7 +4,6 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.*;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,8 +24,6 @@ public class BusinessLogic {
     private final ScheduleRepository scheduleRepository;
     private final ScheduleUpdateRepository scheduleUpdateRepository;
     private final StopRepository stopRepository;
-    private static final Timestamp UPDATE_TIME = Timestamp.valueOf("2017-04-25 09:30:08.094");
-
 
     @Autowired
     public BusinessLogic(ScheduleRepository scheduleRepository,
@@ -37,13 +34,9 @@ public class BusinessLogic {
     }
 
     public List<Stop> findStops(String stopName) {
-        //TODO stop this shit
-        return stopRepository.findAllByUpdateAndName(UPDATE_TIME, "Gümligen");
+        return stopRepository.
+                findAllByNameWithIgnoreCase(stopName + "%", LocalDateTime.parse("2017-05-05T08:41:04.467000"), new Sort(Direction.ASC, "name"));
 
-//        return stopRepository.findAllByNameStartingWithIgnoreCase(
-//            stopName,
-//            new Sort(Direction.ASC, "name")
-//        );
 
     }
 
@@ -72,6 +65,7 @@ public class BusinessLogic {
         Page<Schedule> page = scheduleRepository.findSchedulesByStop(
             stop,
             time,
+                LocalDateTime.parse("2017-05-05T08:41:04.467000"),
             new PageRequest(1, 10, Direction.ASC, "plannedDeparture"));
         return page.getContent();
 

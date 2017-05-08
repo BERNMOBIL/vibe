@@ -1,10 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import java.sql.Timestamp;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -13,7 +10,8 @@ public class Stop {
     private UUID id;
 
     private String name;
-    private Timestamp update;
+    @Column(name = "update")
+    private LocalDateTime lastUpdate;
 
     @OneToOne
     @JoinColumn(name = "area")
@@ -41,5 +39,13 @@ public class Stop {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }
