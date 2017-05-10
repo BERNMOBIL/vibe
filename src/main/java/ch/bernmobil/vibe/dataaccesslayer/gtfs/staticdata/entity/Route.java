@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
@@ -12,7 +13,8 @@ public class Route {
     private UUID id;
     private Integer type;
     private String line;
-    private Timestamp update;
+    @Column(name = "update")
+    private LocalDateTime updateTimestamp;
 
 
     public UUID getId() {
@@ -37,5 +39,13 @@ public class Route {
 
     public void setLine(String line) {
         this.line = line;
+    }
+
+    public LocalDateTime getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 }

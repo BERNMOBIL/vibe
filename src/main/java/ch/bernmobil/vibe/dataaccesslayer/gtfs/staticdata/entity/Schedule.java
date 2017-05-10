@@ -1,8 +1,9 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,7 +18,8 @@ public class Schedule {
     private String platform;
     private LocalTime plannedArrival;
     private LocalTime plannedDeparture;
-    private Timestamp update;
+    @Column(name = "update")
+    private LocalDateTime updateTimestamp;
 
     @OneToOne
     @JoinColumn(name = "stop")
@@ -85,6 +87,14 @@ public class Schedule {
     public void setScheduleUpdate(
         ScheduleUpdate scheduleUpdate) {
         this.scheduleUpdate = scheduleUpdate;
+    }
+
+    public LocalDateTime getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 
     @Transient

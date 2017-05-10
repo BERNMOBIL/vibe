@@ -1,7 +1,9 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,6 +20,9 @@ public class JourneyDisruption {
     @ManyToOne
     @JoinColumn(name = "journey")
     private Journey journey;
+
+    @Column(name = "update")
+    private LocalDateTime updateTimestamp;
 
     public UUID getId() {
         return id;
@@ -57,5 +62,13 @@ public class JourneyDisruption {
 
     public void setJourney(Journey journey) {
         this.journey = journey;
+    }
+
+    public LocalDateTime getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 }

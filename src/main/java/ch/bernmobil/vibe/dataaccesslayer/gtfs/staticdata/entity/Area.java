@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +14,8 @@ public class Area {
     @GeneratedValue
     private UUID id;
     private String name;
-    private Timestamp update;
+    @Column(name = "update")
+    private LocalDateTime updateTimestamp;
 
     public UUID getId() {
         return id;
@@ -29,5 +31,13 @@ public class Area {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDateTime getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 }

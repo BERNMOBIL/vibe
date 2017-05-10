@@ -2,10 +2,14 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,13 +35,11 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
     @Override
     public Page<Schedule> findSchedulesByStop(Stop stop, LocalTime time, LocalDateTime timestamp, Pageable pageable) {
-        //TODO order
         int pageNumber = pageable.getOffset() - pageable.getPageSize();
+        //Query query = entityManager.createQuery("select s from ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule s where s.lastUpdate = :time")
+
         Query query = entityManager.createNativeQuery(queryString, Schedule.class)
                 .setParameter(1, Timestamp.valueOf(timestamp))
                 .setParameter(2, stop.getId())

@@ -1,8 +1,9 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,7 +16,8 @@ public class CalendarException {
     private UUID id;
     private LocalDate date;
     private String type;
-    private Timestamp update;
+    @Column(name = "update")
+    private LocalDateTime updateTimestamp;
 
     @OneToOne
     @JoinColumn(name = "calendarDate")
@@ -51,5 +53,13 @@ public class CalendarException {
 
     public void setCalendarDate(CalendarDate calendarDate) {
         this.calendarDate = calendarDate;
+    }
+
+    public LocalDateTime getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 }

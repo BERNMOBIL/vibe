@@ -1,10 +1,10 @@
 package ch.bernmobil.vibe.businesslayer;
 
+import ch.bernmobil.vibe.UpdateTimestampService;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.*;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
@@ -22,22 +22,24 @@ import java.util.List;
 public class BusinessLogic {
 
     private final ScheduleRepository scheduleRepository;
-    private final ScheduleUpdateRepository scheduleUpdateRepository;
     private final StopRepository stopRepository;
+    private final UpdateTimestampService updateTimestampService;
 
     @Autowired
     public BusinessLogic(ScheduleRepository scheduleRepository,
-        ScheduleUpdateRepository scheduleUpdateRepository, StopRepository stopRepository) {
+        StopRepository stopRepository,
+        UpdateTimestampService updateTimestampService) {
         this.scheduleRepository = scheduleRepository;
-        this.scheduleUpdateRepository = scheduleUpdateRepository;
         this.stopRepository = stopRepository;
+        this.updateTimestampService = updateTimestampService;
     }
 
     public List<Stop> findStops(String stopName) {
+        LocalDateTime timestamp = updateTimestampService.getCurrentTimestamp();
+        //TODO: manually append % should be avoided
         return stopRepository.
-                findAllByNameWithIgnoreCase(stopName + "%", LocalDateTime.parse("2017-05-05T08:41:04.467000"), new Sort(Direction.ASC, "name"));
-
-
+                findAllByNameWithIgnoreCase(stopName + "%",
+                    timestamp, new Sort(Direction.ASC, "name"));
     }
 
     public Stop getStopById(UUID id) {
@@ -45,10 +47,10 @@ public class BusinessLogic {
     }
 
     public List<Schedule> getNextDeparturesByStopId(UUID stopId) {
-        return getDepartureByStopNameAtTimeSlow(stopId, LocalTime.now());
+        return getDepartureByStopIdAtTime(stopId, LocalTime.now());
     }
 
-    public List<Schedule> getDepartureByStopNameAtTimeSlow(UUID stopId, LocalTime time) {
+    public List<Schedule> getDepartureByStopIdAtTime(UUID stopId, LocalTime time) {
         Stop stop = stopRepository.findOne(stopId);
         List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
 
@@ -65,7 +67,7 @@ public class BusinessLogic {
         Page<Schedule> page = scheduleRepository.findSchedulesByStop(
             stop,
             time,
-                LocalDateTime.parse("2017-05-05T08:41:04.467000"),
+                updateTimestampService.getCurrentTimestamp(),
             new PageRequest(1, 10, Direction.ASC, "plannedDeparture"));
         return page.getContent();
 

@@ -2,11 +2,11 @@ package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity;
 
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.JsonObjectConverter;
 import com.google.gson.JsonObject;
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Convert;
-import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,8 +21,8 @@ public class CalendarDate {
     private JsonObject days;
     private LocalDate validFrom;
     private LocalDate validUntil;
-    private Timestamp update;
-
+    @Column(name = "update")
+    private LocalDateTime updateTimestamp;
     @OneToOne
     @JoinColumn(name = "journey")
     private Journey journey;
@@ -65,5 +65,13 @@ public class CalendarDate {
 
     public void setDays(JsonObject days) {
         this.days = days;
+    }
+
+    public LocalDateTime getUpdateTimestamp() {
+        return updateTimestamp;
+    }
+
+    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 }
