@@ -29,6 +29,14 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
             + "WHERE schedule.update = ?"
             + "AND stop = ? "
             + "AND planned_departure > ? "
+            + "AND journey NOT IN ("
+                + "SELECT id FROM journey "
+                + "WHERE terminal_station = ?"
+            + ")"
+            +"AND journey IN ("
+                +"SELECT journey FROM calendar_date "
+                +"WHERE current_date BETWEEN valid_from AND valid_until"
+            +")"
             + "ORDER BY planned_departure "
             + "LIMIT ? OFFSET ?;";
 
@@ -44,8 +52,9 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
                 .setParameter(1, Timestamp.valueOf(timestamp))
                 .setParameter(2, stop.getId())
                 .setParameter(3, Time.valueOf(time))
-                .setParameter(4, pageable.getPageSize())
-                .setParameter(5, pageNumber);
+                .setParameter(4, stop.getId())
+                .setParameter(5, pageable.getPageSize())
+                .setParameter(6, pageNumber);
         List<Schedule> result = query.getResultList();
         return new PageImpl<>(result);
     }

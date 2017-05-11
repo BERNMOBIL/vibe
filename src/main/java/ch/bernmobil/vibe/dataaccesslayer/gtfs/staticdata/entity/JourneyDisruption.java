@@ -21,9 +21,6 @@ public class JourneyDisruption {
     @JoinColumn(name = "journey")
     private Journey journey;
 
-    @Column(name = "update")
-    private LocalDateTime updateTimestamp;
-
     public UUID getId() {
         return id;
     }
@@ -62,13 +59,5 @@ public class JourneyDisruption {
 
     public void setJourney(Journey journey) {
         this.journey = journey;
-    }
-
-    public LocalDateTime getUpdateTimestamp() {
-        return updateTimestamp;
-    }
-
-    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
-        this.updateTimestamp = updateTimestamp;
     }
 }

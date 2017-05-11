@@ -1,10 +1,7 @@
 package ch.bernmobil.vibe;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AreaRepository;
-import java.sql.Timestamp;
+import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.UpdateHistoryRepository;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import org.apache.log4j.Logger;
@@ -17,12 +14,12 @@ import org.springframework.stereotype.Service;
 @EnableScheduling
 public class UpdateTimestampService {
     private final Logger logger = Logger.getLogger(UpdateTimestampService.class);
-    private final AreaRepository areaRepository;
+    private final UpdateHistoryRepository updateHistoryRepository;
     private LocalDateTime currentTimestamp;
 
     @Autowired
-    public UpdateTimestampService(AreaRepository areaRepository) {
-        this.areaRepository = areaRepository;
+    public UpdateTimestampService(UpdateHistoryRepository updateHistoryRepository) {
+        this.updateHistoryRepository = updateHistoryRepository;
     }
 
     @Scheduled(fixedRate = 60 * 1000)
@@ -40,11 +37,8 @@ public class UpdateTimestampService {
 
     private CompletableFuture<LocalDateTime> check() {
         return CompletableFuture.supplyAsync(() -> {
-            List<LocalDateTime> timestamps = areaRepository.findDistinctUpdateTimestamp();
-            logger.debug(String.format("Found timestamps: %s", timestamps));
-            Optional<LocalDateTime> t = timestamps.stream().max(Comparator.naturalOrder());
-            logger.debug(String.format("Newest timestamp: %s", t));
-            return t.orElse(LocalDateTime.now());
+            Optional<LocalDateTime> maxTimestamp = Optional.ofNullable(updateHistoryRepository.findMaxTime());
+            return maxTimestamp.orElse(LocalDateTime.now());
         });
     }
 

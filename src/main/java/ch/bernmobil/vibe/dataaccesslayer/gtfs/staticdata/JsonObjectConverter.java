@@ -7,7 +7,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import org.postgresql.util.PGobject;
 
-@Converter(autoApply = true)
+//@Converter(autoApply = true)
 public class JsonObjectConverter implements AttributeConverter<Object, JsonObject> {
 
     @Override

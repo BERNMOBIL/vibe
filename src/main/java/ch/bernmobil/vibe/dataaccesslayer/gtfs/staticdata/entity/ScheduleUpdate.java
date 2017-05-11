@@ -16,8 +16,6 @@ public class ScheduleUpdate {
     private UUID id;
     private Time actualArrival;
     private Time actualDeparture;
-    @Column(name = "update")
-    private LocalDateTime updateTimestamp;
 
     @OneToOne
     @JoinColumn(name = "schedule")
@@ -53,13 +51,5 @@ public class ScheduleUpdate {
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
-    }
-
-    public LocalDateTime getUpdateTimestamp() {
-        return updateTimestamp;
-    }
-
-    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
-        this.updateTimestamp = updateTimestamp;
     }
 }
