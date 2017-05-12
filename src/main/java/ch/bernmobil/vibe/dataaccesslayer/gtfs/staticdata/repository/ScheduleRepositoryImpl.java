@@ -26,6 +26,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
     private final static String queryString = "SELECT * FROM schedule "
+            + "LEFT JOIN schedule_update ON schedule.id = schedule_update.schedule "
             + "WHERE schedule.update = ?"
             + "AND stop = ? "
             + "AND planned_departure > ? "
@@ -37,7 +38,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
                 +"SELECT journey FROM calendar_date "
                 +"WHERE current_date BETWEEN valid_from AND valid_until"
             +")"
-            + "ORDER BY planned_departure "
+            + "ORDER BY schedule_update.actual_departure, planned_departure "
             + "LIMIT ? OFFSET ?;";
 
     @PersistenceContext
@@ -46,7 +47,6 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
     @Override
     public Page<Schedule> findSchedulesByStop(Stop stop, LocalTime time, LocalDateTime timestamp, Pageable pageable) {
         int pageNumber = pageable.getOffset() - pageable.getPageSize();
-        //Query query = entityManager.createQuery("select s from ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule s where s.lastUpdate = :time")
 
         Query query = entityManager.createNativeQuery(queryString, Schedule.class)
                 .setParameter(1, Timestamp.valueOf(timestamp))

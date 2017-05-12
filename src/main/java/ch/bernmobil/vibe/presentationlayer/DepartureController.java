@@ -30,8 +30,8 @@ public class DepartureController {
 
     @RequestMapping("/{stopId}")
     public String departures(Model model, @PathVariable("stopId") UUID stopId) {
-        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, LocalTime.now(
-            ZoneId.of("Europe/Paris")));
+        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId,
+            LocalTime.now(ZoneId.of("Europe/Paris")));
         Stop stop = businessLogic.getStopById(stopId);
         model.addAttribute("departure", stop.getName());
         model.addAttribute("nextDepartures", nextDepartures);

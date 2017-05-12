@@ -64,13 +64,14 @@ public class BusinessLogic {
 
     public List<Schedule> getDeparturesByStopId(UUID stopId, LocalTime time) {
         Stop stop = stopRepository.findOne(stopId);
+
         Page<Schedule> page = scheduleRepository.findSchedulesByStop(
             stop,
             time,
                 updateTimestampService.getCurrentTimestamp(),
             new PageRequest(1, 10, Direction.ASC, "plannedDeparture"));
-        return page.getContent();
-
+        List<Schedule> result = page.getContent();
+        return result;
     }
 
 }
