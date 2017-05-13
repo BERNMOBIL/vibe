@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.businesslayer;
 
-import ch.bernmobil.vibe.UpdateTimestampService;
+import ch.bernmobil.vibe.service.UpdateTimestampService;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.*;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 

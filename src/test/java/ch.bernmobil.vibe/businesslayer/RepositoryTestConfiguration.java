@@ -2,7 +2,7 @@ package ch.bernmobil.vibe.businesslayer;
 
 import static org.mockito.Mockito.mock;
 
-import ch.bernmobil.vibe.UpdateTimestampService;
+import ch.bernmobil.vibe.service.UpdateTimestampService;
 import ch.bernmobil.vibe.businesslayer.mock.AreaRepositoryMock;
 import ch.bernmobil.vibe.businesslayer.mock.CalendarDateRepositoryMock;
 import ch.bernmobil.vibe.businesslayer.mock.CalendarExceptionRepositoryMock;
