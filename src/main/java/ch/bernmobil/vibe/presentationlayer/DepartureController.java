@@ -30,6 +30,7 @@ public class DepartureController {
 
     @RequestMapping("/{stopId}")
     public String departures(Model model, @PathVariable("stopId") UUID stopId) {
+        //TODO: Externalize timezone configuration
         List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId,
             LocalTime.now(ZoneId.of("Europe/Paris")));
         Stop stop = businessLogic.getStopById(stopId);

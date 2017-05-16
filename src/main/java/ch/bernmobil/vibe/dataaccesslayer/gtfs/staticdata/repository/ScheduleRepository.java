@@ -12,5 +12,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ScheduleRepository extends CrudRepository<Schedule, UUID>, ScheduleRepositoryCustom {
     List<Schedule> findAllByStop(Stop stop);
-    List<Schedule> findAll();
 }

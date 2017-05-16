@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UpdateHistoryRepository extends CrudRepository<UpdateHistory, UUID> {
-    @Query("select max(a.time) from UpdateHistory a")
+    @Query("select max(uh.time) from UpdateHistory uh")
     LocalDateTime findMaxTime();
 }

@@ -5,6 +5,5 @@ import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AreaRepository extends CrudRepository<Area, UUID> {
-//    @Query("select distinct a.updateTimestamp from Area a")
- //   List<LocalDateTime> findDistinctUpdateTimestamp();
+
 }
