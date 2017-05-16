@@ -1,7 +1,6 @@
 package ch.bernmobil.vibe.businesslayer;
 
 import ch.bernmobil.vibe.service.UpdateTimestampService;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.*;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
 
@@ -9,6 +8,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
+import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,19 +49,7 @@ public class BusinessLogic {
     }
 
     public List<Schedule> getNextDeparturesByStopId(UUID stopId) {
-        return getDepartureByStopIdAtTime(stopId, LocalTime.now());
-    }
-
-    public List<Schedule> getDepartureByStopIdAtTime(UUID stopId, LocalTime time) {
-        Stop stop = stopRepository.findOne(stopId);
-        List<Schedule> allDepartures = scheduleRepository.findAllByStop(stop);
-
-        return allDepartures
-            .stream()
-            .filter(s -> s.getPlannedDeparture().isAfter(time))
-            .sorted(Schedule::compareByDepartureTime)
-            .limit(10)
-            .collect(Collectors.toList());
+        return getDeparturesByStopId(stopId, LocalTime.now());
     }
 
     public List<Schedule> getDeparturesByStopId(UUID stopId, LocalTime time) {
