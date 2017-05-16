@@ -3,7 +3,7 @@ package ch.bernmobil.vibe.dataacesslayer.gtfs;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.LocalDateConverter;
+import ch.bernmobil.vibe.shared.converter.LocalDateConverter;
 
 import java.text.SimpleDateFormat;
 import org.junit.Test;

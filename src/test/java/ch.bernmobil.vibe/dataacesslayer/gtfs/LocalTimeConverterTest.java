@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.dataacesslayer.gtfs;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.LocalTimeConverter;
+import ch.bernmobil.vibe.shared.converter.LocalTimeConverter;
 import org.junit.Test;
 
 import java.time.LocalTime;
