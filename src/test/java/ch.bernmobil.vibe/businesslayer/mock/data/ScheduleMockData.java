@@ -1,8 +1,8 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Journey;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import ch.bernmobil.vibe.shared.entity.hibernate.Journey;
+import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
+import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

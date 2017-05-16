@@ -2,8 +2,8 @@ package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
+import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import org.springframework.beans.factory.annotation.Autowired;

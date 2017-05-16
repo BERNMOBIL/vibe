@@ -1,22 +1,15 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Root;
-import org.springframework.beans.factory.annotation.Autowired;
+import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
+import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -45,6 +38,7 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
+
     public Page<Schedule> findSchedulesByStop(Stop stop, LocalTime time, LocalDateTime timestamp, Pageable pageable) {
         int pageNumber = pageable.getOffset() - pageable.getPageSize();
 
@@ -55,7 +49,12 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
                 .setParameter(4, stop.getId())
                 .setParameter(5, pageable.getPageSize())
                 .setParameter(6, pageNumber);
-        List<Schedule> result = query.getResultList();
+        List<Schedule> result = getResultList(query);
         return new PageImpl<>(result);
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<Schedule> getResultList(Query query) {
+        return query.getResultList();
     }
 }

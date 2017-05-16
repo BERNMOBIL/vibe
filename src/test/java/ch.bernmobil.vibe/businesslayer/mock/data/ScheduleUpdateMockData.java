@@ -1,7 +1,7 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.ScheduleUpdate;
+import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
+import ch.bernmobil.vibe.shared.entity.hibernate.ScheduleUpdate;
 
 import java.sql.Time;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Journey;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Route;
+import ch.bernmobil.vibe.shared.entity.hibernate.Journey;
+import ch.bernmobil.vibe.shared.entity.hibernate.Route;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

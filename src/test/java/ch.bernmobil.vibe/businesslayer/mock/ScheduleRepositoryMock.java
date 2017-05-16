@@ -4,8 +4,8 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 import ch.bernmobil.vibe.businesslayer.mock.data.ScheduleMockData;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Stop;
+import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
+import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.ScheduleRepository;
 
 

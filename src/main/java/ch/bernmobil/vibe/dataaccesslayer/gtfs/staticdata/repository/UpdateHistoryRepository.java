@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.UpdateHistory;
+import ch.bernmobil.vibe.shared.entity.hibernate.UpdateHistory;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

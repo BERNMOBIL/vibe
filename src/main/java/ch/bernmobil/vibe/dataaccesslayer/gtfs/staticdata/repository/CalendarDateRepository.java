@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.CalendarDate;
+import ch.bernmobil.vibe.shared.entity.hibernate.CalendarDate;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;

@@ -3,7 +3,7 @@ package ch.bernmobil.vibe.businesslayer.mock;
 import static org.mockito.Mockito.when;
 
 import ch.bernmobil.vibe.businesslayer.mock.data.RouteMockData;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Route;
+import ch.bernmobil.vibe.shared.entity.hibernate.Route;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.RouteRepository;
 
 

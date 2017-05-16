@@ -1,7 +1,7 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.CalendarDate;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.CalendarException;
+import ch.bernmobil.vibe.shared.entity.hibernate.CalendarDate;
+import ch.bernmobil.vibe.shared.entity.hibernate.CalendarException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

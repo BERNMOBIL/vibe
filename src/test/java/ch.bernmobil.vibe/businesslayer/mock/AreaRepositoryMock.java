@@ -3,7 +3,7 @@ package ch.bernmobil.vibe.businesslayer.mock;
 import static org.mockito.Mockito.when;
 
 import ch.bernmobil.vibe.businesslayer.mock.data.AreaMockData;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.Area;
+import ch.bernmobil.vibe.shared.entity.hibernate.Area;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.AreaRepository;
 
 

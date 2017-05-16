@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.entity.JourneyDisruption;
+import ch.bernmobil.vibe.shared.entity.hibernate.JourneyDisruption;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
