@@ -3,8 +3,8 @@ package ch.bernmobil.vibe.businesslayer.mock;
 import static org.mockito.Mockito.when;
 
 import ch.bernmobil.vibe.businesslayer.mock.data.CalendarExceptionMockData;
-import ch.bernmobil.vibe.shared.entity.hibernate.CalendarException;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.CalendarExceptionRepository;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.CalendarException;
+import ch.bernmobil.vibe.dataaccesslayer.repository.CalendarExceptionRepository;
 
 
 public class CalendarExceptionRepositoryMock extends RepositoryMock<CalendarException, CalendarExceptionRepository>{

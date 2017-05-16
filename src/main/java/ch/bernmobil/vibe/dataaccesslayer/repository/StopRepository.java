@@ -1,6 +1,6 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
+package ch.bernmobil.vibe.dataaccesslayer.repository;
 
-import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

@@ -3,8 +3,8 @@ package ch.bernmobil.vibe.businesslayer.mock;
 import static org.mockito.Mockito.when;
 
 import ch.bernmobil.vibe.businesslayer.mock.data.CalendarDateMockData;
-import ch.bernmobil.vibe.shared.entity.hibernate.CalendarDate;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.CalendarDateRepository;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.CalendarDate;
+import ch.bernmobil.vibe.dataaccesslayer.repository.CalendarDateRepository;
 
 
 public class CalendarDateRepositoryMock extends RepositoryMock<CalendarDate, CalendarDateRepository>{

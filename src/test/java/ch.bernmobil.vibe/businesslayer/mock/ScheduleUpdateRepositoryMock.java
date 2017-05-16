@@ -3,8 +3,8 @@ package ch.bernmobil.vibe.businesslayer.mock;
 import static org.mockito.Mockito.when;
 
 import ch.bernmobil.vibe.businesslayer.mock.data.ScheduleUpdateMockData;
-import ch.bernmobil.vibe.shared.entity.hibernate.ScheduleUpdate;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.ScheduleUpdateRepository;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
+import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleUpdateRepository;
 
 
 public class ScheduleUpdateRepositoryMock extends RepositoryMock<ScheduleUpdate, ScheduleUpdateRepository>{

@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.shared.entity.hibernate.Route;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Route;
 
 import java.util.ArrayList;
 import java.util.List;

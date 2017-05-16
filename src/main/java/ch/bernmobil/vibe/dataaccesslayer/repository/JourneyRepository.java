@@ -1,6 +1,6 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
+package ch.bernmobil.vibe.dataaccesslayer.repository;
 
-import ch.bernmobil.vibe.shared.entity.hibernate.Journey;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Journey;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;

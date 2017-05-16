@@ -1,7 +1,7 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.shared.entity.hibernate.CalendarDate;
-import ch.bernmobil.vibe.shared.entity.hibernate.Journey;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.CalendarDate;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Journey;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

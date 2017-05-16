@@ -20,7 +20,7 @@
         <th>Hinweis</th>
     </tr>
     </thead>
-    <!--/*@thymesVar id="schedule" type="ch.bernmobil.vibe.shared.entity.hibernate.Schedule"*/-->
+    <!--/*@thymesVar id="schedule" type="ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule"*/-->
     <tr data-th-each="schedule : ${nextDepartures}" class="row">
         <td data-th-text="${schedule.getJourney().getRoute().getLine()}"></td>
         <td><span data-th-text="${schedule.getJourney().getHeadsign()}"></span></td>

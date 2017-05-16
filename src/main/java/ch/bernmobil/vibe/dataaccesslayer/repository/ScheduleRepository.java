@@ -1,7 +1,7 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
+package ch.bernmobil.vibe.dataaccesslayer.repository;
 
-import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
-import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 
 import java.util.List;
 import java.util.UUID;

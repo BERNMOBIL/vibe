@@ -1,7 +1,7 @@
-package ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository;
+package ch.bernmobil.vibe.dataaccesslayer.repository;
 
-import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
-import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

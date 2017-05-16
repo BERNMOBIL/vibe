@@ -1,5 +1,7 @@
 package ch.bernmobil.vibe.businesslayer;
 
+import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleRepository;
+import ch.bernmobil.vibe.dataaccesslayer.repository.StopRepository;
 import ch.bernmobil.vibe.service.UpdateTimestampService;
 import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 
@@ -7,10 +9,9 @@ import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-import ch.bernmobil.vibe.shared.entity.hibernate.Schedule;
-import ch.bernmobil.vibe.shared.entity.hibernate.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

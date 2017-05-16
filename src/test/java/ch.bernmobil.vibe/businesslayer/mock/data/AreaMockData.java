@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.businesslayer.mock.data;
 
-import ch.bernmobil.vibe.shared.entity.hibernate.Area;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Area;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

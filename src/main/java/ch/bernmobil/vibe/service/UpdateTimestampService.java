@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.service;
 
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.UpdateHistoryRepository;
+import ch.bernmobil.vibe.dataaccesslayer.repository.UpdateHistoryRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;

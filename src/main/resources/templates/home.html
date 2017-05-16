@@ -12,7 +12,7 @@
 <h1>Abfahrtsanzeiger</h1>
 <p>Bitte geben sie eine Station ein</p>
 <div data-th-each="stop:${stopList}" class="collection, light-primary-color">
-    <!--/*@thymesVar id="stop" type="ch.bernmobil.vibe.shared.entity.hibernate.Stop"*/-->
+    <!--/*@thymesVar id="stop" type="ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop"*/-->
     <div class="collection-item, accent-color">
       <a data-th-href="@{/departures/__${stop.getId()}__}" class="text-primary-color">
         <span data-th-text="${stop.getName()}"></span>
