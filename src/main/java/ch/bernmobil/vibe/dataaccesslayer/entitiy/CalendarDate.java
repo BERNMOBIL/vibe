@@ -1,7 +1,7 @@
 package ch.bernmobil.vibe.dataaccesslayer.entitiy;
 
 
-import ch.bernmobil.vibe.shared.converter.JsonObjectConverter;
+import ch.bernmobil.vibe.dataaccesslayer.converter.JsonObjectConverter;
 import com.google.gson.JsonObject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -1,17 +1,10 @@
 package ch.bernmobil.vibe.businesslayer;
 
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleRepository;
 import ch.bernmobil.vibe.dataaccesslayer.repository.StopRepository;
 import ch.bernmobil.vibe.service.UpdateTimestampService;
-import ch.bernmobil.vibe.dataaccesslayer.gtfs.staticdata.repository.*;
-
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.UUID;
-
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +12,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BusinessLogic {

@@ -40,9 +40,9 @@ ext {
     springCloudVersion = 'Dalston.RELEASE'
 }
 
-task buildDocker(type: Docker, dependsOn: build) {
+task createDocker(type: Docker) {
     push = false
-    applicationName = jar.baseName
+    applicationName = rootProject.name
     dockerfile = file('src/main/docker/Dockerfile')
     doFirst {
         copy {
@@ -62,7 +62,6 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-bus-amqp')
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
-    compile project(':shared')
     compileOnly "org.springframework.boot:spring-boot-configuration-processor"
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
