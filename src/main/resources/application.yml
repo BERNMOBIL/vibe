@@ -3,7 +3,10 @@ spring:
     url: jdbc:postgresql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
-
+  rabbitmq:
+    host: ${RABBITMQ_HOSTNAME}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
   #jpa:
     #hibernate:
       #ddl-auto: validate
