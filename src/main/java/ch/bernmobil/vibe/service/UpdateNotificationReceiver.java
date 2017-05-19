@@ -5,16 +5,12 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Observable;
+import java.util.Observer;
+
 @Component
-public class UpdateNotificationReceiver {
+public class UpdateNotificationReceiver extends Observable {
     private final Logger logger = Logger.getLogger(UpdateNotificationReceiver.class);
-
-    private UpdateTimestampService updateTimestampService;
-
-    @Autowired
-    public UpdateNotificationReceiver(UpdateTimestampService updateTimestampService) {
-        this.updateTimestampService = updateTimestampService;
-    }
 
     @RabbitListener(queues = "#{autoDeleteQueue.name}")
     public void receive(String message) {
@@ -23,6 +19,7 @@ public class UpdateNotificationReceiver {
             return;
         }
         logger.info("Received update notification");
-        updateTimestampService.checkTimestamp();
+        setChanged();
+        notifyObservers();
     }
 }

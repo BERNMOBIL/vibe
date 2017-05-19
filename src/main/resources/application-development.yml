@@ -7,3 +7,7 @@ spring:
       url: jdbc:postgresql://localhost:5432/vibe
       username: vibe
       password: vibe
+    rabbitmq:
+      host: localhost
+      username: guest
+      password: guest

@@ -1,5 +1,8 @@
-package ch.bernmobil.vibe.service;
+package ch.bernmobil.vibe;
 
+import ch.bernmobil.vibe.dataaccesslayer.repository.UpdateHistoryRepository;
+import ch.bernmobil.vibe.service.UpdateNotificationReceiver;
+import ch.bernmobil.vibe.service.UpdateTimestampService;
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -28,4 +31,5 @@ public class CommunicationConfiguration {
     public Binding binding(Queue autoDeleteQueue, FanoutExchange fanoutExchange) {
         return BindingBuilder.bind(autoDeleteQueue).to(fanoutExchange);
     }
+
 }

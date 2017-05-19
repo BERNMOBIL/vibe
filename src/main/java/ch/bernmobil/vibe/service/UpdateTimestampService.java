@@ -7,18 +7,21 @@ import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class UpdateTimestampService {
+public class UpdateTimestampService implements Observer {
     private final Logger logger = Logger.getLogger(UpdateTimestampService.class);
     private final UpdateHistoryRepository updateHistoryRepository;
     private LocalDateTime currentTimestamp;
 
     @Autowired
-    public UpdateTimestampService(UpdateHistoryRepository updateHistoryRepository) {
+    public UpdateTimestampService(UpdateHistoryRepository updateHistoryRepository, UpdateNotificationReceiver receiver) {
         this.updateHistoryRepository = updateHistoryRepository;
+        receiver.addObserver(this);
         checkTimestamp();
     }
 
@@ -48,4 +51,8 @@ public class UpdateTimestampService {
         return currentTimestamp;
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        checkTimestamp();
+    }
 }
