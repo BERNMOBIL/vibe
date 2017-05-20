@@ -48,4 +48,5 @@ public class Stop {
     public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
 }

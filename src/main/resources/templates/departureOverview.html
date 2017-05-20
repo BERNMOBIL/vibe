@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Abfarhtsanzeiger</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
     <link rel="stylesheet" href="/style.css"/>
@@ -20,8 +20,9 @@
         <th>Hinweis</th>
     </tr>
     </thead>
-    <!--/*@thymesVar id="schedule" type="ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule"*/-->
+    <!--/*@thymesVar id="nextDepartures" type="java.util.List"*/-->
     <tr data-th-each="schedule : ${nextDepartures}" class="row">
+    <!--/*@thymesVar id="schedule" type="ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule"*/-->
         <td data-th-text="${schedule.getJourney().getRoute().getLine()}"></td>
         <td><span data-th-text="${schedule.getJourney().getHeadsign()}"></span></td>
         <td>

@@ -2,12 +2,21 @@ body {
   background: #0812ba;
   color: #ffffff;
 }
+.loader {
+  position: fixed;
+  left:0; right:0;
+  top:0; bottom:0;
+  margin: auto;
 
+  /*max-width:100%;
+  max-height:100%;
+  overflow:auto;*/
+}
 #dark-primary-color    { background: #303F9F; }
 #default-primary-color { background: #3F51B5; }
 #light-primary-color   { background: #C5CAE9; }
 #text-primary-color    { color: #FFFFFF; !important; }
-#text-primary-color:link    { color: #FFFFFF; !important; }3
+#text-primary-color:link    { color: #FFFFFF; !important; }
 #accent-color          { background: #03A9F4; }
 #primary-text-color    { color: #212121; }
 #secondary-text-color  { color: #757575; }

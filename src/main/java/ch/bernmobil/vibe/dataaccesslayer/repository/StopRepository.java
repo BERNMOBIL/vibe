@@ -15,4 +15,5 @@ import java.util.UUID;
 public interface StopRepository extends CrudRepository<Stop, UUID> {
     @Query(value = "SELECT s FROM Stop s WHERE s.lastUpdate = :updateTimestamp AND s.name LIKE :name")
     List<Stop> findAllByNameWithIgnoreCase(@Param("name") String name, @Param("updateTimestamp") LocalDateTime update, @Param("sort") Sort sort);
+    List<Stop> findAllByName(String name);
 }

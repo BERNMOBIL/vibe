@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Abfahrtsanzeiger</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
+  <link rel="stylesheet" href="/style.css"/>
+  <script src="/jquery-3.2.1.js"></script>
+  <script src="/handlebars-v4.0.8.js"></script>
+  <script src="/scripts.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<script id="template" type="text/x-handlebars-template">
+  <h1>Abfahrten von {{departure.name}}</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Linie</th>
+      <th>Ziel</th>
+      <th>Kante / Perron</th>
+      <th>Abfahrt</th>
+      <th>Hinweis</th>
+    </tr>
+    </thead>
+    {{#each departures}}
+    <tr class="row">
+      <td>{{this.line}}</td>
+      <td>{{this.destination}}</td>
+      <td>
+        {{#if this.hasPlatform }}
+        <span>{{this.platform}}</span>
+        {{/if}}
+      </td>
+      <td>{{this.plannedDeparture}}</td>
+      <td>
+        {{#if this.actualDeparture}}
+        <span>{{this.actualDeparture}}</span>
+        {{else}}
+        <span>OK</span>
+        {{/if}}
+      </td>
+    </tr>
+    {{/each}}
+  </table>
+</script>
+<div class="content">
+  <div class="loader preloader-wrapper active">
+    <div class="spinner-layer">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

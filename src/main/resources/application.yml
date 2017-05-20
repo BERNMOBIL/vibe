@@ -13,3 +13,5 @@ spring:
 bernmobil:
   amqp:
     fanout-queue: ch.bernmobil.vibe.update-queue
+  locale:
+    timezone: Europe/Paris

@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.entitiy;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,8 +12,8 @@ public class ScheduleUpdate {
 
     @Id
     private UUID id;
-    private Time actualArrival;
-    private Time actualDeparture;
+    private LocalTime actualArrival;
+    private LocalTime actualDeparture;
 
     @OneToOne
     @JoinColumn(name = "schedule")
@@ -27,19 +27,19 @@ public class ScheduleUpdate {
         this.id = id;
     }
 
-    public Time getActualArrival() {
+    public LocalTime getActualArrival() {
         return actualArrival;
     }
 
-    public void setActualArrival(Time actualArrival) {
+    public void setActualArrival(LocalTime actualArrival) {
         this.actualArrival = actualArrival;
     }
 
-    public Time getActualDeparture() {
+    public LocalTime getActualDeparture() {
         return actualDeparture;
     }
 
-    public void setActualDeparture(Time actualDeparture) {
+    public void setActualDeparture(LocalTime actualDeparture) {
         this.actualDeparture = actualDeparture;
     }
 
