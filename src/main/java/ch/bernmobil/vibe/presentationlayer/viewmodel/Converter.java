@@ -6,17 +6,21 @@ import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class Converter {
 
+    private static DateTimeFormatter dateTimeFormatter =
+        DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.GERMAN);
+
     public static ScheduleViewModel convertSchedule(Schedule schedule) {
         ScheduleViewModel viewModel = new ScheduleViewModel();
-        viewModel.setPlannedDeparture(schedule.getPlannedDeparture().format(DateTimeFormatter.ofLocalizedTime(
-            FormatStyle.SHORT)));
+        viewModel.setPlannedDeparture(schedule.getPlannedDeparture().format(
+            dateTimeFormatter));
         ScheduleUpdate update = schedule.getScheduleUpdate();
         if (update != null) {
-            viewModel.setActualDeparture(update.getActualDeparture().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)));
+            viewModel.setActualDeparture(update.getActualDeparture().format(dateTimeFormatter));
         }
         viewModel.setLine(schedule.getJourney().getRoute().getLine());
         viewModel.setDestination(schedule.getJourney().getHeadsign());
