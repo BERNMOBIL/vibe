@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,14 +46,10 @@ public class ApiController {
      * @return JSON object containing all departures with relevant information or, on exception,
      * a HTTP status code corresponding to the error.
      */
-    //TODO: Size of resultset as parameter
     @RequestMapping(value = "/departures/{stopId}", method = RequestMethod.GET)
-    public DeparturesViewModel departures(@PathVariable("stopId") UUID stopId) {
-        List<ScheduleViewModel> nextDepartures = Converter
-            .convertScheduleList(businessLogic
-                .getDeparturesByStopId(stopId, LocalTime.now(ZoneId.of(timezone))));
-        StopViewModel stop = Converter.convertStop(businessLogic.getStopById(stopId));
-        return new DeparturesViewModel(stop, nextDepartures);
+    public ResponseEntity<DeparturesViewModel> apiDepartures(@PathVariable("stopId") UUID stopId,
+                                                          @RequestParam(name = "size", defaultValue = "10") int pageSize) {
+        return getDepartures(stopId, LocalTime.now(ZoneId.of(timezone)), pageSize);
     }
 
     /**
@@ -62,20 +59,25 @@ public class ApiController {
      * @return JSON object containing all departures with relevant information or, on exception,
      * a HTTP status code corresponding to the error.
      */
-    @RequestMapping(value = "/departures/{stopId}/at/{time}", method = RequestMethod.GET)
-    public ResponseEntity<DeparturesViewModel> departuresAtTime(@PathVariable("stopId")UUID stopId,
-        @PathVariable("time") String time) {
+    @RequestMapping(value ="/departures/{stopId}/at/{time}", method = RequestMethod.GET)
+    public ResponseEntity<DeparturesViewModel> apiDeparturesAtTime(@PathVariable("stopId")UUID stopId, @PathVariable("time") String time,
+                                                                @RequestParam(name = "size", defaultValue = "10") int pageSize) {
         LocalTime localTime;
         try {
             localTime = LocalTime.parse(time);
         } catch (DateTimeParseException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        List<ScheduleViewModel> nextDepartures = Converter
-            .convertScheduleList(businessLogic
-                .getDeparturesByStopId(stopId, localTime));
-        StopViewModel stop = Converter.convertStop(businessLogic.getStopById(stopId));
-        DeparturesViewModel viewModel = new DeparturesViewModel(stop, nextDepartures);
+        return getDepartures(stopId, localTime, pageSize);
+    }
+
+    private ResponseEntity<DeparturesViewModel> getDepartures(UUID stopId, LocalTime localTime, int pageSize) {
+        Stop stop = businessLogic.getStopById(stopId);
+        stop = businessLogic.getNewestStopEntity(stop);
+        List<ScheduleViewModel> nextDepartures =
+                Converter.convertScheduleList(businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize));
+        StopViewModel stopViewModel = Converter.convertStop(businessLogic.getStopById(stop.getId()));
+        DeparturesViewModel viewModel = new DeparturesViewModel(stopViewModel, nextDepartures);
         return ResponseEntity.ok(viewModel);
     }
 }

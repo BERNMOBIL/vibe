@@ -5,7 +5,7 @@ import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleRepository;
 import ch.bernmobil.vibe.dataaccesslayer.repository.StopRepository;
 import ch.bernmobil.vibe.service.UpdateTimestampService;
-import java.util.Comparator;
+
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,27 +47,24 @@ public class BusinessLogic {
         return stopRepository.findOne(id);
     }
 
-    public List<Schedule> getNextDeparturesByStopId(UUID stopId) {
-        return getDeparturesByStopId(stopId, LocalTime.now());
-    }
-
-    public List<Schedule> getDeparturesByStopId(UUID stopId, LocalTime time) {
+    public List<Schedule> getDeparturesByStopId(UUID stopId, LocalTime time, int size) {
         Stop stop = stopRepository.findOne(stopId);
-
         Page<Schedule> page = scheduleRepository.findSchedulesByStop(
             stop,
             time,
-                updateTimestampService.getCurrentTimestamp(),
-            new PageRequest(1, 10, Direction.ASC, "plannedDeparture"));
+            updateTimestampService.getCurrentTimestamp(),
+            new PageRequest(1, size, Direction.ASC, "plannedDeparture"));
         List<Schedule> result = page.getContent();
         return result;
     }
 
-    public Stop getLatestStop(Stop stop) {
+    public Stop getNewestStopEntity(Stop stop) {
         List<Stop> allStops = stopRepository.findAllByName(stop.getName());
 
-        Optional<Stop> newStopOptional = allStops.stream()
-            .max(Comparator.comparing(Stop::getLastUpdate));
+        Optional<Stop> newStopOptional = allStops
+                .stream()
+                .filter(s -> s.getUpdateTimestamp().equals(updateTimestampService.getCurrentTimestamp()))
+                .findFirst();
 
         return newStopOptional.orElse(stop);
     }

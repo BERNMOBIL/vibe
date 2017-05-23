@@ -16,8 +16,7 @@ public class Converter {
 
     public static ScheduleViewModel convertSchedule(Schedule schedule) {
         ScheduleViewModel viewModel = new ScheduleViewModel();
-        viewModel.setPlannedDeparture(schedule.getPlannedDeparture().format(
-            dateTimeFormatter));
+        viewModel.setPlannedDeparture(schedule.getPlannedDeparture().format(dateTimeFormatter));
         ScheduleUpdate update = schedule.getScheduleUpdate();
         if (update != null) {
             viewModel.setActualDeparture(update.getActualDeparture().format(dateTimeFormatter));

@@ -1,19 +1,18 @@
 package ch.bernmobil.vibe.presentationlayer.viewmodel;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import java.util.List;
 
 public class DeparturesViewModel {
-    private StopViewModel departure;
+    private StopViewModel station;
     private List<ScheduleViewModel> departures;
 
     public DeparturesViewModel(StopViewModel departure, List<ScheduleViewModel> departures) {
-        this.departure = departure;
+        this.station = departure;
         this.departures = departures;
     }
 
-    public StopViewModel getDeparture() {
-        return departure;
+    public StopViewModel getStation() {
+        return station;
     }
 
     public List<ScheduleViewModel> getDepartures() {

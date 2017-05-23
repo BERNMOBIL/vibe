@@ -10,15 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 @Transactional(readOnly = true)
 public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
-    private final static String queryString = "SELECT * FROM schedule "
+    private final static String NATIVE_QUERY = "SELECT * FROM schedule "
             + "LEFT JOIN schedule_update ON schedule.id = schedule_update.schedule "
             + "WHERE schedule.update = ?"
             + "AND stop = ? "
@@ -38,11 +40,10 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
     private EntityManager entityManager;
 
     @Override
-
     public Page<Schedule> findSchedulesByStop(Stop stop, LocalTime time, LocalDateTime timestamp, Pageable pageable) {
         int pageNumber = pageable.getOffset() - pageable.getPageSize();
 
-        Query query = entityManager.createNativeQuery(queryString, Schedule.class)
+        Query query = entityManager.createNativeQuery(NATIVE_QUERY, Schedule.class)
                 .setParameter(1, Timestamp.valueOf(timestamp))
                 .setParameter(2, stop.getId())
                 .setParameter(3, Time.valueOf(time))

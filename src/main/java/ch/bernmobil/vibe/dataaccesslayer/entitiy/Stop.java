@@ -11,7 +11,7 @@ public class Stop {
 
     private String name;
     @Column(name = "update")
-    private LocalDateTime lastUpdate;
+    private LocalDateTime updateTimestamp;
 
     @OneToOne
     @JoinColumn(name = "area")
@@ -41,12 +41,12 @@ public class Stop {
         this.area = area;
     }
 
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
+    public LocalDateTime getUpdateTimestamp() {
+        return updateTimestamp;
     }
 
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 
 }

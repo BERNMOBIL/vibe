@@ -21,6 +21,10 @@ public class Journey {
     @JoinColumn(name = "route")
     private Route route;
 
+    @OneToOne
+    @JoinColumn(name = "terminal_station")
+    private Stop terminalStation;
+
     @OneToOne(targetEntity = JourneyDisruption.class, mappedBy = "journey")
     private JourneyDisruption journeyDisruption;
 
@@ -63,5 +67,13 @@ public class Journey {
 
     public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
+    }
+
+    public Stop getTerminalStation() {
+        return terminalStation;
+    }
+
+    public void setTerminalStation(Stop terminalStation) {
+        this.terminalStation = terminalStation;
     }
 }

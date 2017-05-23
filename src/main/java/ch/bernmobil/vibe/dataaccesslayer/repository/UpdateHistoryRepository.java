@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface UpdateHistoryRepository extends CrudRepository<UpdateHistory, UUID> {
-    @Query("select max(uh.time) from UpdateHistory uh")
+    @Query("select max(uh.time) from UpdateHistory uh where uh.status = 'SUCCESS'")
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    LocalDateTime findMaxTime();
+    LocalDateTime findLatestSuccessTimestamp();
 }

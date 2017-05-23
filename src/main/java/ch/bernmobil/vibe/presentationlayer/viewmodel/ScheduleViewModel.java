@@ -1,7 +1,5 @@
 package ch.bernmobil.vibe.presentationlayer.viewmodel;
 
-import java.time.LocalTime;
-
 public class ScheduleViewModel {
     private String plannedDeparture;
     private String platform;
