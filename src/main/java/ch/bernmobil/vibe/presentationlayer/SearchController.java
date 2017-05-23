@@ -6,9 +6,11 @@ import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Comparator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +23,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/search")
 public class SearchController {
+    @Value("${bernmobil.locale.timezone}")
+    public String timezone;
+
     private final BusinessLogic businessLogic;
 
     @Autowired
@@ -38,7 +43,7 @@ public class SearchController {
     @RequestMapping(value = "/delays", method = RequestMethod.GET)
     public String searchDelays(Model model) {
         Collection<ScheduleUpdate> allUpdates = businessLogic.getAllScheduleUpdates();
-        LocalTime now = LocalTime.now();
+        LocalTime now = LocalTime.now(ZoneId.of(timezone));
 
         List<ScheduleUpdate> actualDelays = allUpdates
             .stream()

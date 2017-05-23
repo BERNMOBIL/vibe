@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -60,8 +61,7 @@ public class BusinessLogic {
             time,
             updateTimestampService.getCurrentTimestamp(),
             new PageRequest(1, size, Direction.ASC, "plannedDeparture"));
-        List<Schedule> result = page.getContent();
-        return result;
+        return page.getContent();
     }
 
     public Stop getNewestStopEntity(Stop stop) {
@@ -76,7 +76,8 @@ public class BusinessLogic {
     }
 
     public Collection<ScheduleUpdate> getAllScheduleUpdates() {
-        return scheduleUpdateRepository.findAll();
+        Page<ScheduleUpdate> page = scheduleUpdateRepository.findAll(new PageRequest(1, 100));
+        return page.getContent();
     }
 
 }
