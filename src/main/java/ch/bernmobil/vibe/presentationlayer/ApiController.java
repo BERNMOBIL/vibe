@@ -19,8 +19,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Provides access to relevant data for the departure view. This controller returns JSON structures
+ * for any request.
+ */
 @RestController
 @RequestMapping("api")
 public class ApiController {
@@ -34,7 +39,14 @@ public class ApiController {
         this.businessLogic = businessLogic;
     }
 
-    @RequestMapping("departures/{stopId}")
+    /**
+     * Get the ten next departures for a selected stop.
+     * @param stopId The ID from where the vehicles depart
+     * @return JSON object containing all departures with relevant information or, on exception,
+     * a HTTP status code corresponding to the error.
+     */
+    //TODO: Size of resultset as parameter
+    @RequestMapping(value = "/departures/{stopId}", method = RequestMethod.GET)
     public DeparturesViewModel departures(@PathVariable("stopId") UUID stopId) {
         List<ScheduleViewModel> nextDepartures = Converter
             .convertScheduleList(businessLogic
@@ -43,8 +55,16 @@ public class ApiController {
         return new DeparturesViewModel(stop, nextDepartures);
     }
 
-    @RequestMapping("departures/{stopId}/at/{time}")
-    public ResponseEntity<DeparturesViewModel> departuresAtTime(@PathVariable("stopId")UUID stopId, @PathVariable("time") String time) {
+    /**
+     * Get the ten next departures for a selected stop at a specific time.
+     * @param stopId The ID from where the vehicles depart
+     * @param time A time string formatted as HH:mm
+     * @return JSON object containing all departures with relevant information or, on exception,
+     * a HTTP status code corresponding to the error.
+     */
+    @RequestMapping(value = "/departures/{stopId}/at/{time}", method = RequestMethod.GET)
+    public ResponseEntity<DeparturesViewModel> departuresAtTime(@PathVariable("stopId")UUID stopId,
+        @PathVariable("time") String time) {
         LocalTime localTime;
         try {
             localTime = LocalTime.parse(time);

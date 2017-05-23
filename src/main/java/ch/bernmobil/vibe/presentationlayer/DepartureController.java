@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
-@RequestMapping("departures")
+@RequestMapping(value = "departures")
 public class DepartureController {
     @Value("${bernmobil.locale.timezone}")
     public String timezone;
@@ -31,7 +32,7 @@ public class DepartureController {
     }
 
 
-    @RequestMapping("/static/{stopId}")
+    @RequestMapping(value = "/static/{stopId}", method = RequestMethod.GET)
     public String departures(Model model, @PathVariable("stopId") UUID stopId) {
         List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId,
             LocalTime.now(ZoneId.of(timezone)));
@@ -42,7 +43,7 @@ public class DepartureController {
         return "departureOverview";
     }
 
-    @RequestMapping("/static/{stopId}/at/{time}")
+    @RequestMapping(value = "/static/{stopId}/at/{time}", method = RequestMethod.GET)
     public String departuresAtTime(Model model,
             @PathVariable("stopId")UUID stopId,
             @PathVariable("time") String time) {
@@ -55,7 +56,7 @@ public class DepartureController {
         return "departureOverview";
     }
 
-    @RequestMapping("/{stopId}")
+    @RequestMapping(value = "/{stopId}", method = RequestMethod.GET)
     public String getHtml(@PathVariable("stopId") UUID stopId) {
         Stop stop = businessLogic.getStopById(stopId);
         Stop newStop = businessLogic.getLatestStop(stop);

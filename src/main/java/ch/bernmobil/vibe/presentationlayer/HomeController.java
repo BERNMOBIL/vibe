@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
@@ -21,12 +22,12 @@ public class HomeController {
         this.businessLogic = businessLogic;
     }
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
         return "home";
     }
 
-    @RequestMapping("/search/{stopName}")
+    @RequestMapping(value = "/search/{stopName}", method = RequestMethod.GET)
     public String searchStop(Model model, @PathVariable("stopName") String stopName) {
         List<Stop> stopList = businessLogic.findStops(stopName);
         model.addAttribute("stopList", stopList);
