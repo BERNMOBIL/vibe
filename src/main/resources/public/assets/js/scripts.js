@@ -23,7 +23,9 @@ $(document).ready(function () {
         var oldId = getIdFromUrl();
         var newId = source.station.id;
         var newHref = location.href.replace(oldId, newId);
-        history.pushState(null, null, newHref);
+        if(oldId !== newId) {
+            history.pushState(null, null, newHref);
+        }
         $templateContainer.html(rendered);
     }
 
