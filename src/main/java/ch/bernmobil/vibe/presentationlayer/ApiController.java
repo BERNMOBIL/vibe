@@ -2,14 +2,17 @@ package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.DeparturesViewModel;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.Converter;
+import ch.bernmobil.vibe.presentationlayer.viewmodel.ScheduleUpdateViewModel;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.ScheduleViewModel;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.StopViewModel;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;

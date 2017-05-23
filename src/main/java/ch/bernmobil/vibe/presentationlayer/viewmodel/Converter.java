@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Converter {
 
     private static DateTimeFormatter dateTimeFormatter =
-        DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.GERMAN);
+        DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(Locale.GERMAN);
 
     public static ScheduleViewModel convertSchedule(Schedule schedule) {
         ScheduleViewModel viewModel = new ScheduleViewModel();

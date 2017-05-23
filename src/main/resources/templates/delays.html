@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Abfahrtsanzeiger</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
+  <link rel="stylesheet" href="/assets/css/style.css"/>
+</head>
+<body class="default-primary-color, text-primary-color">
+<h1>Verspätungen</h1>
+<!--/*@thymesVar id="delays" type="java.util.List"*/-->
+<div data-th-each="delay:${delays}" class="collection, light-primary-color">
+    <!--/*@thymesVar id="delay" type="ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate"*/-->
+    <div class="collection-item, accent-color">
+      <a data-th-href="@{/departures/__${delay.getSchedule().getStop().getId()}__}" class="text-primary-color">
+        <span data-th-text="${delay.getSchedule().getStop().getName()}"></span>
+        <span data-th-text="${delay.getActualDeparture()}"></span>
+      </a>
+    </div>
+</div>
+</body>
+</html>

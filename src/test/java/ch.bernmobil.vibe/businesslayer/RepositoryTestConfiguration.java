@@ -42,7 +42,7 @@ public class RepositoryTestConfiguration {
     public BusinessLogic businessLogic(ScheduleRepository scheduleRepository,
         ScheduleUpdateRepository scheduleUpdateRepository, StopRepository stopRepository,
         UpdateTimestampService updateTimestampService) {
-        return new BusinessLogic(scheduleRepository, stopRepository, updateTimestampService);
+        return new BusinessLogic(scheduleRepository, scheduleUpdateRepository, stopRepository, updateTimestampService);
     }
     @Bean
     @Primary

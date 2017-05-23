@@ -1,11 +1,14 @@
 package ch.bernmobil.vibe.businesslayer;
 
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleRepository;
+import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleUpdateRepository;
 import ch.bernmobil.vibe.dataaccesslayer.repository.StopRepository;
 import ch.bernmobil.vibe.service.UpdateTimestampService;
 
+import java.util.Collection;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,14 +26,17 @@ import java.util.UUID;
 public class BusinessLogic {
 
     private final ScheduleRepository scheduleRepository;
+    private final ScheduleUpdateRepository scheduleUpdateRepository;
     private final StopRepository stopRepository;
     private final UpdateTimestampService updateTimestampService;
 
     @Autowired
     public BusinessLogic(ScheduleRepository scheduleRepository,
+        ScheduleUpdateRepository scheduleUpdateRepository,
         StopRepository stopRepository,
         UpdateTimestampService updateTimestampService) {
         this.scheduleRepository = scheduleRepository;
+        this.scheduleUpdateRepository = scheduleUpdateRepository;
         this.stopRepository = stopRepository;
         this.updateTimestampService = updateTimestampService;
     }
@@ -67,6 +73,10 @@ public class BusinessLogic {
                 .findFirst();
 
         return newStopOptional.orElse(stop);
+    }
+
+    public Collection<ScheduleUpdate> getAllScheduleUpdates() {
+        return scheduleUpdateRepository.findAll();
     }
 
 }
