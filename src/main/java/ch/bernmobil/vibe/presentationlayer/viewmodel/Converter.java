@@ -1,10 +1,14 @@
 package ch.bernmobil.vibe.presentationlayer.viewmodel;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -37,8 +41,17 @@ public class Converter {
 
     public static List<ScheduleViewModel> convertScheduleList(List<Schedule> list) {
         return list
-            .parallelStream()
+            .stream()
+            .sorted(Comparator.comparing(Schedule::getPlannedDeparture))
             .map(Converter::convertSchedule)
             .collect(Collectors.toList());
+    }
+
+    private static String getDelayInMinutes(LocalTime planned, LocalTime actual) {
+        long difference = MINUTES.between(planned, actual);
+        if(difference == 0) {
+            return "OK";
+        }
+        return Long.toString(difference);
     }
 }
