@@ -7,6 +7,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
   <link rel="stylesheet" href="/assets/css/style.css"/>
   <script src="/assets/js/lib/jquery-3.2.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <script src="/assets/js/lib/handlebars-v4.0.8.js"></script>
   <script src="/assets/js/scripts.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -35,8 +36,8 @@
       </td>
       <td>{{this.plannedDeparture}}</td>
       <td>
-        {{#if this.actualDeparture}}
-        <span>{{this.actualDeparture}}</span>
+        {{#if this.hasDelay}}
+        <span>+ {{this.actualDeparture}} min</span>
         {{else}}
         <span>OK</span>
         {{/if}}

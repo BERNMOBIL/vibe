@@ -1,30 +1,22 @@
 package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.DeparturesViewModel;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.Converter;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.ScheduleUpdateViewModel;
+import ch.bernmobil.vibe.presentationlayer.viewmodel.DeparturesViewModel;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.ScheduleViewModel;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.StopViewModel;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeParseException;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Provides access to relevant data for the departure view. This controller returns JSON structures
@@ -37,10 +29,12 @@ public class ApiController {
     public String timezone;
 
     private final BusinessLogic businessLogic;
+    private final Converter converter;
 
     @Autowired
-    public ApiController(BusinessLogic businessLogic) {
+    public ApiController(BusinessLogic businessLogic, Converter converter) {
         this.businessLogic = businessLogic;
+        this.converter = converter;
     }
 
     /**
@@ -63,8 +57,9 @@ public class ApiController {
      * a HTTP status code corresponding to the error.
      */
     @RequestMapping(value ="/departures/{stopId}/at/{time}", method = RequestMethod.GET)
-    public ResponseEntity<DeparturesViewModel> apiDeparturesAtTime(@PathVariable("stopId")UUID stopId, @PathVariable("time") String time,
-                                                                @RequestParam(name = "size", defaultValue = "10") int pageSize) {
+    public ResponseEntity<DeparturesViewModel> apiDeparturesAtTime(@PathVariable("stopId")UUID stopId,
+                                                                   @PathVariable("time") String time,
+                                                                   @RequestParam(name = "size", defaultValue = "10") int pageSize) {
         LocalTime localTime;
         try {
             localTime = LocalTime.parse(time);
@@ -78,8 +73,8 @@ public class ApiController {
         Stop stop = businessLogic.getStopById(stopId);
         stop = businessLogic.getNewestStopEntity(stop);
         List<ScheduleViewModel> nextDepartures =
-                Converter.convertScheduleList(businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize));
-        StopViewModel stopViewModel = Converter.convertStop(businessLogic.getStopById(stop.getId()));
+                converter.convertScheduleList(businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize));
+        StopViewModel stopViewModel = converter.convertStop(businessLogic.getStopById(stop.getId()));
         DeparturesViewModel viewModel = new DeparturesViewModel(stopViewModel, nextDepartures);
         return ResponseEntity.ok(viewModel);
     }
