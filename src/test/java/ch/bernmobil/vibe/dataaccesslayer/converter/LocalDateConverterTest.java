@@ -1,4 +1,4 @@
-package ch.bernmobil.vibe.dataacesslayer.gtfs;
+package ch.bernmobil.vibe.dataaccesslayer.converter;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

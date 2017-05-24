@@ -1,7 +1,8 @@
 $(document).ready(function () {
     "use strict";
 
-    var $templateContainer = $('.content');
+    var $contentContainer = $('.content');
+    var $templateContainer = $('#template');
 
     function getIdFromUrl() {
         var split = $(location).attr('pathname').split('/');
@@ -17,7 +18,7 @@ $(document).ready(function () {
     }
 
     function renderTemplate(source) {
-        var $template = $('#template').html();
+        var $template = $templateContainer.html();
         var compile = Handlebars.compile($template);
         var rendered = compile(source);
         var oldId = getIdFromUrl();
@@ -26,14 +27,14 @@ $(document).ready(function () {
         if(oldId !== newId) {
             history.pushState(null, null, newHref);
         }
-        $templateContainer.html(rendered);
+        $('.row').show();
+        $contentContainer.html(rendered);
     }
 
     function handleError(jqXHR, textStatus, errorThrown) {
-        //TODO: do fancy error
-        $templateContainer.html("An Error occured");
-        console.error(textStatus);
-        console.error(errorThrown);
+        $('.row').hide();
+        Materialize.toast("Beim Laden der Abfahrtsdaten ist ein Fehler aufgetreten.", 15 * 1000);
+        console.error("An error occurred while fetching data: " + textStatus + ", " + errorThrown + ".")
     }
 
     function startAjax(id, parameters) {

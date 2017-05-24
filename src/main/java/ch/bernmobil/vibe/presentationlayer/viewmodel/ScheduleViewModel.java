@@ -6,6 +6,7 @@ public class ScheduleViewModel {
     private boolean hasPlatform;
     private String destination;
     private String line;
+    private boolean hasDelay;
     private String actualDeparture;
 
     public String getPlannedDeparture() {
@@ -54,5 +55,13 @@ public class ScheduleViewModel {
 
     public void setHasPlatform(boolean hasPlatform) {
         this.hasPlatform = hasPlatform;
+    }
+
+    public boolean getHasDelay() {
+        return hasDelay;
+    }
+
+    public void setHasDelay(boolean hasDelay) {
+        this.hasDelay = hasDelay;
     }
 }

@@ -1,29 +1,38 @@
 package ch.bernmobil.vibe.presentationlayer.viewmodel;
 
-import static java.time.temporal.ChronoUnit.MINUTES;
-
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
-import java.time.LocalTime;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+@Component
 public class Converter {
+    @Value("${bernmobil.ruleset.delay}")
+    private int delay;
+    private final ChronoUnit unit = MINUTES;
 
     private static DateTimeFormatter dateTimeFormatter =
-        DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(Locale.GERMAN);
+            DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.GERMAN);
 
-    public static ScheduleViewModel convertSchedule(Schedule schedule) {
+    public ScheduleViewModel convertSchedule(Schedule schedule) {
         ScheduleViewModel viewModel = new ScheduleViewModel();
         viewModel.setPlannedDeparture(schedule.getPlannedDeparture().format(dateTimeFormatter));
         ScheduleUpdate update = schedule.getScheduleUpdate();
         if (update != null) {
-            viewModel.setActualDeparture(update.getActualDeparture().format(dateTimeFormatter));
+            long delay = getDelay(schedule);
+            viewModel.setActualDeparture(Long.toString(delay));
+            viewModel.setHasDelay(delay > 0);
         }
         viewModel.setLine(schedule.getJourney().getRoute().getLine());
         viewModel.setDestination(schedule.getJourney().getHeadsign());
@@ -32,26 +41,22 @@ public class Converter {
         return viewModel;
     }
 
-    public static StopViewModel convertStop(Stop stop) {
+    public StopViewModel convertStop(Stop stop) {
         StopViewModel viewModel = new StopViewModel();
         viewModel.setId(stop.getId());
         viewModel.setName(stop.getName());
         return viewModel;
     }
 
-    public static List<ScheduleViewModel> convertScheduleList(List<Schedule> list) {
+    public List<ScheduleViewModel> convertScheduleList(List<Schedule> list) {
         return list
-            .stream()
-            .sorted(Comparator.comparing(Schedule::getPlannedDeparture))
-            .map(Converter::convertSchedule)
-            .collect(Collectors.toList());
+                .stream()
+                .sorted(Comparator.comparing(Schedule::getPlannedDeparture))
+                .map(this::convertSchedule)
+                .collect(Collectors.toList());
     }
 
-    private static String getDelayInMinutes(LocalTime planned, LocalTime actual) {
-        long difference = MINUTES.between(planned, actual);
-        if(difference == 0) {
-            return "OK";
-        }
-        return Long.toString(difference);
+    private long getDelay(Schedule schedule) {
+        return unit.between(schedule.getPlannedDeparture(), schedule.getScheduleUpdate().getActualDeparture());
     }
 }

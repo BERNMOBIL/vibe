@@ -2,73 +2,38 @@ package ch.bernmobil.vibe.dataaccesslayer.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
+import java.sql.Time;
 import java.time.LocalTime;
 
+/**
+ * Converter class to convert {@link java.time.LocalTime} to and from {@link java.sql.Time}.
+ */
 @Converter(autoApply = true)
-public class LocalTimeConverter implements AttributeConverter<LocalTime, String>{
+public class LocalTimeConverter implements AttributeConverter<LocalTime, Time>{
+    /**
+     * Convert {@link java.time.LocalTime} to {@link java.sql.Time}.
+     * @param attribute An instance of {@link java.time.LocalTime} which could be null.
+     * @return The converted {@link java.sql.Time} instance.
+     */
     @Override
-    public String convertToDatabaseColumn(LocalTime attribute) {
+    public Time convertToDatabaseColumn(LocalTime attribute) {
         if(attribute == null) {
             return null;
         }
-        return attribute.toString();
+        return Time.valueOf(attribute);
     }
 
+    /**
+     * Convert {@link java.sql.Time} to {@link java.time.LocalTime}.
+     * @param dbData An instance of {@link java.sql.Time} which could be null.
+     * @return The converted {@link java.time.LocalTime} instance.
+     */
     @Override
-    public LocalTime convertToEntityAttribute(String dbData) {
+    public LocalTime convertToEntityAttribute(Time dbData) {
         if(dbData == null) {
             return null;
         }
-
-        String[] digits = dbData.split(":");
-        String[] correctTime = {"00", "00", "00"};
-
-        switch(digits.length) {
-            case 3: correctTime[2] = normalizeSecondsAndMinutes(digits[2]);
-            case 2: correctTime[1] = normalizeSecondsAndMinutes(digits[1]);
-            case 1: correctTime[0] = normalizeHour(digits[0]);
-        }
-
-        return LocalTime.parse(String.join(":", correctTime));
+        return dbData.toLocalTime();
     }
-
-
-    private String normalizeString(int digit) {
-        if(digit < 10){
-            return "0" + digit;
-        }
-         else {
-            return Integer.toString(digit);
-        }
-    }
-
-    private int parseInt(String digitString) {
-        int digit;
-        try {
-            digit = Integer.parseInt(digitString);
-        } catch (NumberFormatException ex) {
-            return 0;
-        }
-        return digit;
-    }
-
-    private String normalizeSecondsAndMinutes(String digitString) {
-        int digit = parseInt(digitString);
-        if(digit > 60){
-            return "00";
-        }
-        return normalizeString(digit);
-    }
-
-    private String normalizeHour(String hourString) {
-        int hour = parseInt(hourString);
-        if(hour > 23) {
-            hour -= 24;
-        }
-        return normalizeString(hour);
-    }
-
-
-
 
 }
