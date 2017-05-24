@@ -9,6 +9,7 @@ import ch.bernmobil.vibe.presentationlayer.viewmodel.StopViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,8 +44,8 @@ public class ApiController {
      * @return JSON object containing all departures with relevant information or, on exception,
      * a HTTP status code corresponding to the error.
      */
-    @RequestMapping(value = "/departures/{stopId}", method = RequestMethod.GET)
-    public ResponseEntity<DeparturesViewModel> apiDepartures(@PathVariable("stopId") UUID stopId,
+    @RequestMapping(value = "/departures/{stopId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity apiDepartures(@PathVariable("stopId") UUID stopId,
                                                           @RequestParam(name = "size", defaultValue = "10") int pageSize) {
         return getDepartures(stopId, LocalTime.now(ZoneId.of(timezone)), pageSize);
     }
@@ -56,21 +57,24 @@ public class ApiController {
      * @return JSON object containing all departures with relevant information or, on exception,
      * a HTTP status code corresponding to the error.
      */
-    @RequestMapping(value ="/departures/{stopId}/at/{time}", method = RequestMethod.GET)
-    public ResponseEntity<DeparturesViewModel> apiDeparturesAtTime(@PathVariable("stopId")UUID stopId,
+    @RequestMapping(value ="/departures/{stopId}/at/{time}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity apiDeparturesAtTime(@PathVariable("stopId")UUID stopId,
                                                                    @PathVariable("time") String time,
                                                                    @RequestParam(name = "size", defaultValue = "10") int pageSize) {
         LocalTime localTime;
         try {
             localTime = LocalTime.parse(time);
         } catch (DateTimeParseException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
         return getDepartures(stopId, localTime, pageSize);
     }
 
-    private ResponseEntity<DeparturesViewModel> getDepartures(UUID stopId, LocalTime localTime, int pageSize) {
+    private ResponseEntity getDepartures(UUID stopId, LocalTime localTime, int pageSize) {
         Stop stop = businessLogic.getStopById(stopId);
+        if(stop == null) {
+            return ResponseEntity.status(HttpStatus.GONE).body("This id does not exist anymore.");
+        }
         stop = businessLogic.getNewestStopEntity(stop);
         List<ScheduleViewModel> nextDepartures =
                 converter.convertScheduleList(businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize));
