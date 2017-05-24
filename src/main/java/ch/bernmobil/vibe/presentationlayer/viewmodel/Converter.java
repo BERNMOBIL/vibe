@@ -23,7 +23,7 @@ public class Converter {
     private final ChronoUnit unit = MINUTES;
 
     private static DateTimeFormatter dateTimeFormatter =
-            DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).withLocale(Locale.GERMAN);
+            DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.GERMAN);
 
     public ScheduleViewModel convertSchedule(Schedule schedule) {
         ScheduleViewModel viewModel = new ScheduleViewModel();
