@@ -9,8 +9,10 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Comparator;
+import javax.print.attribute.standard.Media;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,24 +35,24 @@ public class SearchController {
         this.businessLogic = businessLogic;
     }
 
-    @RequestMapping(value = "/{stopName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{stopName}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String searchStop(Model model, @PathVariable("stopName") String stopName) {
         List<Stop> stopList = businessLogic.findStops(stopName);
         model.addAttribute("stopList", stopList);
         return "home";
     }
 
-    @RequestMapping(value = "/delays", method = RequestMethod.GET)
+    @RequestMapping(value = "/delays", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String searchDelays(Model model) {
         Collection<ScheduleUpdate> allUpdates = businessLogic.getAllScheduleUpdates();
         LocalTime now = LocalTime.now(ZoneId.of(timezone));
 
         List<ScheduleUpdate> actualDelays = allUpdates
             .stream()
-            .filter(u -> u.getActualDeparture() != null && u.getActualDeparture().isAfter(now))
-            .sorted((u1, u2) -> u1.getActualDeparture().isAfter(u2.getActualDeparture()) ? 1 : -1)
+            .filter(u -> u.getActualDeparture() != null)
+            .filter(u -> u.getActualDeparture().isAfter(now))
+            .sorted(Comparator.comparing(ScheduleUpdate::getActualDeparture))
             .collect(toList());
-
 
         model.addAttribute("delays", actualDelays);
         return "delays";

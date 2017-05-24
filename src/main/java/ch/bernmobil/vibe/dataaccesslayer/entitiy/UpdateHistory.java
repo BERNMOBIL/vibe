@@ -8,7 +8,6 @@ import javax.persistence.Id;
 public class UpdateHistory {
 
     @Id
-    private long id;
     private LocalDateTime time;
     private String status;
 
@@ -18,14 +17,6 @@ public class UpdateHistory {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public LocalDateTime getTime() {

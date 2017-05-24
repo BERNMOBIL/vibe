@@ -3,6 +3,7 @@ package ch.bernmobil.vibe.presentationlayer.viewmodel;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
+import java.time.LocalTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class Converter {
         viewModel.setPlannedDeparture(schedule.getPlannedDeparture().format(dateTimeFormatter));
         ScheduleUpdate update = schedule.getScheduleUpdate();
         if (update != null) {
-            long delay = getDelay(schedule);
+            long delay = getDelay(schedule.getPlannedDeparture(), schedule.getScheduleUpdate().getActualDeparture());
             viewModel.setActualDeparture(Long.toString(delay));
             viewModel.setHasDelay(delay > 0);
         }
@@ -56,7 +57,7 @@ public class Converter {
                 .collect(Collectors.toList());
     }
 
-    private long getDelay(Schedule schedule) {
-        return unit.between(schedule.getPlannedDeparture(), schedule.getScheduleUpdate().getActualDeparture());
+    private long getDelay(LocalTime plannedDeparture, LocalTime actualDeparture) {
+        return unit.between(plannedDeparture, actualDeparture);
     }
 }

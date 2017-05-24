@@ -28,7 +28,7 @@ public class UpdateTimestampService implements Observer {
         if(timestamp == null) {
             logger.error("No timestamp found with status: SUCCESS");
         } else {
-            logger.info(String.format("Update-timestamp set to %s", currentTimestamp));
+            logger.info(String.format("Update-timestamp set to %s", timestamp));
             currentTimestamp = timestamp;
         }
 

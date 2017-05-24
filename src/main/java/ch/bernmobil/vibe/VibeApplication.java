@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
 
 @SpringBootApplication
-public class VibeApplication extends AsyncConfigurerSupport {
+public class VibeApplication {
     public static void main(String[] args) {
         SpringApplication.run(VibeApplication.class, args);
     }
