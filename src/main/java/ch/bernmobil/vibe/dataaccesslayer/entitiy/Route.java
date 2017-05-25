@@ -3,6 +3,8 @@ package ch.bernmobil.vibe.dataaccesslayer.entitiy;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.util.UUID;
 
@@ -11,7 +13,8 @@ public class Route {
 
     @Id
     private UUID id;
-    private Integer type;
+    @Enumerated(EnumType.ORDINAL)
+    private RouteType type;
     private String line;
     @Column(name = "update")
     private LocalDateTime updateTimestamp;
@@ -25,11 +28,11 @@ public class Route {
         this.id = id;
     }
 
-    public int getType() {
+    public RouteType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(RouteType type) {
         this.type = type;
     }
 
@@ -47,5 +50,9 @@ public class Route {
 
     public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
+    }
+
+    public static enum RouteType {
+        TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR
     }
 }

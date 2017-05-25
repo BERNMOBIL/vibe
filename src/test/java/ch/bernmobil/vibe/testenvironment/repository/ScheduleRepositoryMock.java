@@ -1,18 +1,21 @@
-package ch.bernmobil.vibe.businesslayer.mock;
+package ch.bernmobil.vibe.testenvironment.repository;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-import ch.bernmobil.vibe.businesslayer.mock.data.ScheduleMockData;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleRepository;
+import ch.bernmobil.vibe.testenvironment.data.ScheduleMockData;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class ScheduleRepositoryMock extends RepositoryMock<Schedule, ScheduleRepository>{
 
-    public ScheduleRepositoryMock(){
-        super(ScheduleRepository.class, ScheduleMockData.getDataSource());
+    @Autowired
+    public ScheduleRepositoryMock(ScheduleMockData scheduleMockData){
+        super(ScheduleRepository.class, scheduleMockData.getDataSource());
     }
 
     @Override

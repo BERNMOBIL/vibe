@@ -7,21 +7,18 @@ import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleRepository;
 import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleUpdateRepository;
 import ch.bernmobil.vibe.dataaccesslayer.repository.StopRepository;
 import ch.bernmobil.vibe.service.UpdateTimestampService;
-
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class BusinessLogic {
@@ -44,9 +41,8 @@ public class BusinessLogic {
 
     public List<Stop> findStops(String stopName) {
         LocalDateTime timestamp = updateTimestampService.getCurrentTimestamp();
-        //TODO: manually append % should be avoided
         return stopRepository.
-                findAllByNameWithIgnoreCase(stopName + "%",
+                findAllByNameWithIgnoreCase(stopName,
                     timestamp, new Sort(Direction.ASC, "name"));
     }
 

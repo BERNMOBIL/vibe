@@ -14,6 +14,7 @@ public class Area {
     @GeneratedValue
     private UUID id;
     private String name;
+
     @Column(name = "update")
     private LocalDateTime updateTimestamp;
 
