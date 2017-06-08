@@ -18,3 +18,6 @@ wrapper.jar
 out/
 
 /classes/
+
+# MacOS caching files
+.DS_Store
