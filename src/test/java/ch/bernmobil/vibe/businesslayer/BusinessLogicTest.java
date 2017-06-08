@@ -43,7 +43,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(classes = {RepositoryConfiguration.class, MockDataConfiguration.class,
     ServiceConfiguration.class, MockConfiguration.class})
 public class BusinessLogicTest {
-
     private ScheduleRepositoryMock scheduleRepositoryMock;
     private ScheduleUpdateRepositoryMock scheduleUpdateRepositoryMock;
     private StopRepositoryMock stopRepositoryMock;

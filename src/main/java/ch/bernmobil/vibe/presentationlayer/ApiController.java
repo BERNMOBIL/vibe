@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
+import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.Converter;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.DeparturesViewModel;
@@ -25,12 +26,15 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Provides access to relevant data for the departure view. This controller returns JSON structures
  * for any request.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
  */
 @RestController
 @RequestMapping("api")
 public class ApiController {
     @Value("${bernmobil.locale.timezone}")
-    public String timezone;
+    private String timezone;
 
     private final BusinessLogic businessLogic;
     private final Converter converter;
@@ -42,7 +46,7 @@ public class ApiController {
     }
 
     /**
-     * Get the ten next departures for a selected stop.
+     * Get the next ten departures for a selected stop.
      * @param stopId The ID from where the vehicles depart
      * @return JSON object containing all departures with relevant information or, on exception,
      * a HTTP status code corresponding to the error.
@@ -68,20 +72,32 @@ public class ApiController {
         try {
             localTime = LocalTime.parse(time);
         } catch (DateTimeParseException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                String.format("%s is not a valid time. A valid time could be \"10:10\" or \"10:15:30\". See ISO-8601 for more details.", time));
         }
         return getDepartures(stopId, localTime, pageSize);
     }
 
+    /**
+     *
+     * @param stopId
+     * @param localTime
+     * @param pageSize
+     * @return
+     */
     private ResponseEntity getDepartures(UUID stopId, LocalTime localTime, int pageSize) {
         Stop stop = businessLogic.getStopById(stopId);
         if(stop == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This id does not exist.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("Stop with id \"%s\" does not exist.", stopId));
         }
         stop = businessLogic.getNewestStopVersion(stop);
-        List<ScheduleViewModel> nextDepartures =
-                converter.convertScheduleList(businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize));
-        StopViewModel stopViewModel = converter.convertStop(businessLogic.getStopById(stop.getId()));
+        if(stop == null) {
+            return ResponseEntity.status(HttpStatus.GONE)
+                .body(String.format("Stop with id \"%s\" is not available anymore. Please do another search for this stop", stopId));
+        }
+        List<Schedule> departureList = businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize);
+        List<ScheduleViewModel> nextDepartures = converter.convertScheduleList(departureList);
+        StopViewModel stopViewModel = converter.convertStop(stop);
         DeparturesViewModel viewModel = new DeparturesViewModel(stopViewModel, nextDepartures);
         return ResponseEntity.ok(viewModel);
     }

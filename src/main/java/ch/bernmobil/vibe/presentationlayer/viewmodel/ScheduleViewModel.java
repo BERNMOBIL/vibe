@@ -64,4 +64,49 @@ public class ScheduleViewModel {
     public void setHasDelay(boolean hasDelay) {
         this.hasDelay = hasDelay;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        ScheduleViewModel that = (ScheduleViewModel) o;
+
+        if (hasPlatform != that.hasPlatform) {
+            return false;
+        }
+        if (hasDelay != that.hasDelay) {
+            return false;
+        }
+        if (!plannedDeparture.equals(that.plannedDeparture)) {
+            return false;
+        }
+        if (platform != null ? !platform.equals(that.platform) : that.platform != null) {
+            return false;
+        }
+        if (!destination.equals(that.destination)) {
+            return false;
+        }
+        if (!line.equals(that.line)) {
+            return false;
+        }
+        return actualDeparture != null ? actualDeparture.equals(that.actualDeparture)
+            : that.actualDeparture == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = plannedDeparture.hashCode();
+        result = 31 * result + (platform != null ? platform.hashCode() : 0);
+        result = 31 * result + (hasPlatform ? 1 : 0);
+        result = 31 * result + destination.hashCode();
+        result = 31 * result + line.hashCode();
+        result = 31 * result + (hasDelay ? 1 : 0);
+        result = 31 * result + (actualDeparture != null ? actualDeparture.hashCode() : 0);
+        return result;
+    }
 }
