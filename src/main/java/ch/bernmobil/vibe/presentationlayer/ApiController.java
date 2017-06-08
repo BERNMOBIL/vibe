@@ -46,8 +46,14 @@ public class ApiController {
     }
 
     /**
-     * Get the next ten departures for a selected stop.
+     * Get the next ten departures for a selected stop.Endpoint can return:
+     * <ul>
+     * <li>{@link DeparturesDto} if successful</li>
+     * <li>{@link HttpStatus#NOT_FOUND} if no stop to the given id could be found</li>
+     * <li>{@link HttpStatus#GONE} if the versio of the id was too old to find a newer version of the stop</li>
+     * </ul>
      * @param stopId The ID from where the vehicles depart
+     * @param pageSize of the result.
      * @return JSON object containing all departures with relevant information or, on exception,
      * a HTTP status code corresponding to the error.
      */
@@ -58,9 +64,16 @@ public class ApiController {
     }
 
     /**
-     * Get the ten next departures for a selected stop at a specific time.
+     * Get the ten next departures for a selected stop at a specific time. Endpoint can return:
+     * <ul>
+     * <li>{@link DeparturesDto} if successful</li>
+     * <li>{@link HttpStatus#BAD_REQUEST} if time parameter cannot be parsed</li>
+     * <li>{@link HttpStatus#NOT_FOUND} if no stop to the given id could be found</li>
+     * <li>{@link HttpStatus#GONE} if the versio of the id was too old to find a newer version of the stop</li>
+     * </ul>
      * @param stopId The ID from where the vehicles depart
      * @param time A time string formatted as HH:mm
+     * @param pageSize of the result.
      * @return JSON object containing all departures with relevant information or, on exception,
      * a HTTP status code corresponding to the error.
      */
@@ -86,7 +99,9 @@ public class ApiController {
      * @param localTime from which the departures are returned.
      * @param pageSize of the the result.
      * @return {@link ResponseEntity} which either contains a {@link DeparturesDto} or a {@link String}
-     * if an error occurred while processing.
+     * if an error occurred while processing. If the id could not be found in the database
+     * {@link HttpStatus#NOT_FOUND}, if the sent stops version is too old an cannot be
+     * linked to a new one {@link HttpStatus#GONE} is returned.
      */
     private ResponseEntity getDepartures(UUID stopId, LocalTime localTime, int pageSize) {
         Stop stop = businessLogic.getStopById(stopId);
@@ -101,7 +116,7 @@ public class ApiController {
         List<Schedule> departureList = businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize);
         List<ScheduleDto> nextDepartures = converter.convertScheduleList(departureList);
         StopDto stopDto = converter.convertStop(stop);
-        DeparturesDto viewModel = new DeparturesDto(stopDto, nextDepartures);
-        return ResponseEntity.ok(viewModel);
+        DeparturesDto dto = new DeparturesDto(stopDto, nextDepartures);
+        return ResponseEntity.ok(dto);
     }
 }

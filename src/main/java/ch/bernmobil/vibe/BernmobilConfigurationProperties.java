@@ -4,7 +4,8 @@ import java.time.temporal.ChronoUnit;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * This class helps the Configuration-Processor of Spring resolving the types of configuration properties.
+ * This class helps the Configuration-Processor of Spring resolving the types
+ * of properties configured in a configuration file.
  *
  * @author Oliviero Chiodo
  * @author Matteo Patisso
