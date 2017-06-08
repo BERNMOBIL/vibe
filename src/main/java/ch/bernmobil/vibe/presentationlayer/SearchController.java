@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Comparator;
-import javax.print.attribute.standard.Media;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -18,8 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.util.List;
 
 
 @Controller
@@ -44,7 +42,7 @@ public class SearchController {
 
     @RequestMapping(value = "/delays", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String searchDelays(Model model) {
-        Collection<ScheduleUpdate> allUpdates = businessLogic.getAllScheduleUpdates();
+        Collection<ScheduleUpdate> allUpdates = businessLogic.getNextScheduleUpdates();
         LocalTime now = LocalTime.now(ZoneId.of(timezone));
 
         List<ScheduleUpdate> actualDelays = allUpdates

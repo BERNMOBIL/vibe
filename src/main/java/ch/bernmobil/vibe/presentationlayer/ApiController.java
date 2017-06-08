@@ -76,9 +76,9 @@ public class ApiController {
     private ResponseEntity getDepartures(UUID stopId, LocalTime localTime, int pageSize) {
         Stop stop = businessLogic.getStopById(stopId);
         if(stop == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This id does not exist anymore.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This id does not exist.");
         }
-        stop = businessLogic.getNewestStopEntity(stop);
+        stop = businessLogic.getNewestStopVersion(stop);
         List<ScheduleViewModel> nextDepartures =
                 converter.convertScheduleList(businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize));
         StopViewModel stopViewModel = converter.convertStop(businessLogic.getStopById(stop.getId()));

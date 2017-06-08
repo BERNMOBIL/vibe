@@ -20,9 +20,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+/**
+ * Provides logic components for the presentation layer, to access to data from dataaccess layer.
+ * Its purpose is to take off as much load from the presentation layer.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
+ */
 @Service
 public class BusinessLogic {
-
     private final ScheduleRepository scheduleRepository;
     private final ScheduleUpdateRepository scheduleUpdateRepository;
     private final StopRepository stopRepository;
@@ -39,6 +45,11 @@ public class BusinessLogic {
         this.updateTimestampService = updateTimestampService;
     }
 
+    /**
+     * Find all {@link Stop} beginning with a given name.
+     * @param stopName which is searched.
+     * @return {@link List} of {@link Stop} which are beginning with the searched name.
+     */
     public List<Stop> findStops(String stopName) {
         LocalDateTime timestamp = updateTimestampService.getCurrentTimestamp();
         return stopRepository.
@@ -46,10 +57,23 @@ public class BusinessLogic {
                     timestamp, new Sort(Direction.ASC, "name"));
     }
 
+    /**
+     * Get a stop by its id.
+     * @param id of the {@link Stop}
+     * @return The {@link Stop} with the id, if none was found it returns null.
+     */
     public Stop getStopById(UUID id) {
         return stopRepository.findOne(id);
     }
 
+    /**
+     * Find all departures from a {@link Stop} after a specified time.
+     * @param stopId of the {@link Stop} to which the {@link Schedule} will be searched.
+     * @param time which is compared, and all {@link Schedule} with a {@link Schedule#plannedDeparture}
+     * after this time will be returned.
+     * @param size The number of {@link Schedule} which will be in the resulting {@link List}.
+     * @return {@link List} of {@link Schedule} of the defined size.
+     */
     public List<Schedule> getDeparturesByStopId(UUID stopId, LocalTime time, int size) {
         Stop stop = stopRepository.findOne(stopId);
         Page<Schedule> page = scheduleRepository.findSchedulesByStop(
@@ -60,7 +84,15 @@ public class BusinessLogic {
         return page.getContent();
     }
 
-    public Stop getNewestStopEntity(Stop stop) {
+    /**
+     * Check if there is a newer version of a {@link Stop} by its {@link Stop#name}. It searches all
+     * {@link Stop} which have the same name as the given {@link Stop} and returns the {@link Stop}
+     * which has the latest successful timestamp, as saved in {@link UpdateTimestampService}.
+     * @param stop of which a possible newer version is available.
+     * @return A newer {@link Stop} if any, or the given {@link Stop} if there is no newer version,
+     * or null if there is no {@link Stop} with the given name.
+     */
+    public Stop getNewestStopVersion(Stop stop) {
         List<Stop> allStops = stopRepository.findAllByName(stop.getName());
 
         Optional<Stop> newStopOptional = allStops
@@ -68,10 +100,14 @@ public class BusinessLogic {
                 .filter(s -> s.getUpdateTimestamp().equals(updateTimestampService.getCurrentTimestamp()))
                 .findFirst();
 
-        return newStopOptional.orElse(stop);
+        return newStopOptional.orElse(null);
     }
 
-    public Collection<ScheduleUpdate> getAllScheduleUpdates() {
+    /**
+     * Get the next 100 {@link ScheduleUpdate}.
+     * @return {@link Collection} of the next 100 {@link ScheduleUpdate}
+     */
+    public Collection<ScheduleUpdate> getNextScheduleUpdates() {
         Page<ScheduleUpdate> page = scheduleUpdateRepository.findAll(new PageRequest(1, 100));
         return page.getContent();
     }

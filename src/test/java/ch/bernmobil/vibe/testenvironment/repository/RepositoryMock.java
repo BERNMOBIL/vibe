@@ -25,4 +25,8 @@ public abstract class RepositoryMock<E, R> {
         return mock;
     }
 
+    public List<E> getDataSource() {
+        return dataSource;
+    }
+
 }

@@ -44,11 +44,12 @@ public class StopMockData {
         return s;
     }
 
+    public Stop get(int index) {
+        return dataSource.get(index);
+    }
+
     public List<Stop> getDataSource() {
         return dataSource;
     }
 
-    public Stop get(int index) {
-        return dataSource.get(index);
-    }
 }
