@@ -8,6 +8,12 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * Provides configuration of Swagger API doc.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {

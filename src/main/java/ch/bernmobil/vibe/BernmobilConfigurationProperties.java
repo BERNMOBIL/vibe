@@ -1,11 +1,13 @@
 package ch.bernmobil.vibe;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.time.temporal.ChronoUnit;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * This class helps the Configuration-Processor of Spring resolving the types of configuration properties.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
  */
 public class BernmobilConfigurationProperties {
 
@@ -30,8 +32,8 @@ public class BernmobilConfigurationProperties {
     public class Locale {
 
         /**
-         * The timezone in which the departures are taking place. Refer to {@link java.time.ZoneId}
-         * for information about valid values
+         * The timezone in which the departures are taking place.
+         * Refer to {@link java.time.ZoneId} for information about valid values
          */
         private String timezone;
 
@@ -47,13 +49,13 @@ public class BernmobilConfigurationProperties {
     @ConfigurationProperties(prefix = "bernmobil.ruleset")
     public class RuleSet {
         /**
-         * Die Verspätung, mit welcher ein Fahrzeug unterwegs ist, bis es als Verspätet gilt
+         * The delay with which a vehicle is traveling until it is considered delayed, in minutes.
+         * Changing the {@link ChronoUnit} in {@link ch.bernmobil.vibe.presentationlayer.dto.Converter}
+         * affects this unit.
+         *
+         * @see ch.bernmobil.vibe.presentationlayer.dto.Converter
          */
         private int delay;
-        /**
-         * Chronological Unit of the delay in {@link java.time.temporal.ChronoUnit}
-         */
-        private ChronoUnit unit;
 
         public int getDelay() {
             return delay;
@@ -63,13 +65,6 @@ public class BernmobilConfigurationProperties {
             this.delay = delay;
         }
 
-        public ChronoUnit getUnit() {
-            return unit;
-        }
-
-        public void setUnit(ChronoUnit unit) {
-            this.unit = unit;
-        }
     }
 
 }

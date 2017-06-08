@@ -15,6 +15,15 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Custom implementation of {@link ScheduleRepository} to efficiently query through all
+ * {@link Schedule} entities and get the next departures from the database. Currently uses a
+ * native Query since it is the fastest possible solution to access database. Altough it prevents
+ * the class from being tested properly.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
+ */
 @Transactional(readOnly = true)
 public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
     private final static String NATIVE_QUERY = "SELECT * FROM schedule "

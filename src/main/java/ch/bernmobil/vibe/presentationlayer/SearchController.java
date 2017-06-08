@@ -19,7 +19,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+/**
+ * Controller which provides methods to query through the transit data.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
+ */
 @Controller
 @RequestMapping("/search")
 public class SearchController {
@@ -33,6 +38,14 @@ public class SearchController {
         this.businessLogic = businessLogic;
     }
 
+    /**
+     * Search for a stop name, or just a substring of the stop name. This method is only for
+     * demonstration purposes.
+     * @param model which is injected by the framework to be filled with values, which are processed
+     * by the Thymeleaf template engine.
+     * @param stopName Name or substring of a name.
+     * @return Template with all stops which are beginning with the searched string.
+     */
     @RequestMapping(value = "/{stopName}", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String searchStop(Model model, @PathVariable("stopName") String stopName) {
         List<Stop> stopList = businessLogic.findStops(stopName);
@@ -40,6 +53,12 @@ public class SearchController {
         return "home";
     }
 
+    /**
+     * Search for the next delays from now. This method in only for demonstration purposes.
+     * @param model which is injected by the framework to be filled with values, which are processed
+     * by the Thymeleaf template engine.
+     * @return Template with the next delayed departures.
+     */
     @RequestMapping(value = "/delays", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String searchDelays(Model model) {
         Collection<ScheduleUpdate> allUpdates = businessLogic.getNextScheduleUpdates();

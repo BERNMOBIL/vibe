@@ -1,58 +1,27 @@
 package ch.bernmobil.vibe.presentationlayer;
 
-import ch.bernmobil.vibe.businesslayer.BusinessLogic;
-
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import java.util.UUID;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
-import java.util.UUID;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+/**
+ * Provides access to the client side template which uses {@link ApiController} to display
+ * departures
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
+ */
 @Controller
 @RequestMapping("departures")
 public class DepartureController {
-    @Value("${bernmobil.locale.timezone}")
-    public String timezone;
 
-    private final BusinessLogic businessLogic;
-
-    @Autowired
-    public DepartureController(BusinessLogic businessLogic) {
-        this.businessLogic = businessLogic;
-    }
-
-    @RequestMapping(value = "/static/{stopId}", method = RequestMethod.GET)
-    public String departures(Model model, @PathVariable("stopId") UUID stopId) {
-        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId,
-            LocalTime.now(ZoneId.of(timezone)), 10);
-        Stop stop = businessLogic.getStopById(stopId);
-        model.addAttribute("departure", stop.getName());
-        model.addAttribute("nextDepartures", nextDepartures);
-        return "departureOverview";
-    }
-
-    @RequestMapping(value = "/static/{stopId}/at/{time}", method = RequestMethod.GET)
-    public String departuresAtTime(Model model,
-            @PathVariable("stopId")UUID stopId,
-            @PathVariable("time") String time) {
-        LocalTime localTime = LocalTime.parse(time);
-        List<Schedule> nextDepartures = businessLogic.getDeparturesByStopId(stopId, localTime, 10);
-        Stop stop = businessLogic.getStopById(stopId);
-        model.addAttribute("departure", stop.getName());
-        model.addAttribute("nextDepartures", nextDepartures);
-        return "departureOverview";
-    }
-
+    /**
+     * Returns only a static template which then access the {@link ApiController}.
+     * @param stopId as a dummy variable which is automatically passed to the front-end.
+     * @return {@link String} matching the filename of a template.
+     */
     @RequestMapping(value = "/{stopId}", method = RequestMethod.GET)
     public String getHtml(@PathVariable("stopId") UUID stopId) {
         return "nextDepartures";

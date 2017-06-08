@@ -8,6 +8,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Manages the current version of schedule data by distributing the latest timestamp which is linked
+ * to a successful import of static data.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
+ */
 @Service
 public class UpdateTimestampService implements Observer {
     private final Logger logger = Logger.getLogger(UpdateTimestampService.class);
@@ -23,8 +30,8 @@ public class UpdateTimestampService implements Observer {
 
     /**
      * Looks through the update_history table and searches for the latest timestamp which has status
-     * successful. Since JPA 2.1 does not directly support new the Java 1.8  Date and Time API
-     * , including {@link LocalDateTime}, there is no possibility to convert a field with an
+     * successful. Since JPA 2.1 does not directly support Date and Time API introduced in JDK 1.8,
+     * including {@link LocalDateTime}, there is no possibility to convert a field with an
      * {@link javax.persistence.Id}.
      *
      * @see javax.persistence.Id

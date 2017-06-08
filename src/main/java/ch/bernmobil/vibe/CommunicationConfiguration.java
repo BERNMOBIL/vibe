@@ -1,8 +1,5 @@
 package ch.bernmobil.vibe;
 
-import ch.bernmobil.vibe.dataaccesslayer.repository.UpdateHistoryRepository;
-import ch.bernmobil.vibe.service.UpdateNotificationReceiver;
-import ch.bernmobil.vibe.service.UpdateTimestampService;
 import org.springframework.amqp.core.AnonymousQueue;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -12,6 +9,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Provides configuration for the reception of AMQP messages.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
+ */
 @Configuration
 public class CommunicationConfiguration {
     @Value("${bernmobil.amqp.fanout-queue}")
