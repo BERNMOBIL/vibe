@@ -1,9 +1,9 @@
-package ch.bernmobil.vibe.presentationlayer.viewmodel;
+package ch.bernmobil.vibe.presentationlayer.dto;
 
 
 import java.util.UUID;
 
-public class StopViewModel {
+public class StopDto {
     private UUID id;
     private String name;
 

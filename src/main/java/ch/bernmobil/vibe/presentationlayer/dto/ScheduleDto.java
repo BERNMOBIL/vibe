@@ -1,6 +1,6 @@
-package ch.bernmobil.vibe.presentationlayer.viewmodel;
+package ch.bernmobil.vibe.presentationlayer.dto;
 
-public class ScheduleViewModel {
+public class ScheduleDto {
     private String plannedDeparture;
     private String platform;
     private boolean hasPlatform;
@@ -74,7 +74,7 @@ public class ScheduleViewModel {
             return false;
         }
 
-        ScheduleViewModel that = (ScheduleViewModel) o;
+        ScheduleDto that = (ScheduleDto) o;
 
         if (hasPlatform != that.hasPlatform) {
             return false;

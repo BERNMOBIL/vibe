@@ -13,9 +13,9 @@ import static org.mockito.Mockito.when;
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.Converter;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.DeparturesViewModel;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.ScheduleViewModel;
+import ch.bernmobil.vibe.presentationlayer.dto.Converter;
+import ch.bernmobil.vibe.presentationlayer.dto.DeparturesDto;
+import ch.bernmobil.vibe.presentationlayer.dto.ScheduleDto;
 import ch.bernmobil.vibe.service.UpdateTimestampService;
 import ch.bernmobil.vibe.testenvironment.MockConfiguration;
 import ch.bernmobil.vibe.testenvironment.MockDataConfiguration;
@@ -65,9 +65,9 @@ public class ApiControllerTest {
 
         ResponseEntity response = controller.apiDepartures(s.getId(), 10);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        DeparturesViewModel result = (DeparturesViewModel) response.getBody();
-        List<ScheduleViewModel> vmList = result.getDepartures();
-        List<ScheduleViewModel> expected = converter.convertScheduleList(scheduleList);
+        DeparturesDto result = (DeparturesDto) response.getBody();
+        List<ScheduleDto> vmList = result.getDepartures();
+        List<ScheduleDto> expected = converter.convertScheduleList(scheduleList);
         assertThat(vmList, equalTo(expected));
     }
 
@@ -126,9 +126,9 @@ public class ApiControllerTest {
 
         ResponseEntity response = controller.apiDeparturesAtTime(s.getId(), timeString,  10);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        DeparturesViewModel result = (DeparturesViewModel) response.getBody();
-        List<ScheduleViewModel> vmList = result.getDepartures();
-        List<ScheduleViewModel> expected = converter.convertScheduleList(scheduleList);
+        DeparturesDto result = (DeparturesDto) response.getBody();
+        List<ScheduleDto> vmList = result.getDepartures();
+        List<ScheduleDto> expected = converter.convertScheduleList(scheduleList);
         assertThat(vmList, equalTo(expected));
     }
 

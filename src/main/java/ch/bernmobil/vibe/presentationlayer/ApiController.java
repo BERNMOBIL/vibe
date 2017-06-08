@@ -3,10 +3,10 @@ package ch.bernmobil.vibe.presentationlayer;
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.Converter;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.DeparturesViewModel;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.ScheduleViewModel;
-import ch.bernmobil.vibe.presentationlayer.viewmodel.StopViewModel;
+import ch.bernmobil.vibe.presentationlayer.dto.Converter;
+import ch.bernmobil.vibe.presentationlayer.dto.DeparturesDto;
+import ch.bernmobil.vibe.presentationlayer.dto.ScheduleDto;
+import ch.bernmobil.vibe.presentationlayer.dto.StopDto;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
@@ -96,9 +96,9 @@ public class ApiController {
                 .body(String.format("Stop with id \"%s\" is not available anymore. Please do another search for this stop", stopId));
         }
         List<Schedule> departureList = businessLogic.getDeparturesByStopId(stop.getId(), localTime, pageSize);
-        List<ScheduleViewModel> nextDepartures = converter.convertScheduleList(departureList);
-        StopViewModel stopViewModel = converter.convertStop(stop);
-        DeparturesViewModel viewModel = new DeparturesViewModel(stopViewModel, nextDepartures);
+        List<ScheduleDto> nextDepartures = converter.convertScheduleList(departureList);
+        StopDto stopDto = converter.convertStop(stop);
+        DeparturesDto viewModel = new DeparturesDto(stopDto, nextDepartures);
         return ResponseEntity.ok(viewModel);
     }
 }
