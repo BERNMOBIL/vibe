@@ -6,18 +6,21 @@ import ch.bernmobil.vibe.presentationlayer.viewmodel.Converter;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.DeparturesViewModel;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.ScheduleViewModel;
 import ch.bernmobil.vibe.presentationlayer.viewmodel.StopViewModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Provides access to relevant data for the departure view. This controller returns JSON structures
@@ -73,7 +76,7 @@ public class ApiController {
     private ResponseEntity getDepartures(UUID stopId, LocalTime localTime, int pageSize) {
         Stop stop = businessLogic.getStopById(stopId);
         if(stop == null) {
-            return ResponseEntity.status(HttpStatus.GONE).body("This id does not exist anymore.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This id does not exist anymore.");
         }
         stop = businessLogic.getNewestStopEntity(stop);
         List<ScheduleViewModel> nextDepartures =
