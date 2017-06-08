@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.entitiy;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class UpdateHistory {
 
     @Id
-    private LocalDateTime time;
+    private Timestamp time;
     private String status;
 
     public String getStatus() {
@@ -19,11 +19,11 @@ public class UpdateHistory {
         this.status = status;
     }
 
-    public LocalDateTime getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }
