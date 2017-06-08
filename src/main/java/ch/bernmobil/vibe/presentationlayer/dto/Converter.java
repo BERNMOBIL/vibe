@@ -16,38 +16,59 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * Provides converting logic to convert entities into dtos.
+ *
+ * @author Oliviero Chiodo
+ * @author Matteo Patisso
+ */
 @Component
 public class Converter {
+    private final ChronoUnit delayUnit = MINUTES;
     @Value("${bernmobil.ruleset.delay}")
     private int delay;
-    private final ChronoUnit unit = MINUTES;
 
-    private static DateTimeFormatter dateTimeFormatter =
+    private final DateTimeFormatter dateTimeFormatter =
             DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.GERMAN);
 
+    /**
+     * Convert a {@link Schedule} into a {@link ScheduleDto}.
+     * @param schedule which should be converted
+     * @return A {@link ScheduleDto} which contains necessary information from the {@link Schedule}.
+     */
     public ScheduleDto convertSchedule(Schedule schedule) {
-        ScheduleDto viewModel = new ScheduleDto();
-        viewModel.setPlannedDeparture(schedule.getPlannedDeparture().format(dateTimeFormatter));
+        ScheduleDto dto = new ScheduleDto();
+        dto.setPlannedDeparture(schedule.getPlannedDeparture().format(dateTimeFormatter));
         ScheduleUpdate update = schedule.getScheduleUpdate();
         if (update != null) {
             long delay = getDelay(schedule.getPlannedDeparture(), schedule.getScheduleUpdate().getActualDeparture());
-            viewModel.setActualDeparture(Long.toString(delay));
-            viewModel.setHasDelay(delay > 0);
+            dto.setActualDeparture(Long.toString(delay));
+            dto.setHasDelay(delay > 0);
         }
-        viewModel.setLine(schedule.getJourney().getRoute().getLine());
-        viewModel.setDestination(schedule.getJourney().getHeadsign());
-        viewModel.setPlatform(schedule.getPlatform());
-        viewModel.setHasPlatform(!schedule.getPlatform().equals("0"));
-        return viewModel;
+        dto.setLine(schedule.getJourney().getRoute().getLine());
+        dto.setDestination(schedule.getJourney().getHeadsign());
+        dto.setPlatform(schedule.getPlatform());
+        dto.setHasPlatform(!schedule.getPlatform().equals("0"));
+        return dto;
     }
 
+    /**
+     * Convert a {@link Stop} into a {@link StopDto}.
+     * @param stop which should be converted.
+     * @return A {@link StopDto} which contains necessary information from the {@link Stop}.
+     */
     public StopDto convertStop(Stop stop) {
-        StopDto viewModel = new StopDto();
-        viewModel.setId(stop.getId());
-        viewModel.setName(stop.getName());
-        return viewModel;
+        StopDto dto = new StopDto();
+        dto.setId(stop.getId());
+        dto.setName(stop.getName());
+        return dto;
     }
 
+    /**
+     * Convert a {@link List} of {@link Schedule} into a {@link List} of {@link ScheduleDto}.
+     * @param list of {@link ScheduleDto}
+     * @return A {@link List} of {@link ScheduleDto}.
+     */
     public List<ScheduleDto> convertScheduleList(List<Schedule> list) {
         return list
                 .stream()
@@ -56,7 +77,13 @@ public class Converter {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Calculate the delay of a departure using a {@link ChronoUnit}.
+     * @param plannedDeparture from a stop.
+     * @param actualDeparture from a stop.
+     * @return Numeric value which represents the difference between two {@link LocalTime} using {@link #delayUnit}.
+     */
     private long getDelay(LocalTime plannedDeparture, LocalTime actualDeparture) {
-        return unit.between(plannedDeparture, actualDeparture);
+        return delayUnit.between(plannedDeparture, actualDeparture);
     }
 }

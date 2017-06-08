@@ -79,11 +79,14 @@ public class ApiController {
     }
 
     /**
-     *
-     * @param stopId
-     * @param localTime
-     * @param pageSize
-     * @return
+     * Returns a {@link ResponseEntity} with either the result or a appropriate error message. The
+     * method checks, if the given {@link UUID} is valid, if there is a newer version of the {@link Stop}
+     * corresponding to the id and then converts all model to DTOs to minimize network overhead.
+     * @param stopId of the {@link Stop} to which the departures are searched.
+     * @param localTime from which the departures are returned.
+     * @param pageSize of the the result.
+     * @return {@link ResponseEntity} which either contains a {@link DeparturesDto} or a {@link String}
+     * if an error occurred while processing.
      */
     private ResponseEntity getDepartures(UUID stopId, LocalTime localTime, int pageSize) {
         Stop stop = businessLogic.getStopById(stopId);

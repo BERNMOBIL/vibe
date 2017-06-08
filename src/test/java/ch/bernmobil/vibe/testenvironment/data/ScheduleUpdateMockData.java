@@ -2,20 +2,21 @@ package ch.bernmobil.vibe.testenvironment.data;
 
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ScheduleUpdateMockData {
 
-    private static List<ScheduleUpdate> dataSource = new ArrayList<>(3);
+    private static List<ScheduleUpdate> dataSource;
     private final ScheduleMockData scheduleMockData;
 
     public ScheduleUpdateMockData(ScheduleMockData scheduleMockData) {
         this.scheduleMockData = scheduleMockData;
-        IntStream.range(0, idList.length)
-            .forEach(i -> dataSource.add(create(i)));
+        dataSource = IntStream.range(0, idList.length)
+            .mapToObj(this::create)
+            .collect(Collectors.toList());
     }
 
     private UUID[] idList = {
