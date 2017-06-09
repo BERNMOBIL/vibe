@@ -1,15 +1,14 @@
 package ch.bernmobil.vibe.dataaccesslayer.entitiy;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.UUID;
 
 @Entity
 public class Area {
-
     @Id
     @GeneratedValue
     private UUID id;
