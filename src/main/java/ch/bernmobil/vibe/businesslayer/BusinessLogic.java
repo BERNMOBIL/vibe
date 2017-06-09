@@ -80,7 +80,7 @@ public class BusinessLogic {
             stop,
             time,
             updateTimestampService.getCurrentTimestamp(),
-            new PageRequest(1, size, Direction.ASC, "plannedDeparture"));
+            new PageRequest(1, size));
         return page.getContent();
     }
 

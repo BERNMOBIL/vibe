@@ -34,7 +34,8 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
         ") " +
         "and s.journey in (" +
         "  select c.journey from CalendarDate c " +
-        "  where current_date between c.validFrom and c.validUntil) " +
+        "  where current_date between c.validFrom and c.validUntil" +
+        ") " +
         "order by su.actualDeparture, s.plannedDeparture";
 
     @PersistenceContext
@@ -44,11 +45,14 @@ public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
     public Page<Schedule> findSchedulesByStop(Stop stop, LocalTime time, LocalDateTime timestamp,
         Pageable pageable) {
         Query query = entityManager.createQuery(HQL_QUERY, Schedule.class);
+        int startPosition = pageable.getOffset() - pageable.getPageSize();
+        int pageSize = pageable.getPageSize();
         query.setParameter("lastUpdate", timestamp)
             .setParameter("stop", stop)
             .setParameter("time", time)
             .setParameter("terminalStation", stop)
-            .setMaxResults(pageable.getPageSize());
+            .setFirstResult(startPosition)
+            .setMaxResults(pageSize);
 
         List<Schedule> list = getResultList(query);
         return new PageImpl<>(list);

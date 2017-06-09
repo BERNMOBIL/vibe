@@ -21,7 +21,8 @@ public interface ScheduleRepositoryCustom {
      * @param stop from which the departures are searched.
      * @param time which is used to sort and filter.
      * @param timestamp of the current valid version of schedule data.
-     * @param pageable containing page number and size.
+     * @param pageable containing page number and size. Order direction and properties in
+     * {@link Pageable} are ignored.
      * @return {@link Page} of {@link Schedule}.
      */
     Page<Schedule> findSchedulesByStop(Stop stop, LocalTime time, LocalDateTime timestamp, Pageable pageable);
