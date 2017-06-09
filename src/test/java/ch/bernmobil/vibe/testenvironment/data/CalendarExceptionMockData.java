@@ -10,21 +10,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CalendarExceptionMockData extends TestData<CalendarException> {
-    private CalendarDateMockData calendarDateMockData;
+    private final CalendarDateMockData calendarDateMockData;
 
-    private UUID[] idList = {
+    private final UUID[] idList = {
         UUID.fromString("635977d7-28be-4cbc-833b-f817fbc47225"),
         UUID.fromString("1b50cc76-83be-4aa0-bde9-74fc188a8978"),
         UUID.fromString("86deb4f8-aaa3-4734-a772-1ee38f3e0344")
     };
 
-    private LocalDate[] dateList = {
+    private final LocalDate[] dateList = {
         LocalDate.of(2017, 4, 1),
         LocalDate.of(2017, 2, 19),
         LocalDate.of(2017, 6, 24)
     };
 
-    private String[] typeList = {
+    private final String[] typeList = {
         "ADDED", "ADDED", "REMOVED"
     };
 

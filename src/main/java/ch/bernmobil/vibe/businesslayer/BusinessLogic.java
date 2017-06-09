@@ -21,7 +21,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 /**
- * Provides logic components for the presentation layer, to access to data from dataaccess layer.
+ * Provides logic components for the presentation layer, to access to data from data-access layer.
  * Its purpose is to take off as much load from the presentation layer.
  *
  * @author Oliviero Chiodo

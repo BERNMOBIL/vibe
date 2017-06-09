@@ -3,8 +3,8 @@ package ch.bernmobil.vibe.presentationlayer.dto;
 import java.util.List;
 
 public class DeparturesDto {
-    private StopDto station;
-    private List<ScheduleDto> departures;
+    private final StopDto station;
+    private final List<ScheduleDto> departures;
 
     public DeparturesDto(StopDto departure, List<ScheduleDto> departures) {
         this.station = departure;

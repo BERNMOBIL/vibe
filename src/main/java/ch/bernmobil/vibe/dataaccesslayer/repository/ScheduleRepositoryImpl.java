@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Custom implementation of {@link ScheduleRepository} to efficiently query through all
  * {@link Schedule} entities and get the next departures from the database. Currently uses a
- * native Query since it is the fastest possible solution to access database. Altough it prevents
+ * native Query since it is the fastest possible solution to access database. Although it prevents
  * the class from being tested properly.
  *
  * @author Oliviero Chiodo

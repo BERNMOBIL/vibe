@@ -9,7 +9,7 @@ import org.mockito.Mockito;
  * @param <R> Repository class type
  */
 public abstract class RepositoryMock<E, R> {
-    protected R mock;
+    protected final R mock;
     protected final List<E> dataSource;
 
 

@@ -91,11 +91,8 @@ public class ScheduleDto {
         if (!destination.equals(that.destination)) {
             return false;
         }
-        if (!line.equals(that.line)) {
-            return false;
-        }
-        return actualDeparture != null ? actualDeparture.equals(that.actualDeparture)
-            : that.actualDeparture == null;
+        return line.equals(that.line) && (actualDeparture != null ? actualDeparture
+            .equals(that.actualDeparture) : that.actualDeparture == null);
     }
 
     @Override

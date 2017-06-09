@@ -52,7 +52,7 @@ public class ApiController {
      * <ul>
      * <li>{@link DeparturesDto} if successful</li>
      * <li>{@link HttpStatus#NOT_FOUND} if no stop to the given id could be found</li>
-     * <li>{@link HttpStatus#GONE} if the versio of the id was too old to find a newer version of the stop</li>
+     * <li>{@link HttpStatus#GONE} if the version of the id was too old to find a newer version of the stop</li>
      * </ul>
      * @param stopId The ID from where the vehicles depart
      * @param pageSize of the result.
@@ -71,7 +71,7 @@ public class ApiController {
      * <li>{@link DeparturesDto} if successful</li>
      * <li>{@link HttpStatus#BAD_REQUEST} if time parameter cannot be parsed</li>
      * <li>{@link HttpStatus#NOT_FOUND} if no stop to the given id could be found</li>
-     * <li>{@link HttpStatus#GONE} if the versio of the id was too old to find a newer version of the stop</li>
+     * <li>{@link HttpStatus#GONE} if the version of the id was too old to find a newer version of the stop</li>
      * </ul>
      * @param stopId The ID from where the vehicles depart
      * @param time A time string formatted as HH:mm

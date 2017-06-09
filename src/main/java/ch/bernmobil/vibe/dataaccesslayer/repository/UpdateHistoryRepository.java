@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Provides access to {@link UpdateHistory} entitiy on the database.
+ * Provides access to {@link UpdateHistory} entity on the database.
  *
  * @author Oliviero Chiodo
  * @author Matteo Patisso

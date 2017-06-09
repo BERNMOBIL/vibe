@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * Provides converting logic to convert entities into dtos.
+ * Provides converting logic to convert entities into DTOs.
  *
  * @author Oliviero Chiodo
  * @author Matteo Patisso

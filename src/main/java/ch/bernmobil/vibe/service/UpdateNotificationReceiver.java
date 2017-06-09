@@ -17,7 +17,7 @@ public class UpdateNotificationReceiver extends Observable {
     private final Logger logger = Logger.getLogger(UpdateNotificationReceiver.class);
 
     /**
-     * Recieve and check the correctness of the recieved message.
+     * Receive and check the correctness of the received message.
      * @param message which has been sent to the queue.
      */
     @RabbitListener(queues = "#{autoDeleteQueue.name}")
