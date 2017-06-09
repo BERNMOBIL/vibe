@@ -1,6 +1,5 @@
-package ch.bernmobil.vibe.dataaccesslayer.entitiy;
+package ch.bernmobil.vibe.dataaccesslayer.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -10,18 +9,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class CalendarException {
-
+public class Stop {
     @Id
     private UUID id;
-    private LocalDate date;
-    private String type;
+
+    private String name;
     @Column(name = "update")
     private LocalDateTime updateTimestamp;
 
     @OneToOne
-    @JoinColumn(name = "calendarDate")
-    private CalendarDate calendarDate;
+    @JoinColumn(name = "area")
+    private Area area;
 
     public UUID getId() {
         return id;
@@ -31,28 +29,20 @@ public class CalendarException {
         this.id = id;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getName() {
+        return name;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public Area getArea() {
+        return area;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public CalendarDate getCalendarDate() {
-        return calendarDate;
-    }
-
-    public void setCalendarDate(CalendarDate calendarDate) {
-        this.calendarDate = calendarDate;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
     public LocalDateTime getUpdateTimestamp() {
@@ -62,4 +52,5 @@ public class CalendarException {
     public void setUpdateTimestamp(LocalDateTime updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
     }
+
 }

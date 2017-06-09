@@ -1,8 +1,8 @@
 package ch.bernmobil.vibe.presentationlayer;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Stop;
 import ch.bernmobil.vibe.presentationlayer.dto.Converter;
 import ch.bernmobil.vibe.presentationlayer.dto.DeparturesDto;
 import ch.bernmobil.vibe.presentationlayer.dto.ScheduleDto;

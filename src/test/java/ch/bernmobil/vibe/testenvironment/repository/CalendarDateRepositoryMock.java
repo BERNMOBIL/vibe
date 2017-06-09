@@ -2,7 +2,7 @@ package ch.bernmobil.vibe.testenvironment.repository;
 
 import static org.mockito.Mockito.when;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.CalendarDate;
+import ch.bernmobil.vibe.dataaccesslayer.entity.CalendarDate;
 import ch.bernmobil.vibe.dataaccesslayer.repository.CalendarDateRepository;
 import ch.bernmobil.vibe.testenvironment.data.CalendarDateMockData;
 import org.springframework.beans.factory.annotation.Autowired;

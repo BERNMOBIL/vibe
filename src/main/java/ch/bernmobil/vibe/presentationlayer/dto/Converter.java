@@ -2,9 +2,9 @@ package ch.bernmobil.vibe.presentationlayer.dto;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entity.ScheduleUpdate;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Stop;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;

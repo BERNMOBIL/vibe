@@ -1,7 +1,7 @@
 package ch.bernmobil.vibe.testenvironment.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Route;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Route.RouteType;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Route;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Route.RouteType;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.testenvironment.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Schedule;
 import java.time.LocalTime;
 import java.util.UUID;
 import java.util.stream.Collectors;

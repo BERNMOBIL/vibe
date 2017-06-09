@@ -3,8 +3,8 @@ package ch.bernmobil.vibe.presentationlayer;
 import static java.util.stream.Collectors.toList;
 
 import ch.bernmobil.vibe.businesslayer.BusinessLogic;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entity.ScheduleUpdate;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Stop;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Collection;

@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.testenvironment.data;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.CalendarException;
+import ch.bernmobil.vibe.dataaccesslayer.entity.CalendarException;
 import java.time.LocalDate;
 import java.util.UUID;
 import java.util.stream.Collectors;

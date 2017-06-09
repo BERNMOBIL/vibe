@@ -2,7 +2,7 @@ package ch.bernmobil.vibe.testenvironment.repository;
 
 import static org.mockito.Mockito.when;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
+import ch.bernmobil.vibe.dataaccesslayer.entity.ScheduleUpdate;
 import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleUpdateRepository;
 import ch.bernmobil.vibe.testenvironment.data.ScheduleUpdateMockData;
 import org.springframework.beans.factory.annotation.Autowired;

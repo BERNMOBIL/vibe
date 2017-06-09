@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
   <title>Abfahrtsanzeiger</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -13,7 +13,7 @@
 <p>Bitte geben sie eine Station ein</p>
 <!--/*@thymesVar id="stopList" type="java.util.List"*/-->
 <div data-th-each="stop:${stopList}" class="collection, light-primary-color">
-    <!--/*@thymesVar id="stop" type="ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop"*/-->
+  <!--/*@thymesVar id="stop" type="ch.bernmobil.vibe.dataaccesslayer.entity.Stop"*/-->
     <div class="collection-item, accent-color">
       <a data-th-href="@{/departures/__${stop.getId()}__}" class="text-primary-color">
         <span data-th-text="${stop.getName()}"></span>

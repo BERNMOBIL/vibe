@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.repository;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
+import ch.bernmobil.vibe.dataaccesslayer.entity.ScheduleUpdate;
 import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

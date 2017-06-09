@@ -1,6 +1,6 @@
 package ch.bernmobil.vibe.dataaccesslayer.repository;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.UpdateHistory;
+import ch.bernmobil.vibe.dataaccesslayer.entity.UpdateHistory;
 import java.sql.Timestamp;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.Query;

@@ -1,8 +1,8 @@
 package ch.bernmobil.vibe.businesslayer;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entity.ScheduleUpdate;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Stop;
 import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleRepository;
 import ch.bernmobil.vibe.dataaccesslayer.repository.ScheduleUpdateRepository;
 import ch.bernmobil.vibe.dataaccesslayer.repository.StopRepository;

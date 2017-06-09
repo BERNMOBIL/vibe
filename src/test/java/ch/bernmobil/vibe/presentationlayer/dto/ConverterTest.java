@@ -4,9 +4,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.ScheduleUpdate;
-import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Schedule;
+import ch.bernmobil.vibe.dataaccesslayer.entity.ScheduleUpdate;
+import ch.bernmobil.vibe.dataaccesslayer.entity.Stop;
 import ch.bernmobil.vibe.testenvironment.MockDataConfiguration;
 import ch.bernmobil.vibe.testenvironment.data.ScheduleMockData;
 import ch.bernmobil.vibe.testenvironment.data.ScheduleUpdateMockData;

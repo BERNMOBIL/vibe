@@ -1,4 +1,4 @@
-package ch.bernmobil.vibe.dataaccesslayer.entitiy;
+package ch.bernmobil.vibe.dataaccesslayer.entity;
 
 import java.sql.Timestamp;
 import java.util.UUID;
