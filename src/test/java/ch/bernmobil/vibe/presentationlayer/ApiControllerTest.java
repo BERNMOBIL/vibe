@@ -57,7 +57,7 @@ public class ApiControllerTest {
         when(businessLogic.getNewestStopVersion(eq(s))).thenReturn(s);
 
         ApiController controller = new ApiController(businessLogic, converter);
-        SetTimezoneInController(controller);
+        setTimezoneInController(controller);
 
         ResponseEntity response = controller.apiDepartures(s.getId(), 10);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -74,7 +74,7 @@ public class ApiControllerTest {
         when(businessLogic.getStopById(any(UUID.class))).thenReturn(null);
 
         ApiController controller = new ApiController(businessLogic, converter);
-        SetTimezoneInController(controller);
+        setTimezoneInController(controller);
 
         UUID id = UUID.randomUUID();
         ResponseEntity response = controller.apiDepartures(id, 10);
@@ -96,7 +96,7 @@ public class ApiControllerTest {
         when(businessLogic.getNewestStopVersion(eq(s))).thenReturn(null);
 
         ApiController controller = new ApiController(businessLogic, converter);
-        SetTimezoneInController(controller);
+        setTimezoneInController(controller);
 
         ResponseEntity response = controller.apiDepartures(s.getId(), 10);
         assertThat(response.getStatusCode(), is(HttpStatus.GONE));
@@ -118,7 +118,7 @@ public class ApiControllerTest {
         when(businessLogic.getNewestStopVersion(eq(s))).thenReturn(s);
 
         ApiController controller = new ApiController(businessLogic, converter);
-        SetTimezoneInController(controller);
+        setTimezoneInController(controller);
 
         ResponseEntity response = controller.apiDeparturesAtTime(s.getId(), timeString,  10);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -135,7 +135,7 @@ public class ApiControllerTest {
         String timeString = "10.10";
 
         ApiController controller = new ApiController(businessLogic, converter);
-        SetTimezoneInController(controller);
+        setTimezoneInController(controller);
 
         ResponseEntity response = controller.apiDeparturesAtTime(null, timeString,  10);
         assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
@@ -143,7 +143,7 @@ public class ApiControllerTest {
         assertThat(message, containsString(timeString));
     }
 
-    private void SetTimezoneInController(ApiController controller) {
+    private void setTimezoneInController(ApiController controller) {
         ReflectionTestUtils.setField(controller, "timezone", "Europe/Paris", String.class);
     }
 
