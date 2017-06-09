@@ -109,7 +109,7 @@ public class Schedule {
 
     @Transient
     public boolean hasPlatform() {
-        return !platform.equals("0");
+        return !"0".equals(platform);
     }
 
 }

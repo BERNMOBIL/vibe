@@ -2,7 +2,6 @@ package ch.bernmobil.vibe.testenvironment.data;
 
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -10,18 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StopMockData {
-    private LocalDateTime update = LocalDateTime.parse("2017-04-29T10:15:30");
-    private List<Stop> dataSource;
-    private AreaMockData areaMockData;
-
-    @Autowired
-    public StopMockData(AreaMockData areaMockData) {
-        this.areaMockData = areaMockData;
-        dataSource = IntStream.range(0, idList.length)
-            .mapToObj(this::create)
-            .collect(Collectors.toList());
-    }
+public class StopMockData extends TestData<Stop> {
+    private final LocalDateTime update = LocalDateTime.parse("2017-04-29T10:15:30");
+    private final AreaMockData areaMockData;
 
     private UUID[] idList = {
             UUID.fromString("635977d7-28be-4cbc-833b-f817fbc47225"),
@@ -35,6 +25,14 @@ public class StopMockData {
         "Jona, Kreuz"
     };
 
+    @Autowired
+    public StopMockData(AreaMockData areaMockData) {
+        this.areaMockData = areaMockData;
+        dataSource = IntStream.range(0, idList.length)
+            .mapToObj(this::create)
+            .collect(Collectors.toList());
+    }
+
     private Stop create(int index) {
         Stop s = new Stop();
         s.setId(idList[index]);
@@ -43,13 +41,4 @@ public class StopMockData {
         s.setUpdateTimestamp(update);
         return s;
     }
-
-    public Stop get(int index) {
-        return dataSource.get(index);
-    }
-
-    public List<Stop> getDataSource() {
-        return dataSource;
-    }
-
 }

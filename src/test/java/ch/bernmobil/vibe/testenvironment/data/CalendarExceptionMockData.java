@@ -2,25 +2,15 @@ package ch.bernmobil.vibe.testenvironment.data;
 
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.CalendarException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CalendarExceptionMockData {
-    private static List<CalendarException> dataSource = new ArrayList<>(3);
+public class CalendarExceptionMockData extends TestData<CalendarException> {
     private CalendarDateMockData calendarDateMockData;
-
-    @Autowired
-    public CalendarExceptionMockData(CalendarDateMockData calendarDateMockData) {
-        this.calendarDateMockData = calendarDateMockData;
-        IntStream.range(0, idList.length)
-            .forEach(i -> dataSource.add(create(i)));
-    }
 
     private UUID[] idList = {
         UUID.fromString("635977d7-28be-4cbc-833b-f817fbc47225"),
@@ -38,6 +28,14 @@ public class CalendarExceptionMockData {
         "ADDED", "ADDED", "REMOVED"
     };
 
+    @Autowired
+    public CalendarExceptionMockData(CalendarDateMockData calendarDateMockData) {
+        this.calendarDateMockData = calendarDateMockData;
+        dataSource = IntStream.range(0, idList.length)
+            .mapToObj(this::create)
+            .collect(Collectors.toList());
+    }
+
     private CalendarException create(int index) {
         CalendarException c = new CalendarException();
         c.setId(idList[index]);
@@ -45,14 +43,5 @@ public class CalendarExceptionMockData {
         c.setType(typeList[index]);
         c.setCalendarDate(calendarDateMockData.get(index));
         return c;
-    }
-
-    public CalendarException get(int index) {
-        return dataSource.get(index);
-    }
-
-    public List<CalendarException> getDataSource() {
-        //TODO: check if necessary
-        return Collections.unmodifiableList(dataSource);
     }
 }

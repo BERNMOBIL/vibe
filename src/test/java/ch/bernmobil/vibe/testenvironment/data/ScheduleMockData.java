@@ -2,23 +2,14 @@ package ch.bernmobil.vibe.testenvironment.data;
 
 import ch.bernmobil.vibe.dataaccesslayer.entitiy.Schedule;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class ScheduleMockData {
-    private static List<Schedule> dataSource;
+public class ScheduleMockData extends TestData<Schedule> {
     private final StopMockData stopMockData;
     private final JourneyMockData journeyMockData;
-
-    public ScheduleMockData(StopMockData stopMockData, JourneyMockData journeyMockData) {
-        this.stopMockData = stopMockData;
-        this.journeyMockData = journeyMockData;
-        dataSource = IntStream.range(0, ids.length)
-            .mapToObj(this::create)
-            .collect(Collectors.toList());
-    }
 
     private UUID[] ids = {
             UUID.fromString("635977d7-28be-4cbc-833b-f817fbc47225"),
@@ -44,6 +35,15 @@ public class ScheduleMockData {
         LocalTime.parse("15:46:00"),
     };
 
+    @Autowired
+    public ScheduleMockData(StopMockData stopMockData, JourneyMockData journeyMockData) {
+        this.stopMockData = stopMockData;
+        this.journeyMockData = journeyMockData;
+        dataSource = IntStream.range(0, ids.length)
+            .mapToObj(this::create)
+            .collect(Collectors.toList());
+    }
+
     private Schedule create(int index) {
         Schedule s = new Schedule();
         s.setId(ids[index]);
@@ -54,13 +54,4 @@ public class ScheduleMockData {
         s.setJourney(journeyMockData.get(index));
         return s;
     }
-
-    public List<Schedule> getDataSource() {
-        return dataSource;
-    }
-
-    public Schedule get(int index) {
-        return dataSource.get(index);
-    }
-
 }

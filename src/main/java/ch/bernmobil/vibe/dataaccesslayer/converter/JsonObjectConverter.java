@@ -2,11 +2,10 @@ package ch.bernmobil.vibe.dataaccesslayer.converter;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.postgresql.util.PGobject;
-
+import java.sql.SQLException;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import java.sql.SQLException;
+import org.postgresql.util.PGobject;
 
 /**
  * Class to convert a PostgreSQL JSON object wrapped in a {@link PGobject}
@@ -39,7 +38,7 @@ public class JsonObjectConverter implements AttributeConverter<JsonObject, Objec
      */
     @Override
     public JsonObject convertToEntityAttribute(Object dbData) {
-        if(dbData instanceof PGobject && ((PGobject)dbData).getType().equals("json")) {
+        if(dbData instanceof PGobject && "json".equals(((PGobject)dbData).getType())) {
             JsonParser parser = new JsonParser();
             return parser.parse(((PGobject) dbData).getValue()).getAsJsonObject();
         }

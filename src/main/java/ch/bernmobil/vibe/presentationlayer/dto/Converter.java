@@ -24,9 +24,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Converter {
-    private final ChronoUnit delayUnit = MINUTES;
+    private static final ChronoUnit delayUnit = MINUTES;
     @Value("${bernmobil.ruleset.delay}")
-    private int delay;
+    private int timeUntilDelay;
 
     private final DateTimeFormatter dateTimeFormatter =
             DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.GERMAN);
@@ -43,12 +43,12 @@ public class Converter {
         if (update != null) {
             long delay = getDelay(schedule.getPlannedDeparture(), schedule.getScheduleUpdate().getActualDeparture());
             dto.setActualDeparture(Long.toString(delay));
-            dto.setHasDelay(delay > 0);
+            dto.setHasDelay(delay >= timeUntilDelay);
         }
         dto.setLine(schedule.getJourney().getRoute().getLine());
         dto.setDestination(schedule.getJourney().getHeadsign());
         dto.setPlatform(schedule.getPlatform());
-        dto.setHasPlatform(!schedule.getPlatform().equals("0"));
+        dto.setHasPlatform(!"0".equals(schedule.getPlatform()));
         return dto;
     }
 
@@ -78,7 +78,7 @@ public class Converter {
     }
 
     /**
-     * Calculate the delay of a departure using a {@link ChronoUnit}.
+     * Calculate the timeUntilDelay of a departure using a {@link ChronoUnit}.
      * @param plannedDeparture from a stop.
      * @param actualDeparture from a stop.
      * @return Numeric value which represents the difference between two {@link LocalTime} using {@link #delayUnit}.

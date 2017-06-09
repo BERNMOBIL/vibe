@@ -22,7 +22,7 @@ public class UpdateNotificationReceiver extends Observable {
      */
     @RabbitListener(queues = "#{autoDeleteQueue.name}")
     public void receive(String message) {
-        if(!message.equals("update successful")) {
+        if(!"update successful".equals(message)) {
             logger.warn(String.format("Unknown message: %s", message));
             return;
         }

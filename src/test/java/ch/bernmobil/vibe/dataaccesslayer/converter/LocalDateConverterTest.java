@@ -3,17 +3,15 @@ package ch.bernmobil.vibe.dataaccesslayer.converter;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import ch.bernmobil.vibe.dataaccesslayer.converter.LocalDateConverter;
-
-import java.text.SimpleDateFormat;
-import org.junit.Test;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import org.junit.Test;
 
 
 public class LocalDateConverterTest {
     @Test
-    public void LocalDateToDate() throws Exception {
+    public void localDateToDate() throws Exception {
         LocalDateConverter converter = new LocalDateConverter();
 
         Date expectedResult = new Date(new SimpleDateFormat("dd-MM-yyyy").parse("13-03-2017").getTime());
@@ -25,7 +23,7 @@ public class LocalDateConverterTest {
     }
 
     @Test
-    public void DateToLocalDate() throws Exception{
+    public void dateToLocalDate() throws Exception{
         LocalDateConverter converter = new LocalDateConverter();
 
         Date date = new Date(new SimpleDateFormat("dd-MM-yyyy").parse("13-03-2017").getTime());

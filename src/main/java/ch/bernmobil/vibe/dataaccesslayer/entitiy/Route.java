@@ -1,12 +1,12 @@
 package ch.bernmobil.vibe.dataaccesslayer.entitiy;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import java.util.UUID;
 
 @Entity
 public class Route {
@@ -52,7 +52,7 @@ public class Route {
         this.updateTimestamp = updateTimestamp;
     }
 
-    public static enum RouteType {
+    public enum RouteType {
         TRAM, SUBWAY, RAIL, BUS, FERRY, CABLE_CAR, GONDOLA, FUNICULAR
     }
 }

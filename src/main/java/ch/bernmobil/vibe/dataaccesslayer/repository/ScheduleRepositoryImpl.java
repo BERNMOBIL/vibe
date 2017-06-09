@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional(readOnly = true)
 public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
-    private final static String NATIVE_QUERY = "SELECT * FROM schedule "
+    private static final String NATIVE_QUERY = "SELECT * FROM schedule "
             + "LEFT JOIN schedule_update ON schedule.id = schedule_update.schedule "
             + "WHERE schedule.update = ?"
             + "AND stop = ? "

@@ -16,12 +16,10 @@ import ch.bernmobil.vibe.dataaccesslayer.entitiy.Stop;
 import ch.bernmobil.vibe.presentationlayer.dto.Converter;
 import ch.bernmobil.vibe.presentationlayer.dto.DeparturesDto;
 import ch.bernmobil.vibe.presentationlayer.dto.ScheduleDto;
-import ch.bernmobil.vibe.service.UpdateTimestampService;
 import ch.bernmobil.vibe.testenvironment.MockConfiguration;
 import ch.bernmobil.vibe.testenvironment.MockDataConfiguration;
 import ch.bernmobil.vibe.testenvironment.RepositoryConfiguration;
 import ch.bernmobil.vibe.testenvironment.repository.ScheduleRepositoryMock;
-import ch.bernmobil.vibe.testenvironment.repository.ScheduleUpdateRepositoryMock;
 import ch.bernmobil.vibe.testenvironment.repository.StopRepositoryMock;
 import java.time.LocalTime;
 import java.util.List;
@@ -44,9 +42,7 @@ import org.springframework.test.util.ReflectionTestUtils;
     BusinessLogic.class, MockConfiguration.class})
 public class ApiControllerTest {
     private ScheduleRepositoryMock scheduleRepositoryMock;
-    private ScheduleUpdateRepositoryMock scheduleUpdateRepositoryMock;
     private StopRepositoryMock stopRepositoryMock;
-    private UpdateTimestampService updateTimestampService;
 
     @Test
     public void departures() {
@@ -61,7 +57,7 @@ public class ApiControllerTest {
         when(businessLogic.getNewestStopVersion(eq(s))).thenReturn(s);
 
         ApiController controller = new ApiController(businessLogic, converter);
-        ReflectionTestUtils.setField(controller, "timezone", "Europe/Paris", String.class);
+        SetTimezoneInController(controller);
 
         ResponseEntity response = controller.apiDepartures(s.getId(), 10);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -78,7 +74,7 @@ public class ApiControllerTest {
         when(businessLogic.getStopById(any(UUID.class))).thenReturn(null);
 
         ApiController controller = new ApiController(businessLogic, converter);
-        ReflectionTestUtils.setField(controller, "timezone", "Europe/Paris", String.class);
+        SetTimezoneInController(controller);
 
         UUID id = UUID.randomUUID();
         ResponseEntity response = controller.apiDepartures(id, 10);
@@ -100,7 +96,7 @@ public class ApiControllerTest {
         when(businessLogic.getNewestStopVersion(eq(s))).thenReturn(null);
 
         ApiController controller = new ApiController(businessLogic, converter);
-        ReflectionTestUtils.setField(controller, "timezone", "Europe/Paris", String.class);
+        SetTimezoneInController(controller);
 
         ResponseEntity response = controller.apiDepartures(s.getId(), 10);
         assertThat(response.getStatusCode(), is(HttpStatus.GONE));
@@ -122,7 +118,7 @@ public class ApiControllerTest {
         when(businessLogic.getNewestStopVersion(eq(s))).thenReturn(s);
 
         ApiController controller = new ApiController(businessLogic, converter);
-        ReflectionTestUtils.setField(controller, "timezone", "Europe/Paris", String.class);
+        SetTimezoneInController(controller);
 
         ResponseEntity response = controller.apiDeparturesAtTime(s.getId(), timeString,  10);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
@@ -139,12 +135,16 @@ public class ApiControllerTest {
         String timeString = "10.10";
 
         ApiController controller = new ApiController(businessLogic, converter);
-        ReflectionTestUtils.setField(controller, "timezone", "Europe/Paris", String.class);
+        SetTimezoneInController(controller);
 
         ResponseEntity response = controller.apiDeparturesAtTime(null, timeString,  10);
         assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
         String message = (String)response.getBody();
         assertThat(message, containsString(timeString));
+    }
+
+    private void SetTimezoneInController(ApiController controller) {
+        ReflectionTestUtils.setField(controller, "timezone", "Europe/Paris", String.class);
     }
 
     @Autowired
@@ -157,17 +157,5 @@ public class ApiControllerTest {
     public void setScheduleRepositoryMock(
         ScheduleRepositoryMock scheduleRepositoryMock) {
         this.scheduleRepositoryMock = scheduleRepositoryMock;
-    }
-
-    @Autowired
-    public void setScheduleUpdateRepositoryMock(
-        ScheduleUpdateRepositoryMock scheduleUpdateRepositoryMock) {
-        this.scheduleUpdateRepositoryMock = scheduleUpdateRepositoryMock;
-    }
-
-    @Autowired
-    public void setUpdateTimestampService(
-        UpdateTimestampService updateTimestampService) {
-        this.updateTimestampService = updateTimestampService;
     }
 }

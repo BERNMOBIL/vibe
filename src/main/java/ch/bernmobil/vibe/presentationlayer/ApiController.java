@@ -12,6 +12,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.UUID;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api")
 public class ApiController {
+    private static final Logger logger = Logger.getLogger(ApiController.class);
     @Value("${bernmobil.locale.timezone}")
     private String timezone;
 
@@ -85,6 +87,7 @@ public class ApiController {
         try {
             localTime = LocalTime.parse(time);
         } catch (DateTimeParseException ex) {
+            logger.warn(String.format("Invalid time was passed by a client: %s", time), ex);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                 String.format("%s is not a valid time. A valid time could be \"10:10\" or \"10:15:30\". See ISO-8601 for more details.", time));
         }
