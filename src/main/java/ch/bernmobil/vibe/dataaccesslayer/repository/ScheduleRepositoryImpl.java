@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class ScheduleRepositoryImpl implements ScheduleRepositoryCustom {
 
-    private final String HQL_QUERY = "select s from Schedule s " +
+    private static final String HQL_QUERY = "select s from Schedule s " +
         "left join s.scheduleUpdate as su " +
         "where s.updateTimestamp = :lastUpdate " +
         "and s.stop = :stop " +
