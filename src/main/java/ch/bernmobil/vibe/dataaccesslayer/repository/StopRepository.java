@@ -26,7 +26,7 @@ public interface StopRepository extends CrudRepository<Stop, UUID> {
      * @param sort which contains sorting order (ascending or descending) and a property to sort.
      * @return {@link List} which contains all {@link Stop} substrings from the given name.
      */
-    @Query(value = "SELECT s FROM Stop s WHERE s.updateTimestamp = :updateTimestamp AND s.name LIKE concat('%', :name, '%')")
+    @Query(value = "SELECT s FROM Stop s WHERE s.updateTimestamp = :updateTimestamp AND lower(s.name) LIKE concat('%', lower(:name), '%')")
     List<Stop> findAllByNameWithIgnoreCase(@Param("name") String name, @Param("updateTimestamp") LocalDateTime update, @Param("sort") Sort sort);
 
     /**
