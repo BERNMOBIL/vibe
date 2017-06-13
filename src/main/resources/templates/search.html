@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Abfahrtsanzeiger</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
+  <link rel="stylesheet" href="/assets/css/style.css"/>
+</head>
+<body class="default-primary-color, text-primary-color">
+<h1>Abfahrtsanzeiger</h1>
+<p>Bitte geben sie eine Station ein</p>
+<!--/*@thymesVar id="stopList" type="java.util.List"*/-->
+<div data-th-each="stop:${stopList}" class="collection" style="margin: 0">
+  <!--/*@thymesVar id="stop" type="ch.bernmobil.vibe.dataaccesslayer.entity.Stop"*/-->
+      <a data-th-href="@{/departures/__${stop.getId()}__}" class="collection-item">
+        <span class="black-text text-accent-1" data-th-text="${stop.getName()}"></span>
+      </a>
+</div>
+</body>
+</html>

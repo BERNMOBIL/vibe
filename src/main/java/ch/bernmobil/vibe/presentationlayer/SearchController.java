@@ -50,7 +50,7 @@ public class SearchController {
     public String searchStop(Model model, @PathVariable("stopName") String stopName) {
         List<Stop> stopList = businessLogic.findStops(stopName);
         model.addAttribute("stopList", stopList);
-        return "home";
+        return "search";
     }
 
     /**
