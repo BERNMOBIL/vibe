@@ -1,6 +1,7 @@
 package ch.bernmobil.vibe.testenvironment.data;
 
 import ch.bernmobil.vibe.dataaccesslayer.entity.ScheduleUpdate;
+
 import java.time.LocalTime;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -16,15 +17,15 @@ public class ScheduleUpdateMockData extends TestData<ScheduleUpdate> {
     };
 
     private final LocalTime[] actualArrivalList = {
-        LocalTime.now(),
-        LocalTime.now(),
-        LocalTime.now()
+            LocalTime.parse("15:48:00"),
+            LocalTime.parse("18:04:25"),
+            LocalTime.parse("15:49:00"),
     };
 
     private final LocalTime[] actualDepartureList = {
-        LocalTime.now(),
-        LocalTime.now(),
-        LocalTime.now()
+            LocalTime.parse("15:49:00"),
+            LocalTime.parse("18:04:30"),
+            LocalTime.parse("15:50:00"),
     };
 
     public ScheduleUpdateMockData(ScheduleMockData scheduleMockData) {
