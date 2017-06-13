@@ -7,18 +7,20 @@
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css"/>
   <link rel="stylesheet" href="/assets/css/style.css"/>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+  <script src="/assets/js/home.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body class="default-primary-color, text-primary-color">
 <h1>Abfahrtsanzeiger</h1>
-<p>Bitte geben sie eine Station ein</p>
-<!--/*@thymesVar id="stopList" type="java.util.List"*/-->
-<div data-th-each="stop:${stopList}" class="collection, light-primary-color">
-  <!--/*@thymesVar id="stop" type="ch.bernmobil.vibe.dataaccesslayer.entity.Stop"*/-->
-    <div class="collection-item, accent-color">
-      <a data-th-href="@{/departures/__${stop.getId()}__}" class="text-primary-color">
-        <span data-th-text="${stop.getName()}"></span>
-      </a>
-    </div>
+<p>Bitte geben Sie einen Stationsnamen ein</p>
+<div class="row">
+  <div class="input-field col s6">
+    <input id="stop_name" type="text" class="validate" />
+    <label class="active" for="stop_name">Haltestelle</label>
+    <a class="waves-effect waves-light btn" id="search-button">Suche</a>
+  </div>
 </div>
 </body>
 </html>

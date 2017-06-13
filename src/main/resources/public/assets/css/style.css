@@ -33,12 +33,10 @@ body {
 
 #text-primary-color {
     color: #FFFFFF;
-!important;
 }
 
 #text-primary-color:link {
     color: #FFFFFF;
-!important;
 }
 
 #accent-color {
