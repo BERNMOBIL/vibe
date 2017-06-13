@@ -51,7 +51,7 @@ $(document).ready(function () {
 
     function ajaxLoop() {
         startAjax(getIdFromUrl(), getParamtersFromUrl());
-        setTimeout(ajaxLoop, 30 * 1000);
+        setTimeout(ajaxLoop, 10 * 1000);
     }
 
     ajaxLoop();
